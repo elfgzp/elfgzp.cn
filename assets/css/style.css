@@ -3,10 +3,6 @@ html, body, ul, li, div, header, nav, main, footer {
     padding: 0;
 }
 
-ul {
-    list-style-type: none;
-}
-
 html {
     background-image: url(/assets/images/bak.svg);
     /*background-size: 100%;*/
@@ -1507,6 +1503,10 @@ a {
 }
 
 /* */
+
+#toc ul {
+    list-style-type: none;
+}
 
 /* github reference */
 
