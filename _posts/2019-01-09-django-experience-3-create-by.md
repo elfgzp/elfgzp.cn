@@ -259,7 +259,7 @@ def process_response(self, request, response):
 
 [django get current user in model save - Django: Populate user ID when saving a model](https://code.i-harness.com/en/q/d293a)  
 
-[Django学习 curry 函数](https://my.oschina.net/memorybox/blog/74628)  
+[Django 学习 curry 函数](https://my.oschina.net/memorybox/blog/74628)  
   
 [Django Signal 解析](https://blog.csdn.net/zhuoxiuwu/article/details/52498003)
 
