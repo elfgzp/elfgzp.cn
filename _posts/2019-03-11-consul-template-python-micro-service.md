@@ -10,7 +10,7 @@ subtitle: 'Python 配置中心'
 
 # 使用 Consul 作为 Python 微服务的配置中心
 
-README 前半部分主要为 Consul 的一些介绍，若已经了解 Consul，可以直接跳转到：
+前半部分主要为 Consul 的一些介绍，若已经了解 Consul，可以直接跳转到：
 
 [使用 Consul 作为 Python 微服务的配置中心](#使用-consul-作为-python-微服务的配置中心)
 
