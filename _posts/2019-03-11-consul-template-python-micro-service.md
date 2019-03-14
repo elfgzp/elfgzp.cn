@@ -329,12 +329,11 @@ template {
 再来看看模板文件 `config.py.ctmpl`：
 
 
-
 ```python
 # -*- coding: utf-8 -*-
 __author__ = 'gzp'
 
-GREETING = '{{ keyOrDefault "python-web-service/greeting" "Hello World" }}'
+GREETING = '{% raw %}{{{% endraw %} keyOrDefault "python-web-service/greeting" "Hello World" }}'
 ```
 
 
