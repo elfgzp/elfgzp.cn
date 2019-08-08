@@ -23,7 +23,7 @@ about: true
 aboutyou: '本人于17年毕业于广东省惠州学院，专业是软件工程，选择这个专业和毕业后做软件开发都是因为个人的兴趣爱好，喜欢折腾技术方面的问题。
 
            通过这个博客希望可以认识更多拥有相同兴趣爱好的人，并记录自己在技术路上的坎坷和积累。'
-hacknical: 'https://hacknical.com/elfgzp/github?locale=zh'
+hacknical: 
 portraits: '/assets/images/profile.jpeg' # your portraits image file path
 
 # SNS
