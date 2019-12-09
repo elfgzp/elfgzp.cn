@@ -18,9 +18,9 @@ subtitle: '🚪「gortal」一个使用 Go 语言开发的，超级轻量的堡�
 
 ## 产生 Idea 💡  
 
-首先不管是个人项目还是开源项目都得又一个 Idea，我先来说说 `gortal` 这个项目的 idea 是怎么来的。  
+首先不管是个人项目还是开源项目都得有一个 Idea，我先来说说 `gortal` 这个项目的 idea 是怎么来的。  
 
-笔者有一群热开技术的小伙伴们，[TNK-Studio](https://github.com/TNK-Studio/gortal) - `technical studio` 技术小作坊。  
+笔者有一群热爱开源技术的小伙伴们，[TNK-Studio](https://github.com/TNK-Studio/gortal) - `technical studio` 技术小作坊。  
 
 [@mayneyao](https://github.com/mayneyao) 同学的开源项目 [中文独立博客调研](https://github.com/TNK-Studio/zh-independent-blog-research) 需要服务器来跑爬虫，于是我们便将手上的闲置云计算资源都贡献出来。  
 
