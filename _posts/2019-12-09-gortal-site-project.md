@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  'Github 上的个人项目开源心得'
-date:   2019-07-26 10:00:00 +0800
+date:   2019-12-09 22:00:00 +0800
 tags: 'Github gortal siteproject'
 color: rgb(56, 173, 216)
 cover: '/assets/images/2019-12-09-gortal-site-project/github.jpeg'
