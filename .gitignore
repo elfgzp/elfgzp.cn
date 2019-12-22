@@ -35,4 +35,5 @@ Temporary Items
 # Custom
 _site/
 .history/
+Gemfile.lock
 # End of https://www.gitignore.io/api/osx
