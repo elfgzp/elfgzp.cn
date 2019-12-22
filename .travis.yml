@@ -10,6 +10,7 @@ before_install:
 - chmod 600 ~/.ssh/id_ras_deploy
 - cp ssh_config ~/.ssh/config
 script:
+- gem install bundler:1.16.5
 - bundle install
 - bundle exec jekyll build
 after_success:
