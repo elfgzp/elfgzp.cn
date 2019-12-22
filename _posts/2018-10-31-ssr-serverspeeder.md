@@ -2,10 +2,10 @@
 layout: post
 title:  "SSR 速锐 实现科学上网，提高外网访问速度"
 date:   2018-10-31 23:00:00 +0800
-tags: 'SSR 速锐 vultr 科学上网 Google 技术'
+tags: 'Google'
 color: rgb(215, 135, 160)
 cover: '/assets/images/2018-10-31-ssr-serverspeeder/shadowsocksR-logo.png'
-subtitle: '程序员访问Google解决方案'
+subtitle: '程序员访问 Google 解决方案'
 ---
 > 本篇说明仅供交流与学习使用，请勿作出任何违反国家法律的行为。
 
