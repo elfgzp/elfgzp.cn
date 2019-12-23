@@ -35,8 +35,17 @@ description:
       </li>
       <li class="fadeInUp animated">
       {% if site.tags.size>0 %}
+                      
           {% for tag in site.tags %}
-          <a href="tags.html#{{ tag[0] }}" class="tag">{{ tag[0]}}</a>
+          {% assign hide = 0 %}
+                {% for post in tag[1] %}
+                    {% if post.hidden == true %}
+                        {% assign hide = 1 %}
+                    {% endif %}
+                {% endfor %}
+                {% if hide != 1 %}
+              <a href="tags.html#{{ tag[0] }}" class="tag">{{ tag[0]}}</a>
+                {% endif %}
           {% endfor %}
       {% endif %}
       </li>

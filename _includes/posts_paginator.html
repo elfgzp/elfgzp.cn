@@ -1,5 +1,6 @@
 {% for post in paginator.posts %}
-  <a href="{{ post.url }}">
+    {% if post.hidden != true %}
+      <a href="{{ post.url }}">
       <li class="fadeInUp animated">
           {% if post.cover %}
           <img class="post-img" src="{{post.cover}}">
@@ -23,4 +24,5 @@
           </footer>
       </li>
   </a>
+    {% endif %}
 {% endfor %}
