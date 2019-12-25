@@ -164,7 +164,7 @@ RUN chmod +x /gortal
 
 你需要去各种社区分享你的开源项目，例如：[V2EX](https://v2ex.com/go/create)、[稀土掘金](https://v2ex.com/go/create)、[segmentfault](https://segmentfault.com/) 等等。  
 
-让你的项目给更多的人看到，同理写博客也是如此，不分享出去就没有正反馈，就少了很多动力。  
+让你的项目给更多的人看到，同理写文章也是如此，不分享出去就没有正反馈，就少了很多动力。  
 
 ## 稍微总结一下 👻  
 

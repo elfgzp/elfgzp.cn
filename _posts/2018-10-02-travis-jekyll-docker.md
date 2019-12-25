@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "Travis CI  Jekyll  Docker 自动化部署博客到云服务器"
+title:  "Travis CI  Jekyll  Docker 自动化部署个人网站到云服务器"
 date:   2018-10-02 18:00:00 +0800
 tags: 'Travis Jekyll Docker 技术 Linux'
 color: rgb(92,167,96)
 cover: '/assets/images/2018-10-02-travis-jekyll-docker/WX20181002-174437@2x-squashed.png'
 subtitle: '解决Github pages百度爬虫被禁用'
 ---
-> 本篇文章讲解了如何利用云Travis CI  Jekyll  Docker 自动化部署博客到云服务器，从而解决Github pages百度爬虫禁用的问题。
+> 本篇文章讲解了如何利用云Travis CI  Jekyll  Docker 自动化部署个人网站到云服务器，从而解决Github pages百度爬虫禁用的问题。
 >
 > 本文章不包含Github pages 如何配置，相信Google上有类似的文章就不说明了
 
@@ -296,6 +296,6 @@ docker-compose up -d
 ## 参考文章
 > [centos安装docker,docker-compose](https://www.jianshu.com/p/dbc0fb6e9149)  
 > [基于Docker搭建Jekyll并实现自动部署](https://xxblog.cn/2018/01/Run-jekyll-based-docker-and-auto-deployment/)  
-> [Jekyll + Travis CI 自动化部署博客](https://mritd.me/2017/02/25/jekyll-blog-+-travis-ci-auto-deploy/)  
+> [Jekyll + Travis CI 自动化部署](https://mritd.me/2017/02/25/jekyll-blog-+-travis-ci-auto-deploy/)  
 > [Travis-ci远程部署到服务器](https://blog.csdn.net/sp1206/article/details/80430493)  
 > [使用travis自动部署hexo日志](https://blog.tomyail.com/writing-hexo-blog-with-travis-ci/)  
