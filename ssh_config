@@ -1,5 +1,5 @@
-Host cloud.elfgzp.cn
-    HostName cloud.elfgzp.cn
+Host www.elfgzp.cn
+    HostName www.elfgzp.cn
     StrictHostKeyChecking no
     User gzp
     IdentityFile ~/.ssh/id_ras_deploy

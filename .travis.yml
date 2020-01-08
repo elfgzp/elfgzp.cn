@@ -5,7 +5,7 @@ rvm:
 addons:
   ssh_known_hosts: cloud.elfgzp.cn
 before_install:
-- openssl aes-256-cbc -K $encrypted_f91baf41390f_key -iv $encrypted_f91baf41390f_iv
+- openssl aes-256-cbc -K $encrypted_b07104b6ad2c_key -iv $encrypted_b07104b6ad2c_iv
   -in id_ras_deploy.enc -out ~/.ssh/id_ras_deploy -d
 - chmod 600 ~/.ssh/id_ras_deploy
 - cp ssh_config ~/.ssh/config
