@@ -1,0 +1,21 @@
+backend:
+    name: github
+    repo: elfgzp/elfgzp.cn # Path to your GitHub repository
+    branch: master # Branch to update (optional; defaults to master)
+media_folder: 'assets/'
+collections:
+  - name: 'post'
+    label: 'Posts'
+    label_singular: "Post" # Used in the UI, ie.: "New Post"
+    folder: '_posts/'
+    sort: "date:desc" # Default is title:asc
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
+      - {label: "Title", name: "title", widget: "string", tagname: "h1"}
+      - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD hh:mm:ss"}
+      - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Color", name: "color", widget: "string"}
+      - {label: "Cover", name: "cover", widget: "image", allow_multiple: false}
+      - {label: "SubTitle", name: "subtitle", widget: "string", tagname: "h2"}
