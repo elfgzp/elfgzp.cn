@@ -2,13 +2,13 @@ backend:
     name: github
     repo: elfgzp/elfgzp.cn # Path to your GitHub repository
     branch: cms # Branch to update (optional; defaults to master)
-media_folder: 'assets/'
+media_folder: 'assets/uploads'
 collections:
   - name: 'post'
     label: 'Posts'
     label_singular: "Post" # Used in the UI, ie.: "New Post"
     folder: '_posts/'
-    sort: "date:desc" # Default is title:asc
+    sort: "date:asc" # Default is title:asc
     create: true # Allow users to create new documents in this collection
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
