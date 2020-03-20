@@ -14,10 +14,9 @@ collections:
     fields:
       - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
       - {label: "Title", name: "title", widget: "string", tagname: "h1"}
-      - {label: "SubTitle", name: "subtitle", widget: "hidden", tagname: "h2"}
+      - {label: "SubTitle", name: "subtitle", widget: "string", tagname: "h2"}
       - {label: "Cover", name: "cover", widget: "image", allow_multiple: false}
-      - {label: "Body", name: "body", widget: "markdown"}
-    meta:
       - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD hh:mm:ss"}
-      - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Tags", name: "tags", widget: "string"}
       - {label: "Color", name: "color", widget: "string"}
+      - {label: "Body", name: "body", widget: "markdown"}
