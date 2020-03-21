@@ -152,7 +152,6 @@ collections:
 backend:
   name: github
   branch: cms # 默认是 master 分支
-media_folder: 'assets/uploads'
 ```
 
 
