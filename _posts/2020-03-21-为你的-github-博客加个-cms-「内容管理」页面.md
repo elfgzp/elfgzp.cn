@@ -149,11 +149,9 @@ collections:
 因为本人加了 `CI` 所以 `push` 到 `master` 之后就会更新了，这样就不能打草稿了，所以我开了一个 `cms` 的分支。文章保存后都会 `commit` 到这个分支上，等你需要发布的时候在提交 `PR` 到 `master`。  
 
 ```yaml
-
-backend:     name: github
-    repo: elfgzp/elfgzp.cn # Path to your GitHub repository
-    branch: cms # Branch to update (optional; defaults to master)
-
+backend:
+  name: github
+  branch: cms # 默认是 master 分支
 ```
 
 
