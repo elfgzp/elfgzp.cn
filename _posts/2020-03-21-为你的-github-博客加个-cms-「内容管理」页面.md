@@ -55,17 +55,6 @@ color: 'rgb(30, 31, 32)'
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-      <script>
-    if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", function (user) {
-        if (!user) {
-        window.netlifyIdentity.on("login", function () {
-            document.location.href = "/admin/";
-        });
-        }
-    });
-    }
-    </script>
     <title>Content Manager</title>
   </head>
   <body>
@@ -76,6 +65,25 @@ color: 'rgb(30, 31, 32)'
 ```
 
 可以参考我的仓库文件，<https://github.com/elfgzp/elfgzp.cn/blob/master/admin/index.html>  
+
+然后在你的首页的 `index.html` 的 `header` 增加一段 `js` 代码。这段代码的作用是在你登录你的 `cms` admin 页面之后，`netlify-identity-widget.js` 会将你重定向到首页，然后这段代码会把你带回 admin 页面。
+
+```javascript
+<header>
+  <!-- ... -->
+<script>
+    if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", function (user) {
+        if (!user) {
+        window.netlifyIdentity.on("login", function () {
+            document.location.href = "/admin/";
+        });
+        }
+    });
+    }
+    </script>
+</header>
+```
 
 ### 增加一个 admin/config.yml 文件
 
@@ -142,8 +150,6 @@ collections:
 
 这里有一些使用的技巧想分享一下。  
 
-
-
 ### 新建一个 CMS 分支用来打草稿
 
 因为本人加了 `CI` 所以 `push` 到 `master` 之后就会更新了，这样就不能打草稿了，所以我开了一个 `cms` 的分支。文章保存后都会 `commit` 到这个分支上，等你需要发布的时候在提交 `PR` 到 `master`。  
@@ -154,23 +160,13 @@ backend:
   branch: cms # 默认是 master 分支
 ```
 
-
-
 ### Markdown 效果预览
-
-
 
 netlifycms 的 Markdown 预览非常的丑，我直接把他关了，代替预览的方案就是切换编辑框的 `Rich Text` 和 `Markdown` 模式。
 
-
-
 ### 在文章中添加图片
 
-
-
 肯定有读者注意到了在增加了 `![]()` 的 Markdown 图片标签后，切换到 `Rich Text` 就可以选择上传图片了。  
-
-
 
 ## 总结
 
