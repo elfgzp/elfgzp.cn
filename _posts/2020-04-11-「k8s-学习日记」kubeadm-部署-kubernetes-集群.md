@@ -58,7 +58,7 @@ color: 'rgb(37, 126, 235)'
 
 接下来就正式开始了，不过 `ssh` 进入系统后还需要做一些准备工作。  
 
-### K8s 部署准备工作
+## K8s 部署准备工作
 首先避免不必要的麻烦，先关闭 `CentOS 7` 的防火墙，因为本身云服务厂商会有安全组，我们也可以通过配置安全组来实现网络安全防护。  
 
 ```bash
@@ -96,14 +96,21 @@ modprobe br_netfilter
 lsmod | grep br_netfilter
 ```
 
+安装 `docker`：
+
+```bash
+yum install -y docker
+systemctl enable docker && systemctl start docker
+```
+
 笔者已经将上述步骤做成了脚本，可以查看 [https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_prepare-sh](https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_prepare-sh)。  
 为了快速进入下一步可以执行以下命令直接跳过准备操作。  
 
 ```bash
-curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/raw/b4f0a96cf05fcdeca4c7ad25a39e26dc7b1e07fd/vultr_k8s_prepare.sh | sh
+curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/raw/08bcc6bab41566edd39b2512454faf046b1b6a71/vultr_k8s_prepare.sh | sh
 ```
 
-### 安装 Kubeadm
+## 安装 Kubeadm
 
 接下来的步骤可以完全参考官方文档来了，[官方文档链接](https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)。
 
@@ -143,3 +150,80 @@ EOF
 ```bash
 curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/raw/#/vultr_k8s_prepare.sh | sh
 ```
+
+## 使用 Kubeadm 创建 k8s 集群
+
+我们首先要在 `Master` 的实例上执行 `kubeadm`。但是我们先使用 `kubeadm config print init-defaults` 来看看它的默认初始化文件。  
+
+```bash
+kubeadm config print init-defaults
+```
+
+当然你也可以生成一个配置文件后，指定配置文件进行初始化：
+```bash
+kubeadm config print init-defaults > kubeadm.yaml
+# 修改 kubeadm.yml
+kubeadm init --config kubeadm.yaml
+```
+
+如果初始化失败可以执行以下命令，进行重制：
+
+```bash
+kubeadm reset
+rm -rf $HOME/.kube/config
+rm -rf /var/lib/cni/
+rm -rf /etc/kubernetes/
+rm -rf /etc/cni/
+ifconfig cni0 down
+ip link delete cni0
+```
+
+接下来直接执行 `kubeadm init` 进行初始化，国内的主机可能需要修改 `imageRepository` 的配置，来修改 `k8s` 的镜像仓库。
+
+```bash
+cat <<EOF > kubeadm.yaml
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: ClusterConfiguration
+apiServer:
+    extraArgs:
+        runtime-config: "api/all=true"
+kubernetesVersion: "v1.18.1"
+imageRepository: registry.aliyuncs.com/google_containers
+EOF
+kubeadm init --config kubeadm.yaml
+```
+
+执行完成后，我们会得到以下输出：
+```
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join {你的IP}:6443 --token 3prn7r.iavgjxcmrlh3ust3 \
+    --discovery-token-ca-cert-hash sha256:95283a2e81464ba5290bf4aeffc4376b6d708f506fcee278cd2a647f704ed55d
+```
+
+按照他的提示，我们将 `kubectl` 的配置放到 `$HOME/.kube/config` 下，注意每次执行完成 `kubeadm init` 之后，配置文件都会变化，所以需要重新复制。  
+
+```bash
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+如果你们是使用 `root` 用户的话，可以直接利用环境变量指定配置文件：  
+
+```bash
+export KUBECONFIG=/etc/kubernetes/admin.conf
+```
+
