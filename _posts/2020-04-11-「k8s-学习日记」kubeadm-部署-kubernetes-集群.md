@@ -317,3 +317,14 @@ NAME      STATUS   ROLES    AGE     VERSION
 master1   Ready    master   6m52s   v1.18.1
 node1     Ready    <none>   29s     v1.18.1
 ```
+
+## 总结
+
+以上就是在 `Vultr` 上使用 `kubeadm` 部署 `k8s` 集群的所有过程啦，当然也是踩了很多坑。特别是想在不同的云主机上部署，最终还是选择使用同一个云服务商的 ECS。
+
+## 参考文档
+
+[Kubernetes权威指南：从Docker到Kubernetes实践全接触（第4版）](https://weread.qq.com/web/reader/9fc329507191463c9fcee6d)
+
+[深入剖析Kubernetes](https://time.geekbang.org/column/intro/100015201)
+
