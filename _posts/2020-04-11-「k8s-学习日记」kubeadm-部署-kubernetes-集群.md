@@ -108,7 +108,7 @@ yum install -y docker
 systemctl enable docker && systemctl start docker
 ```
 
-笔者已经将上述步骤做成了脚本，可以查看 <https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_prepare-sh>。\
+笔者已经将上述步骤做成了脚本，可以查看 <https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_prepare-sh>。
 为了快速进入下一步可以执行以下命令直接跳过准备操作。  
 
 ```bash
