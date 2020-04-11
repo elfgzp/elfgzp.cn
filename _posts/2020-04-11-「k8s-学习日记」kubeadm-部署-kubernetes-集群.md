@@ -57,8 +57,8 @@ color: 'rgb(37, 126, 235)'
 
 | 实例     | 核心数 | 内存  | 内网 IP      |
 | ------ | --- | --- | ---------- |
-| Master | 2   | 4G  | 10.40.96.4 |
-| Node   | 2   | 4G  | 10.40.96.5 |
+| Master | 2   | 4G  | 10.24.96.3 |
+| Node   | 2   | 4G  | 10.24.96.4 |
 
 接下来就正式开始了，不过 `ssh` 进入系统后还需要做一些准备工作。  
 
@@ -240,8 +240,8 @@ echo 'export KUBECONFIG=/etc/kubernetes/admin.conf' >> ~/.bashrc
 接下来使用 `kubectl get nodes` 来查看节点的状态：  
 
 ```bash
-NAME          STATUS     ROLES    AGE   VERSION
-vultr.guest   NotReady   master   1m   v1.18.1
+NAME      STATUS   ROLES    AGE     VERSION
+master1   NotReady    master   6m52s   v1.18.1
 ```
 
 此时的状态为 `NotReady` 当然这个状态是对的，因为我们还没有安装网络插件。接下来安装网络插件，这里是用的是 `Weave` 网络插件：  
@@ -274,8 +274,8 @@ kubectl describe pods weave-net-8wv4k -n kube-system
 此时的 `Master` 节点状态就变为 `Ready` 了。  
 
 ```bash
-NAME          STATUS   ROLES    AGE   VERSION
-vultr.guest   Ready    master   22m   v1.18.1
+NAME      STATUS   ROLES    AGE     VERSION
+master1   Ready    master   6m52s   v1.18.1
 ```
 
 ### 部署 `Node` 节点
@@ -284,6 +284,7 @@ vultr.guest   Ready    master   22m   v1.18.1
 
 ```bash
 curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/raw/781c2cd7e6dba8f099e2b6b1aba9bb91d9f60fe2/vultr_k8s_prepare.sh | sh
+curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/raw/781c2cd7e6dba8f099e2b6b1aba9bb91d9f60fe2/vultr_k8s_install_kubeadm.sh | sh
 ```
 
 我们需要执行 `kubeadm` 在 `Master` 节点初始化后输出的 `join` 命令。如果不记得了，可以通过在 `Master` 执行以下命令重新获得 `join` 命令。  
@@ -312,7 +313,7 @@ kubeadm join --config kubeadm-join.yaml
 
 ```bash
 kubectl get nodes
-NAME           STATUS   ROLES    AGE   VERSION
-vultr.guest    Ready    master   42m   v1.18.1
-vultr.guest2   Ready    <none>   34s   v1.18.1
+NAME      STATUS   ROLES    AGE     VERSION
+master1   Ready    master   6m52s   v1.18.1
+node1     Ready    <none>   29s     v1.18.1
 ```
