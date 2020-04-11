@@ -35,6 +35,10 @@ color: 'rgb(37, 126, 235)'
 
 注意在 `Additional Features` 处勾选 `Enable Private Networking`，让 `Vultr` 为你的服务器分配内网 `IP`。
 
+设置好两个节点的 `HostName` 防止待会节点名称冲突。  
+
+![hostname](/assets/uploads/wx20200411-160357-2x.png)
+
 在 `Deploy Now` 之前将 `Servers Qty` 增加为 `2` ，这样就不用反复打开部署页面了，直接部署两个实例。  
 
 别被这 `$20.00 /mo` 吓到了，这是每月 `$20`，我们只需要用完了及时销毁就好，而且新用户赠送的 `100$` 可以用很久了。
@@ -59,6 +63,7 @@ color: 'rgb(37, 126, 235)'
 接下来就正式开始了，不过 `ssh` 进入系统后还需要做一些准备工作。  
 
 ## K8s 部署准备工作
+
 首先避免不必要的麻烦，先关闭 `CentOS 7` 的防火墙，因为本身云服务厂商会有安全组，我们也可以通过配置安全组来实现网络安全防护。  
 
 ```bash
@@ -103,7 +108,7 @@ yum install -y docker
 systemctl enable docker && systemctl start docker
 ```
 
-笔者已经将上述步骤做成了脚本，可以查看 [https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_prepare-sh](https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_prepare-sh)。  
+笔者已经将上述步骤做成了脚本，可以查看 <https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_prepare-sh>。\
 为了快速进入下一步可以执行以下命令直接跳过准备操作。  
 
 ```bash
@@ -145,7 +150,7 @@ gpgcheck=0
 EOF
 ```
 
-上述操作的脚本，[https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_install_kubeadm-sh](https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_install_kubeadm-sh)。
+上述操作的脚本，<https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_install_kubeadm-sh>。
 
 ```bash
 curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/raw/#/vultr_k8s_prepare.sh | sh
@@ -162,6 +167,7 @@ kubeadm config print init-defaults
 ```
 
 当然你也可以生成一个配置文件后，指定配置文件进行初始化：
+
 ```bash
 kubeadm config print init-defaults > kubeadm.yaml
 # 修改 kubeadm.yml
@@ -196,6 +202,7 @@ kubeadm init --config kubeadm.yaml
 ```
 
 执行完成后，我们会得到以下输出：
+
 ```
 Your Kubernetes control-plane has initialized successfully!
 
@@ -287,6 +294,7 @@ kubeadm join {你的IP}:6443 --token m239ha.ot52q6goyq0pcadx     --discovery-tok
 ```
 
 若加入时出现问题同样可以使用 `kubeadm rest` 来重置。
+
 ```bash
 kubeadm reset
 ```
@@ -296,19 +304,6 @@ kubeadm reset
 ```bash
 kubeadm config print join-defaults > kubeadm-join.yaml
 kubeadm join --config kubeadm-join.yaml
-```
-
-接下来执行 `kubeadm join` 来加入集群会发现如下错误，是因为节点名称 vultr.guest 已经存在了：
-
-```bash
-a Node with name "vultr.guest" and status "Ready" already exists in the cluster. You must delete the existing Node or change the name of this new joining Node
-To see the stack trace of this error execute with --v=5 or higher
-```
-
-可以通过 `--node-name` 来指定 `node` 的名称：
-
-```bash
-kubeadm join {你的 IP}:6443 --token m239ha.ot52q6goyq0pcadx     --discovery-token-ca-cert-hash sha256:95283a2e81464ba5290bf4aeffc4376b6d708f506fcee278cd2a647f704ed55d --node-name vultr.guest2
 ```
 
 然后再次通过 `kubectl` 查看 `nodes` 状态，如果希望在 `Node` 节点上执行的话，需要将 `Master` 上的 `/etc/kubernetes/admin.conf` 复制到 `Node` 节点上。  
@@ -321,6 +316,3 @@ NAME           STATUS   ROLES    AGE   VERSION
 vultr.guest    Ready    master   42m   v1.18.1
 vultr.guest2   Ready    <none>   34s   v1.18.1
 ```
-
-## 
-
