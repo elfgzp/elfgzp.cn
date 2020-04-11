@@ -107,7 +107,7 @@ systemctl enable docker && systemctl start docker
 为了快速进入下一步可以执行以下命令直接跳过准备操作。  
 
 ```bash
-curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/raw/08bcc6bab41566edd39b2512454faf046b1b6a71/vultr_k8s_prepare.sh | sh
+curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/raw/781c2cd7e6dba8f099e2b6b1aba9bb91d9f60fe2/vultr_k8s_prepare.sh | sh
 ```
 
 ## 安装 Kubeadm
@@ -152,6 +152,8 @@ curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/
 ```
 
 ## 使用 Kubeadm 创建 k8s 集群
+
+### 创建 k8s Master 节点
 
 我们首先要在 `Master` 的实例上执行 `kubeadm`。但是我们先使用 `kubeadm config print init-defaults` 来看看它的默认初始化文件。  
 
@@ -213,7 +215,7 @@ kubeadm join {你的IP}:6443 --token 3prn7r.iavgjxcmrlh3ust3 \
     --discovery-token-ca-cert-hash sha256:95283a2e81464ba5290bf4aeffc4376b6d708f506fcee278cd2a647f704ed55d
 ```
 
-按照他的提示，我们将 `kubectl` 的配置放到 `$HOME/.kube/config` 下，注意每次执行完成 `kubeadm init` 之后，配置文件都会变化，所以需要重新复制。  
+按照他的提示，我们将 `kubectl` 的配置放到 `$HOME/.kube/config` 下，注意每次执行完成 `kubeadm init` 之后，配置文件都会变化，所以需要重新复制。`kubeadm` 还会输出 join 命令的配置信息，用于 `Node` 加入集群。  
 
 ```bash
 mkdir -p $HOME/.kube
@@ -224,6 +226,101 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 如果你们是使用 `root` 用户的话，可以直接利用环境变量指定配置文件：  
 
 ```bash
-export KUBECONFIG=/etc/kubernetes/admin.conf
+echo 'export KUBECONFIG=/etc/kubernetes/admin.conf' >> ~/.bashrc
+. ~/.bashrc
 ```
+
+接下来使用 `kubectl get nodes` 来查看节点的状态：  
+
+```bash
+NAME          STATUS     ROLES    AGE   VERSION
+vultr.guest   NotReady   master   1m   v1.18.1
+```
+
+此时的状态为 `NotReady` 当然这个状态是对的，因为我们还没有安装网络插件。接下来安装网络插件，这里是用的是 `Weave` 网络插件：  
+
+```bash
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+```
+
+还有其他的网络插件可以参考官方文档，[Installing a Pod network add-on](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network)。  
+
+可以通过查看 `Pods` 状态查看是否安装成功：  
+
+```bash
+kubectl get pods -A
+NAMESPACE     NAME                       READY   STATUS    RESTARTS   AGE
+kube-system   coredns-66bff467f8-br94l   1/1     Running   0          14m
+kube-system   coredns-66bff467f8-pvsfn   1/1     Running   0          14m
+kube-system   kube-proxy-b2phr           1/1     Running   0          14m
+kube-system   weave-net-8wv4k            2/2     Running   0          2m2s
+```
+
+如果发现 `STATUS` 不是 `Running` 可以通过，`kubectl logs` 和 `kubectl describe` 命令查看详细的错误信息。  
+
+```bash
+kubectl logs weave-net-8wv4k -n kube-system weave
+kubectl logs weave-net-8wv4k -n kube-system weave-npc
+kubectl describe pods weave-net-8wv4k -n kube-system 
+```
+
+此时的 `Master` 节点状态就变为 `Ready` 了。  
+
+```bash
+NAME          STATUS   ROLES    AGE   VERSION
+vultr.guest   Ready    master   22m   v1.18.1
+```
+
+### 部署 `Node` 节点
+
+部署 `Node` 节点同样需要「准备阶段」的工作，这里就不一一讲解了，直接执行脚本：  
+
+```bash
+curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/raw/781c2cd7e6dba8f099e2b6b1aba9bb91d9f60fe2/vultr_k8s_prepare.sh | sh
+```
+
+我们需要执行 `kubeadm` 在 `Master` 节点初始化后输出的 `join` 命令。如果不记得了，可以通过在 `Master` 执行以下命令重新获得 `join` 命令。  
+
+```bash
+kubeadm token create --print-join-command
+kubeadm join {你的IP}:6443 --token m239ha.ot52q6goyq0pcadx     --discovery-token-ca-cert-hash sha256:95283a2e81464ba5290bf4aeffc4376b6d708f506fcee278cd2a647f704ed55d
+```
+
+若加入时出现问题同样可以使用 `kubeadm rest` 来重置。
+```bash
+kubeadm reset
+```
+
+当然 `join` 命令也是可以提供配置文件的，我们只需要在 `Node` 上执行以下命令就可以生成默认配置文件了。  
+
+```bash
+kubeadm config print join-defaults > kubeadm-join.yaml
+kubeadm join --config kubeadm-join.yaml
+```
+
+接下来执行 `kubeadm join` 来加入集群会发现如下错误，是因为节点名称 vultr.guest 已经存在了：
+
+```bash
+a Node with name "vultr.guest" and status "Ready" already exists in the cluster. You must delete the existing Node or change the name of this new joining Node
+To see the stack trace of this error execute with --v=5 or higher
+```
+
+可以通过 `--node-name` 来指定 `node` 的名称：
+
+```bash
+kubeadm join {你的 IP}:6443 --token m239ha.ot52q6goyq0pcadx     --discovery-token-ca-cert-hash sha256:95283a2e81464ba5290bf4aeffc4376b6d708f506fcee278cd2a647f704ed55d --node-name vultr.guest2
+```
+
+然后再次通过 `kubectl` 查看 `nodes` 状态，如果希望在 `Node` 节点上执行的话，需要将 `Master` 上的 `/etc/kubernetes/admin.conf` 复制到 `Node` 节点上。  
+
+接下来我们验证 `Node` 的状态为 `Ready` 则加入成功：
+
+```bash
+kubectl get nodes
+NAME           STATUS   ROLES    AGE   VERSION
+vultr.guest    Ready    master   42m   v1.18.1
+vultr.guest2   Ready    <none>   34s   v1.18.1
+```
+
+## 
 
