@@ -29,7 +29,7 @@ color: 'rgb(37, 126, 235)'
 
 新用户的话还能免费到账 `100 $` ，这里是邀请的连接 [Vultr Give $100](https://www.vultr.com/?ref=8382877-6G)，要是觉得还不错的话可以试试，笔者是真的觉得他们的服务还不错，所以给他们打个广告。  
 
-这里选择两个`Singapore 新加坡` `CentOS 7 Without SELinux` 的实例。  
+这里选择两个 `CentOS 7 Without SELinux` 的实例。  
 
 `SELinux` 是 `Linux` 下的一个安全相关的软件，为了方便学习和部署，我们直接关闭它，所以选择 `Without SELinux` 就准备开始部署了。  
 
