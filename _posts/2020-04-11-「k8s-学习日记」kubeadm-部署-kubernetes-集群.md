@@ -9,7 +9,7 @@ color: 'rgb(37, 126, 235)'
 ---
 最近在学习 `kubernetest` 但是 Google 上有非常多的教程关于如何部署 `kubernetes`。
 
-原本是想在自己买的 `JD` 和 `HUAWEI` 的 `ECS` 上面部署的，但是折腾了很久无果。无奈还是选用同一个云服务商提供的 ECS，在有 `VPC` 的条件下部署会更方便。
+原本是想在自己买的 `JD` 和 `HUAWEI` 的 `ECS` 上面部署的，但是折腾了很久无果。无奈还是选用同一个云服务商提供的 ECS，在同一个 `VPC` 的条件下部署会更方便。
 
 ## ECS 配置选择
 
@@ -108,8 +108,7 @@ yum install -y docker
 systemctl enable docker && systemctl start docker
 ```
 
-笔者已经将上述步骤做成了脚本，可以查看 <https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_prepare-sh>。
-为了快速进入下一步可以执行以下命令直接跳过准备操作。  
+笔者已经将上述步骤做成了脚本，可以查看 <https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_prepare-sh>。 为了快速进入下一步可以执行以下命令直接跳过准备操作。  
 
 ```bash
 curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/raw/781c2cd7e6dba8f099e2b6b1aba9bb91d9f60fe2/vultr_k8s_prepare.sh | sh
@@ -327,4 +326,3 @@ node1     Ready    <none>   29s     v1.18.1
 [Kubernetes权威指南：从Docker到Kubernetes实践全接触（第4版）](https://weread.qq.com/web/reader/9fc329507191463c9fcee6d)
 
 [深入剖析Kubernetes](https://time.geekbang.org/column/intro/100015201)
-
