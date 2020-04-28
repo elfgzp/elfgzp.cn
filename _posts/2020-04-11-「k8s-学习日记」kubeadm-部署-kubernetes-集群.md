@@ -11,6 +11,8 @@ color: 'rgb(37, 126, 235)'
 
 原本是想在自己买的 `JD` 和 `HUAWEI` 的 `ECS` 上面部署的，但是折腾了很久无果。无奈还是选用同一个云服务商提供的 ECS，在同一个 `VPC` 的条件下部署会更方便。
 
+本文中的所有脚本均可以在这里找到 [https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140](https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140)。  
+
 ## ECS 配置选择
 
 由于只是学习，笔者就不部署高可用的 `k8s` 集群了，所以准备一台 `Master` 和 `Node` 节点。  
@@ -165,11 +167,32 @@ curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/
 kubeadm config print init-defaults
 ```
 
+接下来直接执行 `kubeadm init` 进行初始化。  
+
+```bash
+kubeadm init
+```
+
 当然你也可以生成一个配置文件后，指定配置文件进行初始化：
 
 ```bash
 kubeadm config print init-defaults > kubeadm.yaml
 # 修改 kubeadm.yml
+kubeadm init --config kubeadm.yaml
+```
+
+国内的主机可能需要修改 `imageRepository` 的配置，来修改 `k8s` 的镜像仓库。
+
+```bash
+cat <<EOF > kubeadm.yaml
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: ClusterConfiguration
+apiServer:
+    extraArgs:
+        runtime-config: "api/all=true"
+kubernetesVersion: "v1.18.1"
+imageRepository: registry.aliyuncs.com/google_containers
+EOF
 kubeadm init --config kubeadm.yaml
 ```
 
@@ -183,21 +206,6 @@ rm -rf /etc/kubernetes/
 rm -rf /etc/cni/
 ifconfig cni0 down
 ip link delete cni0
-```
-
-接下来直接执行 `kubeadm init` 进行初始化，国内的主机可能需要修改 `imageRepository` 的配置，来修改 `k8s` 的镜像仓库。
-
-```bash
-cat <<EOF > kubeadm.yaml
-apiVersion: kubeadm.k8s.io/v1beta2
-kind: ClusterConfiguration
-apiServer:
-    extraArgs:
-        runtime-config: "api/all=true"
-kubernetesVersion: "v1.18.1"
-imageRepository: registry.aliyuncs.com/google_containers
-EOF
-kubeadm init --config kubeadm.yaml
 ```
 
 执行完成后，我们会得到以下输出：
