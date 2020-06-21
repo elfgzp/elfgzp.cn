@@ -2,7 +2,7 @@
 layout: post
 title: 新一代的微服务架构 Service Mesh
 subtitle: 微服务架构治理方案
-cover: /assets/uploads/k8sitio.png
+cover: /assets/uploads/images.png
 date: '2020-06-21 01:25:24'
 tags: Kubernetes K8s ServiceMesh Istio 微服务
 color: 'rgb(37, 126, 235)'
@@ -36,7 +36,7 @@ color: 'rgb(37, 126, 235)'
 
 因为业务量越来越大，我们需要多台机器才能应对**大规模的应用**，所以需要**垂直或者水平拆分业务系统**，让其变成一个**分布式的架构**。
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/_2020-06-11_9.24.32.png](/assets/uploads/_2020-06-11_9.24.32.png)
+![](/assets/uploads/_2020-06-11_9.24.32.png)
 
 从上面的表格我们可以看到，分布式系统虽然有一些优势，但也存在一些问题。
 
@@ -66,7 +66,7 @@ color: 'rgb(37, 126, 235)'
 * 资源调度管理。
 * 需要做流量控制。**负载均衡、服务路由、熔断、降级、限流、灰度发布**等流量相关的控制。
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/_2020-06-11_9.31.25.png](/assets/uploads/_2020-06-11_9.31.25.png)
+![](/assets/uploads/_2020-06-11_9.31.25.png)
 
 * 图片引用自 [《左耳听风 - 分布式系统技术栈》](https://time.geekbang.org/column/article/1512)
 
@@ -106,7 +106,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 我们通过 `pstree` 查看操作系统中运行的进程，进程并不是**“孤苦伶仃”**地独自运行的，而是以进程组的方式，**“有原则地”**组织在一起。
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/_2020-06-11_9.50.34.png](/assets/uploads/_2020-06-11_9.50.34.png)
+![](/assets/uploads/_2020-06-11_9.50.34.png)
 
 比如，这里有一个叫作 `rsyslogd` 的程序，它负责的是 `Linux` 操作系统里的日志处理。可以看到, `rsyslogd` 的主程序 `main`, 和它要用到的内核日志模块 `imklog` 等，同属于 `1632` 进程组。这些进程相互协作，共同完成 `rsyslogd` 程序的职责。
 
@@ -126,17 +126,17 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 那这么来看的话，一个有 `A` 和 `B` 两个容器的 `Pod`，不就是等同于一个容器（容器 `A`）共享另外一个容器（容器 `B`）的网络和 `Volume` ？这好像通过 `docker run --net --volumes-from` 这样的命令就能实现，就像这样。
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/Untitled.png](/assets/uploads/untitled.png)
+![](/assets/uploads/untitled.png)
 
 但是，你有没有考虑过，如果真这样做的话，容器 `B` 就必须比容器 `A` 先启动，这样一个 `Pod` 里的多个容器就不是对等关系，而是拓扑关系了。
 
 所以，在 `Kubernetes` 项目里, `Pod` 的实现需要使用一个中间容器，在这个 `Pod` 中，中间容器永远都是第一个被创建的容器，而其他用户定义的容器，则通过 `Join Network Namespace` 的方式，与 中间容器关联在一起。
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/Untitled%201.png](/assets/uploads/untitled-1.png)
+![](/assets/uploads/untitled-1.png)
 
 * 图片引用自 [《Service Mesh 实战：用 Istio 软负载实现服务网格 3.1.3 Pause 容器》](https://weread.qq.com/web/reader/f57324607188b37df57c39ek8e232ec02198e296a067180)
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/Untitled%202.png](/assets/uploads/untitled-2.png)
+![](/assets/uploads/untitled-2.png)
 
 * 图片引用自 [《深入剖析Kubernetes - 为什么我们需要 Pod》](https://time.geekbang.org/column/article/40092)
 
@@ -156,7 +156,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 所谓的**边车模式**，对应于我们生活中熟知的边三轮摩托车。
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/Untitled%203.png](/assets/uploads/untitled-3.png)
+![](/assets/uploads/untitled-3.png)
 
 * 图片引用自 [《左耳听风 - 管理设计篇“边车模式”》](https://time.geekbang.org/column/article/5909)
 
@@ -164,7 +164,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 也就是说，我们不需要在服务中实现控制面上的东西，如**监视、日志记录、限流、熔断、服务注册、协议适配转换**等这些属于控制面上的东西，而只需要专注地做好和业务逻辑相关的代码，然后，由**“边车”**来实现这些与业务逻辑没有关系的控制功能。
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/Untitled%204.png](/assets/uploads/untitled-4.png)
+![](/assets/uploads/untitled-4.png)
 
 * 图片引用自 [《左耳听风 - 管理设计篇“边车模式”》](https://time.geekbang.org/column/article/5909)
 
@@ -172,7 +172,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 那么在 `Istio` 中, `[Envoy](https://github.com/envoyproxy/envoy)` 就是默认的 `Sidecar`。它与服务容器在同一个 `Pod` 中，与服务容器共享同一个 `Network Namespace`，接管所有经过服务容器的流量。
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/Untitled%205.png](/assets/uploads/untitled-5.png)
+![](/assets/uploads/untitled-5.png)
 
 * 图片引用自 [《Kubernetes Istio Canary Deployment》](https://itnext.io/kubernetes-istio-canary-deployment-5ecfd7920e1c)
 
@@ -180,7 +180,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 然后, `Sidecar` 集群就成了 `Service Mesh`。图中的**绿色模块是真实的业务应用服务**，**蓝色模块则是** `Sidecar`, 其组成了一个网格。而我们的应用服务完全独立自包含，只需要和本机的 `Sidecar` 依赖，剩下的事全交给了 `Sidecar`。
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/Untitled%206.png](/assets/uploads/untitled-6.png)
+![](/assets/uploads/untitled-6.png)
 
 * 图片引用自 [《左耳听风 - 管理设计篇之“服务网格”》](https://time.geekbang.org/column/article/5920)
 
@@ -197,7 +197,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 我们今天的主角 `Istio`，它的伟大之处不只是在设计本身，**而是在于它是一个兼容并包的生态**。它为整个行业提供了一种全新的开发及运维的方式。
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/Untitled%207.png](/assets/uploads/untitled-7.png)
+![](/assets/uploads/untitled-7.png)
 
 * 图片引用自 [zhaohuabing/istio-practice](http://zhaohuabing/istio-practice)
 
@@ -232,7 +232,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 下图展示了这个应用的端到端架构。
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/Untitled%208.png](/assets/uploads/untitled-8.png)
+![](/assets/uploads/untitled-8.png)
 
 * 图片引用自 [《 ISTIO 文档示例 BOOKINFO 应用》](https://istio.io/latest/zh/docs/examples/bookinfo/)
 
@@ -242,11 +242,11 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 为了开发人员在测试自己开发的 `Review` 服务不受影响，我们可能需要部署多个完整的 `Bookinfo 应用` 即 `Product page` 、 `Ratings` 、 `Details` 的服务都需要部署，如下图所示 。
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/Istio_Bookinfo.jpg](/assets/uploads/istio_bookinfo.jpg)
+![](/assets/uploads/istio_bookinfo.jpg)
 
 官方的 `BookInfo` 中的微服务数量还是比较少的，在实际的场景中，一个完整的系统可能会有成百上千个微服务共同支撑和运行，如果为了开发测试方便就需要庞大的服务器资源提供给微服务进行部署，这也是目前笔者公司的一个痛点。
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/Untitled%209.png](/assets/uploads/untitled-9.png)
+![](/assets/uploads/untitled-9.png)
 
 ## 利用 Istio 对流量进行控制
 
@@ -288,7 +288,7 @@ spec:
 
 当 `Istio` 的流量控制放到实际的应用场景中时，测试环境就只需要一套完整的服务，和一些需要测试的不同版本的服务了。
 
-![Service%20Mesh%2028f059148202408a92ee2285121c4689/Untitled%2010.png](/assets/uploads/untitled-10.png)
+![](/assets/uploads/untitled-10.png)
 
 当然这只是其中一个应用场景，流量控制还可以用于 `A/B` 测试，灰度发布等。并且这只是 `Istio` 的其中一个功能。
 
