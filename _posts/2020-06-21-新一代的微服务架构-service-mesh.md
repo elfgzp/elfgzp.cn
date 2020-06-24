@@ -68,7 +68,7 @@ color: 'rgb(37, 126, 235)'
 
 ![](/assets/uploads/2020-06-11-9-31-25.png)
 
-* 图片引用自 [《左耳听风 - 分布式系统技术栈》](https://time.geekbang.org/column/article/1512)
+> 图片引用自 [《左耳听风 - 分布式系统技术栈》](https://time.geekbang.org/column/article/1512)
 
 针对这么多的需要去解决和处理的问题。
 
@@ -134,11 +134,11 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 ![](/assets/uploads/untitled-1.png)
 
-* 图片引用自 [《Service Mesh 实战：用 Istio 软负载实现服务网格 3.1.3 Pause 容器》](https://weread.qq.com/web/reader/f57324607188b37df57c39ek8e232ec02198e296a067180)
+> 图片引用自 [《Service Mesh 实战：用 Istio 软负载实现服务网格 3.1.3 Pause 容器》](https://weread.qq.com/web/reader/f57324607188b37df57c39ek8e232ec02198e296a067180)
 
 ![](/assets/uploads/untitled-2.png)
 
-* 图片引用自 [《深入剖析Kubernetes - 为什么我们需要 Pod》](https://time.geekbang.org/column/article/40092)
+> 图片引用自 [《深入剖析Kubernetes - 为什么我们需要 Pod》](https://time.geekbang.org/column/article/40092)
 
 如上图所示，这个 `Pod` 里有两个用户容器 `A` 和 `B`，还有一个中间容器容器。很容易理解，在 `Kubernetes` 项目里，中间容器一定要占用极少的资源，所以它使用的是一个非常特殊的镜像，叫作: `k8s.gcr.io/pause`。这个镜像是一个用汇编语言编写的、永远处于**“暂停”**状态的容器，解压后的大小也只有 `100~200 KB` 左右。
 
@@ -158,7 +158,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 ![](/assets/uploads/untitled-3.png)
 
-* 图片引用自 [《左耳听风 - 管理设计篇“边车模式”》](https://time.geekbang.org/column/article/5909)
+> 图片引用自 [《左耳听风 - 管理设计篇“边车模式”》](https://time.geekbang.org/column/article/5909)
 
 我们可以通过给一个摩托车加上一个边车的方式来扩展现有的服务和功能。这样可以很容易地做到 **"控制 "** 和 **"逻辑"** 的分离。
 
@@ -166,7 +166,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 ![](/assets/uploads/untitled-4.png)
 
-* 图片引用自 [《左耳听风 - 管理设计篇“边车模式”》](https://time.geekbang.org/column/article/5909)
+> 图片引用自 [《左耳听风 - 管理设计篇“边车模式”》](https://time.geekbang.org/column/article/5909)
 
 那最终这个 `Sidecar` 的效果就会像上图所示。
 
@@ -174,7 +174,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 ![](/assets/uploads/untitled-5.png)
 
-* 图片引用自 [《Kubernetes Istio Canary Deployment》](https://itnext.io/kubernetes-istio-canary-deployment-5ecfd7920e1c)
+> 图片引用自 [《Kubernetes Istio Canary Deployment》](https://itnext.io/kubernetes-istio-canary-deployment-5ecfd7920e1c)
 
 ## 3.2 服务网格
 
@@ -182,7 +182,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 ![](/assets/uploads/untitled-6.png)
 
-* 图片引用自 [《左耳听风 - 管理设计篇之“服务网格”》](https://time.geekbang.org/column/article/5920)
+> 图片引用自 [《左耳听风 - 管理设计篇之“服务网格”》](https://time.geekbang.org/column/article/5920)
 
 `Service Mesh` 这个服务网络专注于处理**服务和服务间的通讯**。其主要负责构造一个稳定可靠的**服务通讯的基础设施**，并让整个架构更为的先进和 `Cloud Native`。在工程中, `Service Mesh` 基本来说是一组**轻量级的服务代理和应用逻辑的服务**在一起，并且**对于应用服务是透明的**。
 
@@ -199,7 +199,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 ![](/assets/uploads/untitled-7.png)
 
-* 图片引用自 [zhaohuabing/istio-practice](http://zhaohuabing/istio-practice)
+> 图片引用自 [zhaohuabing/istio-practice](http://zhaohuabing/istio-practice)
 
 微服务架构在网络链路上还有很多待解决的点，如**链路跟踪、分布式日志、监控报警、压测演练、故障注入**等。若让 `Istio` 官方来实现所有的功能，不仅耗时，还会让整个系统变得非常臃肿。
 
@@ -234,7 +234,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 ![](/assets/uploads/untitled-8.png)
 
-* 图片引用自 [《 ISTIO 文档示例 BOOKINFO 应用》](https://istio.io/latest/zh/docs/examples/bookinfo/)
+> 图片引用自 [《 ISTIO 文档示例 BOOKINFO 应用》](https://istio.io/latest/zh/docs/examples/bookinfo/)
 
 ## 4.2 对 Reviews-v2、Reviews-v3 服务进行测试
 
