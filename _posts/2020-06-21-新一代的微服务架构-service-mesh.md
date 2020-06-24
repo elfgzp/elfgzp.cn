@@ -150,7 +150,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 接下来就从 `Sidecar` 到 `Service Mesh` 来一步一步介绍 Istio 的设计思想。这里提到的 `Sidecar` 到底是什么呢, `Sidecar` 在国内翻译为边车模式，这个翻译真的很形象。
 
-## Part 3「边车模式」到「服务网格」
+# Part 3「边车模式」到「服务网格」
 
 ## 3.1 边车模式
 
@@ -205,7 +205,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 接下来就用 `Istio` 的官方 `Demo` 来讲一个实际的应用场景。
 
-## Part 4 **用「Istio Demo」来讲一个实际的应用场景**
+# Part 4 **用「Istio Demo」来讲一个实际的应用场景**
 
 这部分会用 [Istio 官方的 Demo](https://istio.io/latest/zh/docs/examples/bookinfo/) 来演示，所以本文的大部分内容都可以在官方文档中找到。
 
@@ -236,7 +236,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 > 图片引用自 [《 ISTIO 文档示例 BOOKINFO 应用》](https://istio.io/latest/zh/docs/examples/bookinfo/)
 
-## 对 Reviews-v2、Reviews-v3 服务进行测试
+## 4.2 对 Reviews-v2、Reviews-v3 服务进行测试
 
 在实际的应用场景中，我们当前发布了两个 `Reviews` 服务的 `feature` 版本 `v2` 和 `v3` 版本。但是如果需要对这些服务进行测试。
 
@@ -248,7 +248,7 @@ int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL);
 
 ![](/assets/uploads/untitled-9.png)
 
-## 利用 Istio 对流量进行控制
+## 4.3 利用 Istio 对流量进行控制
 
 在官方的 `demo` 中，有这样一个例子。
 
