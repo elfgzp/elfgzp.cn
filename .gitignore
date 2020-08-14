@@ -1,39 +1,27 @@
-
-# Created by https://www.gitignore.io/api/osx
-
-### OSX ###
-# General
+*~
+~*
+*.diff
+*.patch
+*.bak
 .DS_Store
-.AppleDouble
-.LSOverride
+*.swp
+*.swo
+*.log
+*.log.*
 
-# Icon must end with two \r
-Icon
+/.vscode/
 
-# Thumbnails
-._*
+node_modules/
+.sass-cache/
 
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
+/.bundle/
+/vendor/bundle
+*.gem
 
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-# IDE
-.idea/
-
-# Custom
-_site/
-.history/
+yarn.lock
+package-lock.json
 Gemfile.lock
-# End of https://www.gitignore.io/api/osx
+
+_site/
+.jekyll-metadata
+.jekyll-cache/
