@@ -1,5 +1,5 @@
 ---
-layout: post
+# layout: post
 title:  "Travis CI  Jekyll  Docker 自动化部署博客到云服务器"
 date:   2018-10-02 18:00:00 +0800
 tags: 'Travis Jekyll Docker 技术 Linux'

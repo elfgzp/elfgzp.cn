@@ -1,5 +1,5 @@
 ---
-layout: post
+# layout: post
 title:  "MQTT消息服务器EMQ部署，并改造Mysql鉴权，通过Django进行用户管理"
 date:   2018-10-03 9:00:00 +0800
 tags: 'MQTT EMQ MySQL Django IOT 技术 Linux'

@@ -1,5 +1,5 @@
 ---
-layout: post
+# layout: post
 title: 新一代的微服务架构 Service Mesh
 subtitle: 微服务架构治理方案
 cover: /assets/uploads/images.png

@@ -1,5 +1,5 @@
 ---
-layout: post
+# layout: post
 title: 为你的 Github 博客加个 CMS -「内容管理」
 subtitle: Github 博客内容管理解决方案 - 「netlifycms」
 cover: /assets/uploads/screenshot-editor-1fa7f845bc0c9ed177d2c98a7339f2f6.jpg

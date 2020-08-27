@@ -1,5 +1,5 @@
 ---
-layout: post
+# layout: post
 title:  'Github 上的个人项目开源心得'
 date:   2019-12-09 22:00:00 +0800
 tags: 'Github gortal siteproject'

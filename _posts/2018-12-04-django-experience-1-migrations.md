@@ -1,5 +1,5 @@
 ---
-layout: post
+# layout: post
 title:  "Django使用心得（一） 善用migrations"
 date:   2018-12-04 10:30:00 +0800
 tags: 'Django'

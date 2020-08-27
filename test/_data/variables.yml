@@ -19,8 +19,10 @@ default:
     mode: normal
     type: webpage
     article_header:
-      align: left
-      theme: light
+      # align: left
+      # theme: light
+      type: overlay
+      theme: dark
     articles:
       show_cover: true
       show_excerpt: false

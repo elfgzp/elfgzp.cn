@@ -1,5 +1,5 @@
 ---
-layout: post
+# layout: post
 title:  'Django 使用心得 （三）利用 middleware 和 signal 实现数据的 「create_by」 记录功能'
 date:   2019-01-09 13:30:00 +0800
 tags: 'Django'
@@ -262,9 +262,3 @@ def process_response(self, request, response):
 [Django 学习 curry 函数](https://my.oschina.net/memorybox/blog/74628)  
   
 [Django Signal 解析](https://blog.csdn.net/zhuoxiuwu/article/details/52498003)
-
-
-
-
-
-    

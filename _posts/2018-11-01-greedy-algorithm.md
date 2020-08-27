@@ -1,5 +1,5 @@
 ---
-layout: post
+# layout: post
 title:  "贪心算法的转化"
 date:   2018-11-01 23:00:00 +0800
 tags: '算法'

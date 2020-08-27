@@ -1,5 +1,5 @@
 ---
-layout: post
+# layout: post
 title:  '使用 Consul 作为 Python 微服务的配置中心'
 date:   2019-03-11 12:30:00 +0800
 tags: 'Consul Python Micro-service'
@@ -391,4 +391,3 @@ Hello Consul
 > [P2P 网络核心技术：Gossip 协议](https://zhuanlan.zhihu.com/p/41228196)
 >
 > [服务发现框架选型，Consul 还是 Zookeeper 还是 etcd](https://www.servercoder.com/2018/03/30/consul-vs-zookeeper-etcd/)
-

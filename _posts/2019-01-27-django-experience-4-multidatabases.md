@@ -1,5 +1,5 @@
 ---
-layout: post
+# layout: post
 title:  'Django 使用心得 （四）多数据库'
 date:   2019-01-09 13:30:00 +0800
 tags: 'Django'
