@@ -5,7 +5,7 @@ git config --global user.name "Travis CI"
 git checkout --orphan gh-pages
 shopt -s extglob
 cp ads.txt _site/
-rm -rf !(_site) && mv _site/* . && rm -rf _site
+rm -rf !(build) && mv build/* . && rm -rf build
 touch .nojekyll
 git config credential.helper "store --file=.git/credentials"
 echo "https://${GH_TOKEN}:@github.com" > .git/credentials
