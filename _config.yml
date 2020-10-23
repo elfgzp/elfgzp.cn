@@ -106,5 +106,4 @@ sitemap: true
 plugins:
 - jekyll-sitemap
 - jekyll_github_sample
-
-
+destination: ./build
