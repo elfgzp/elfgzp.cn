@@ -2,7 +2,7 @@
 layout: post
 title: 「K8s 学习日记」Kubeadm 部署 kubernetes 集群
 subtitle: 在 Vultr 上部署 kubernetest 集群
-cover: /assets/uploads/v2-582b2a32df399cc3f40ef62fd099e438_1200x500.jpg
+cover: /assets/uploads/kuberneteshero.jpg
 date: '2020-04-11 01:00:01'
 tags: K8s Kubernetes Vultr
 color: 'rgb(37, 126, 235)'
