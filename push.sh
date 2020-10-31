@@ -4,7 +4,7 @@ git config --global user.email "travis@travis-ci.org"
 git config --global user.name "Travis CI"
 git checkout --orphan gh-pages
 shopt -s extglob
-cp ads.txt _site/
+cp ads.txt build/
 rm -rf !(build) && mv build/* . && rm -rf build
 touch .nojekyll
 git config credential.helper "store --file=.git/credentials"
