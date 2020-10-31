@@ -17,7 +17,7 @@ jobs:
       - name: jekyll-build-optional-deploy-gh-pages
         # You may pin to the exact commit or the version.
         # uses: agentd00nut/jekyll-build-optional-deploy-gh-pages@8a3e2f8a27b5557b87488bfa506d0bdbbda3c99c
-        uses: elfgzp/jekyll-build-optional-deploy-gh-pages@00c1d2424576558bd202b0ead979207eb6e824f4
+        uses: elfgzp/jekyll-build-optional-deploy-gh-pages@bb9a3d725a7e8e3c2e5b7cf30425f4a405f98d1e
         env:
           BUILD_DIR: "build/"
           REMOTE_BRANCH: "gh-pages"
