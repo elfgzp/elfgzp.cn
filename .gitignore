@@ -37,4 +37,3 @@ _site/
 .history/
 Gemfile.lock
 # End of https://www.gitignore.io/api/osx
-build/
