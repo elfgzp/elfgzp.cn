@@ -12,4 +12,4 @@ echo "https://${GH_TOKEN}:@github.com" > .git/credentials
 git add .
 git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
 git push origin gh-pages -f
-git push -f --mirror https://elf_gzp:${GITEE_TOKEN}@gitee.com/elf_gzp/elfgzp.cn.git
+git push -f --mirror https://elfgzp:${GITEE_TOKEN}@gitee.com/elfgzp/elfgzp.cn.git
