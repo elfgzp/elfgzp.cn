@@ -1,0 +1,549 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>为你的 Github 博客加个 CMS -「内容管理」</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(30, 31, 32) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(30, 31, 32);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">为你的 Github 博客加个 CMS -「内容管理」</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(30, 31, 32);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2019/12/09/gortal-site-project.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(30, 31, 32)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(30, 31, 32);"><sapn class="main">Github 上的个人项目开源心得</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">为你的 Github 博客加个 CMS -「内容管理」</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2020/04/11/k8s-%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0-kubeadm-%E9%83%A8%E7%BD%B2-kubernetes-%E9%9B%86%E7%BE%A4.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(30, 31, 32)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(30, 31, 32);"><sapn class="main">「K8s 学习日记」Kubeadm 部署 kubernetes 集群</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2019/12/09/gortal-site-project.html" class="leftchange" style="border-right: 1px solid rgb(30, 31, 32);border-bottom: 2px solid rgb(30, 31, 32);"><span>上一篇<br><br>Github 上的个人项目开源心得</span></a>
+    
+    
+    <a href="/2020/04/11/k8s-%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0-kubeadm-%E9%83%A8%E7%BD%B2-kubernetes-%E9%9B%86%E7%BE%A4.html" class="rightchange" style="border-left: 1px solid rgb(30, 31, 32);border-bottom: 2px solid rgb(30, 31, 32);"><span>下一篇<br><br>「K8s 学习日记」Kubeadm 部署 kubernetes 集群</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(30, 31, 32); border-right: 8px solid rgb(30, 31, 32)">
+        Github 博客内容管理解决方案 - 「netlifycms」
+    </div>
+    
+    
+    <img src="/assets/uploads/screenshot-editor-1fa7f845bc0c9ed177d2c98a7339f2f6.jpg" style="margin:auto;">
+    <!-- 文章内容 -->
+    <h1 id="github-博客内容管理解决方案---netlifycms">Github 博客内容管理解决方案 - 「netlifycms」</h1>
+
+<p>在使用 <code class="highlighter-rouge">Github</code> 作为博客很长一段时间在发愁，主要是有以下几个痛点：</p>
+
+<ul>
+  <li>每次写文章都要打开编辑器，感觉自己不是在写文章而是在写代码</li>
+  <li>写完只是想打个草稿，都要用 <code class="highlighter-rouge">git</code> 提交以下更改，更像写代码了</li>
+  <li>不能随时随地的编辑，有时候我想用 ipad 修改点什么都不可以</li>
+</ul>
+
+<p>由于以上几个痛点，每次写 Blog 感觉自己都需要费很大的力气，还不如自己写个笔记就过去了。</p>
+
+<p>但是有些好的东西总是要分享出来才会有价值啊，于是我开始寻找 Github Blog 的 CMS 解决方案。</p>
+
+<p>先来一张效果图。</p>
+
+<p><img src="/assets/uploads/elfgzp_admin.gif" alt="blog_admin" /></p>
+
+<h2 id="netlifycms-与-jekyll-admin-的对比">netlifycms 与 jekyll-admin 的对比</h2>
+
+<p>刚开始我找到的是 <code class="highlighter-rouge">jekyll-admin</code> 这款 <code class="highlighter-rouge">jekyll</code> 的 <code class="highlighter-rouge">CMS</code>，因为本人用的是 <code class="highlighter-rouge">jekyll</code>。但是发现这款 <code class="highlighter-rouge">jeklly</code> 还需要一台服务器，也就是他编辑的只是服务器上的文件。</p>
+
+<p>当初选择使用 <code class="highlighter-rouge">Github</code> 作为 Blog 就是想在没有个人服务器的情况下 Blog 依然能工作。虽然目前是利用 <code class="highlighter-rouge">CI</code> 部署在自己的服务器上方便国内的搜索引擎爬虫进行爬取，目的是优化 <code class="highlighter-rouge">SEO</code>，提高国内的访问速度。但是还是想要一个不需要自己部署后端的 CMS。</p>
+
+<p>于是我就找到了 netlifycms，经过配置完后我大概了解了他的工作原理。</p>
+
+<p>首先你的 CMS admin 页面是跟你博客一起部署在 Github 上面的，admin 的权限则是通过 Github OAuth 来控制的。在你修改了页面之后，会通过 <code class="highlighter-rouge">js</code> 提交给 <code class="highlighter-rouge">netlify</code>，<code class="highlighter-rouge">netlify</code> 会通过 Github OAuth 获取的权限来在你修改了文章之后帮你做 <code class="highlighter-rouge">git commit</code> 的操作，大概的原理图如下。</p>
+
+<p><img src="/assets/uploads/netlifycms.png" alt="netlifycms" /></p>
+
+<p>废话不多说，我们跟着官方文档开始吧。</p>
+
+<h2 id="为你的博客添加-netlifycms">为你的博客添加 netlifycms</h2>
+
+<p>由于本人用的是 jeklly 博客，文章中的演示部分均为 jeklly。当然 netlifycms 不只支持 jeklly，还支持很多其他类型的 Blog。如果是其他类型的 Blog 可以参考<a href="https://www.netlifycms.org/docs/intro/">官方文档</a>的 <code class="highlighter-rouge">Guides</code>，不过应该都是大同小异的，不过建议对比本片文章来配置，如何创建 Oauth 应用可以参考本文，因为官方文档没有讲的太详细。</p>
+
+<p>当然开始之前你需要有一个已经部署好的博客，没有部署好的可以参考 <a href="https://jekyllrb.com/docs/step-by-step/01-setup/">jeklly 的部署指引文档</a>。</p>
+
+<h3 id="增加-adminindexhtml-文件">增加 admin/index.html 文件</h3>
+
+<p>创建一个 <code class="highlighter-rouge">admin/index.html</code> 在你的仓库根目录下，这个文件内容看起来像这样。注意官方文档中并没有添加 <code class="highlighter-rouge">netlify-identity-widget.js</code> 这个 <code class="highlighter-rouge">js</code> ，这个是用来校验你的身份的，需要加上。</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- admin/index.html --&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://identity.netlify.com/v1/netlify-identity-widget.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Content Manager<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="c">&lt;!-- Include the script that builds the page and powers Netlify CMS --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>可以参考我的仓库文件，<a href="https://github.com/elfgzp/elfgzp.cn/blob/master/admin/index.html">https://github.com/elfgzp/elfgzp.cn/blob/master/admin/index.html</a></p>
+
+<p>然后在你的首页的 <code class="highlighter-rouge">index.html</code> 的 <code class="highlighter-rouge">header</code> 增加一段 <code class="highlighter-rouge">js</code> 代码。这段代码的作用是在你登录你的 <code class="highlighter-rouge">cms</code> admin 页面之后，<code class="highlighter-rouge">netlify-identity-widget.js</code> 会将你重定向到首页，然后这段代码会把你带回 admin 页面。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">header</span><span class="o">&gt;</span>
+  <span class="c">&lt;!--</span> <span class="p">...</span> <span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">netlifyIdentity</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">netlifyIdentity</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">init</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">netlifyIdentity</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">login</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/admin/</span><span class="dl">"</span><span class="p">;</span>
+        <span class="p">});</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/header</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<h3 id="增加一个-adminconfigyml-文件">增加一个 admin/config.yml 文件</h3>
+
+<p>同样在仓库根目录下创建一个 <code class="highlighter-rouge">admin/config.yml</code> 文件，这个文件内容看起来是这样。注意官方文档中的 <code class="highlighter-rouge">backend:name</code> 是 <code class="highlighter-rouge">git-gateway</code> ，我们需要修改成 <code class="highlighter-rouge">github</code>。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">backend</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">github</span>
+  <span class="na">branch</span><span class="pi">:</span> <span class="s">master</span> <span class="c1"># 默认是 master 分支</span>
+<span class="na">media_folder</span><span class="pi">:</span> <span class="s1">'</span><span class="s">assets/uploads'</span>
+<span class="na">collections</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">blog'</span>
+    <span class="na">label</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Blog'</span>
+    <span class="na">folder</span><span class="pi">:</span> <span class="s1">'</span><span class="s">_posts/'</span>
+    <span class="na">fields</span><span class="pi">:</span> <span class="c1"># 这里这些字段对应到你写文章的 markdown 上方的一些文章属性 widget 的配置可以参考官方文档的 widget 部分</span>
+      <span class="pi">-</span> <span class="pi">{</span><span class="nv">label</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Layout"</span><span class="pi">,</span> <span class="nv">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">layout"</span><span class="pi">,</span> <span class="nv">widget</span><span class="pi">:</span> <span class="s2">"</span><span class="s">hidden"</span><span class="pi">,</span> <span class="nv">default</span><span class="pi">:</span> <span class="s2">"</span><span class="s">post"</span><span class="pi">}</span>
+      <span class="pi">-</span> <span class="pi">{</span><span class="nv">label</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Title"</span><span class="pi">,</span> <span class="nv">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">title"</span><span class="pi">,</span> <span class="nv">widget</span><span class="pi">:</span> <span class="s2">"</span><span class="s">string"</span><span class="pi">,</span> <span class="nv">tagname</span><span class="pi">:</span> <span class="s2">"</span><span class="s">h1"</span><span class="pi">}</span>
+      <span class="pi">-</span> <span class="pi">{</span><span class="nv">label</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Date"</span><span class="pi">,</span> <span class="nv">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">date"</span><span class="pi">,</span> <span class="nv">widget</span><span class="pi">:</span> <span class="s2">"</span><span class="s">datetime"</span><span class="pi">,</span> <span class="nv">format</span><span class="pi">:</span> <span class="s2">"</span><span class="s">YYYY-MM-DD</span><span class="nv"> </span><span class="s">hh:mm:ss"</span><span class="pi">}</span>
+      <span class="pi">-</span> <span class="pi">{</span><span class="nv">label</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Tags"</span><span class="pi">,</span> <span class="nv">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">tags"</span><span class="pi">,</span> <span class="nv">widget</span><span class="pi">:</span> <span class="s2">"</span><span class="s">string"</span><span class="pi">}</span>
+      <span class="pi">-</span> <span class="pi">{</span><span class="nv">label</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Body"</span><span class="pi">,</span> <span class="nv">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">body"</span><span class="pi">,</span> <span class="nv">widget</span><span class="pi">:</span> <span class="s2">"</span><span class="s">markdown"</span><span class="pi">}</span>
+</code></pre></div></div>
+
+<p>可以参考我的仓库文件，<a href="https://github.com/elfgzp/elfgzp.cn/blob/master/admin/config.yml">https://github.com/elfgzp/elfgzp.cn/blob/master/admin/config.yml</a></p>
+
+<h3 id="在-netlify-配置好你的仓库">在 netlify 配置好你的仓库</h3>
+
+<p>在使用 Github 账号登录了 <code class="highlighter-rouge">netlify</code> 后，点击 「New site from Git」，如果搜索不到的话记得给你的 <code class="highlighter-rouge">netlify</code> 授权访问你的仓库。</p>
+
+<p><img src="/assets/uploads/create_a_new_site.png" alt="create_a_new_site" /></p>
+
+<p>跟着指引创建，注意 <code class="highlighter-rouge">deploy</code> 这个部分如果你有别的 <code class="highlighter-rouge">CI</code> 可以将他的 <code class="highlighter-rouge">build command</code> 去掉。</p>
+
+<p><img src="/assets/uploads/create_a_new_site_2.png" alt="create_a_new_site_2" /></p>
+
+<p>创建完成后，你就会在你的网站列表里面看到你的网站了。如果你有自己的域名，需要到 <code class="highlighter-rouge">Site Settings</code> &gt; <code class="highlighter-rouge">Domain Management</code> 设置你的个人域名。</p>
+
+<p><img src="/assets/uploads/domain_management.png" alt="domain_management" /></p>
+
+<h3 id="配置-oauth-app">配置 Oauth App</h3>
+
+<p>上面几个步骤完成后，将修改 <code class="highlighter-rouge">push</code> 到仓库，你已经可以在你的 <code class="highlighter-rouge">admin</code> 页面看到一些东西了。</p>
+
+<p><img src="/assets/uploads/login.png" alt="login" /></p>
+
+<p>但是这个时候你点击登录肯定是登录不了的，我们还需要配置一个 Oauth App。</p>
+
+<p>首先打开你的 Github 页面，依次按步骤 <code class="highlighter-rouge">Settings</code> &gt; <code class="highlighter-rouge">Developer settings</code> &gt; <code class="highlighter-rouge">Oauth Apps</code> &gt; <code class="highlighter-rouge">New Oauth App</code>。</p>
+
+<p>按照下图填好你的 Blog 信息，注意 <code class="highlighter-rouge">Authorization callback URL</code> 需要填 <code class="highlighter-rouge">https://api.netlify.com/auth/done</code>。</p>
+
+<p><img src="/assets/uploads/oauth_app_1.png" alt="oauth_app_1" /></p>
+
+<p>然后复制好你的 <code class="highlighter-rouge">Oauth Client ID</code> 和 <code class="highlighter-rouge">Oauth Client Secret</code>。</p>
+
+<p><img src="/assets/uploads/oauth_app_2.png" alt="oauth_app_2" /></p>
+
+<p>打开 <code class="highlighter-rouge">netlify</code>到 <code class="highlighter-rouge">Site Settings</code> &gt; <code class="highlighter-rouge">Access control</code> &gt; <code class="highlighter-rouge">Oauth - install provider</code>，将复制的信息粘贴进去。</p>
+
+<p><img src="/assets/uploads/oauth_app_3.png" alt="oauth_app_3" /></p>
+
+<p>完成上面的步骤就大功告成了，你就可以登录你的 Blog Admin 管理你的文章了。</p>
+
+<h2 id="使用技巧">使用技巧</h2>
+
+<p>这里有一些使用的技巧想分享一下。</p>
+
+<h3 id="新建一个-cms-分支用来打草稿">新建一个 CMS 分支用来打草稿</h3>
+
+<p>因为本人加了 <code class="highlighter-rouge">CI</code> 所以 <code class="highlighter-rouge">push</code> 到 <code class="highlighter-rouge">master</code> 之后就会更新了，这样就不能打草稿了，所以我开了一个 <code class="highlighter-rouge">cms</code> 的分支。文章保存后都会 <code class="highlighter-rouge">commit</code> 到这个分支上，等你需要发布的时候在提交 <code class="highlighter-rouge">PR</code> 到 <code class="highlighter-rouge">master</code>。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">backend</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">github</span>
+  <span class="na">branch</span><span class="pi">:</span> <span class="s">cms</span> <span class="c1"># 默认是 master 分支</span>
+</code></pre></div></div>
+
+<h3 id="markdown-效果预览">Markdown 效果预览</h3>
+
+<p>netlifycms 的 Markdown 预览非常的丑，我直接把他关了，代替预览的方案就是切换编辑框的 <code class="highlighter-rouge">Rich Text</code> 和 <code class="highlighter-rouge">Markdown</code> 模式。</p>
+
+<h3 id="在文章中添加图片">在文章中添加图片</h3>
+
+<p>肯定有读者注意到了在增加了 <code class="highlighter-rouge">![]()</code> 的 Markdown 图片标签后，切换到 <code class="highlighter-rouge">Rich Text</code> 就可以选择上传图片了。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>以上就是为 Github 增加 CMS 的解决方案，如果有什么问题或者有更好的解决方案，可以在下方留言。</p>
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(30, 31, 32);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(30, 31, 32);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(30, 31, 32);
+        background-color: transparent;
+        border-left: 2px solid rgb(30, 31, 32);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>

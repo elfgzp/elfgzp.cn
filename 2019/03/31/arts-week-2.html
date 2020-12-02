@@ -1,0 +1,577 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>ARTS 第二周</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(102, 88, 192) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(102, 88, 192);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">ARTS 第二周</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(102, 88, 192);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2019/03/23/arts-week-1.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(102, 88, 192)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(102, 88, 192);"><sapn class="main">ARTS 第一周</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">ARTS 第二周</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2019/04/13/arts-week-3.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(102, 88, 192)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(102, 88, 192);"><sapn class="main">ARTS 第三周</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2019/03/23/arts-week-1.html" class="leftchange" style="border-right: 1px solid rgb(102, 88, 192);border-bottom: 2px solid rgb(102, 88, 192);"><span>上一篇<br><br>ARTS 第一周</span></a>
+    
+    
+    <a href="/2019/04/13/arts-week-3.html" class="rightchange" style="border-left: 1px solid rgb(102, 88, 192);border-bottom: 2px solid rgb(102, 88, 192);"><span>下一篇<br><br>ARTS 第三周</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(102, 88, 192); border-right: 8px solid rgb(102, 88, 192)">
+        ARTS Week-2
+    </div>
+    
+    
+    <img src="https://www.notion.so/image/https%3A%2F%2Fwww.notion.so%2Fimages%2Fpage-cover%2Fmet_vincent_van_gogh_irises.jpg?table=block&id=511ae90f-9dbf-4154-8525-25f4745d51e3&width=3730&cache=v2" style="margin:auto;">
+    <!-- 文章内容 -->
+    <h2 id="algorithm"><strong>Algorithm</strong></h2>
+
+<p><a href="https://leetcode-cn.com/problems/count-primes/">204. 计数质数</a></p>
+
+<p>统计所有小于非负整数 <em>n</em> 的质数的数量。</p>
+
+<p><strong>示例:</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>输入: 10
+输出: 4
+解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7 。
+</code></pre></div></div>
+
+<p>解法一，暴力法：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">countPrimes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">isPrime</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+                
+        <span class="k">return</span> <span class="n">count</span>
+    
+    <span class="k">def</span> <span class="nf">isPrime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span>
+        
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">):</span>
+            
+            <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+        <span class="k">return</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<p>其中这里利用了一个数学规律：</p>
+
+<p>假设一个数 N 他有两个约数 a、b，当 a = b 时，那么它是一个合数，也就是 a^2 = N。</p>
+
+<p>如果他的这两个约数都大于 根号 N ，也就是 a &gt; 根号 N，那么一定有 a ^ &gt; N。</p>
+
+<p>所以若 N 不是质数，那么必定存在一个约数小于等于根号 N（1 除外）。</p>
+
+<p>虽然利用了数学规律，但是暴力法超时了 🤪。</p>
+
+<p>解法二，埃拉托色尼筛网法：</p>
+
+<p><img src="/assets/images/2019-03-31-arts-week-2/20160201110938143-49608c24-5375-41bc-82a6-0ed7cc14e565.gif" alt="" /></p>
+
+<p>如 GIF 所示，首先筛选小于 N 的 2 的倍数，他们必定不是质数。然后筛选 3 的倍数、5 的倍数、7 的倍数 … 以此类推。剩下的数就是质数了。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">countPrimes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        
+        <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            
+            <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="n">mul</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">j</span>
+            
+            <span class="k">while</span> <span class="n">mul</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+                
+                <span class="n">arr</span><span class="p">[</span><span class="n">mul</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">mul</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">j</span>
+        
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+</code></pre></div></div>
+
+<p>虽然利用了算法，但是还是超时了 🥶。</p>
+
+<p>尝试用 Python 中的切片优化一下，把原来的顺序赋值为 0 改为批量赋值为 0：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">countPrimes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        
+        <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="n">n</span><span class="p">:</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="n">n</span><span class="p">:</span><span class="n">i</span><span class="p">])</span>
+        
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+</code></pre></div></div>
+
+<p>我们发现在上面的筛法中有的数字是多个质数的倍数，也就是说它可能会被重复计算多次，比如说6 同时是 2 与 3 的倍数，它在计算时就被访问了两次，所以应该还有优化的空间。</p>
+
+<p>所以在网上看到了一种算法，欧拉函数线性筛法。又是数学，高数要回去重新学了 😵。</p>
+
+<p>这里放一下<a href="https://blog.csdn.net/qq_17550379/article/details/86062147">链接🔗</a>，感兴趣的可以自己去看看。</p>
+
+<p>这道 leetcode 题虽然是标着是简单的，我也觉得并不简单。</p>
+
+<p><a href="https://github.com/elfgzp/Leetcode/blob/master/204.count-primes.py">Github 仓库地址</a></p>
+
+<h2 id="review"><strong>Review</strong></h2>
+
+<p><a href="https://www.the-paper-trail.org/post/2014-08-09-distributed-systems-theory-for-the-distributed-systems-engineer/">《Distributed systems theory for the distributed systems engineer》</a></p>
+
+<p>作者在文章中提到了，分布式系统理论有很多：</p>
+
+<ul>
+  <li><a href="https://www.jianshu.com/p/b620cbabf857">FLP 不可能原理</a>：在网络可靠，但允许节点失效（即便只有一个）的最小化异步模型系统中，不存在一个可以解决一致性问题的确定性共识算法。</li>
+  <li><a href="https://zh.wikipedia.org/wiki/Paxos%E7%AE%97%E6%B3%95">Paxos 算法</a></li>
+  <li><a href="https://zh.wikipedia.org/zh/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98">拜占庭将军问题（Byzantine Generals Problem)</a></li>
+</ul>
+
+<p>…</p>
+
+<p>但是往往上面罗列出来的理论都是非常深奥，复杂都需要非常认真花很多时间去理解和学习，但是往往去学习这些理论知识的学习方向恰恰不是那么的好（除非你是作为博士或研究生去学习）。</p>
+
+<p>所以，分布式系统工程师到底需要学习那些分布式理论知识？</p>
+
+<p>首先，我们需要学习和阅读一些书籍，去了解分布式系统工程师在构建分布式系统过程中，会遇到的一些难点、问题，为后面更加复杂的分布式问题细节研究打下基础，作者也罗列了一些文内容，这里就不详细介绍只把他们列出来。</p>
+
+<ul>
+  <li><a href="http://book.mixu.net/distsys/">Distributed Systems for Fun and Profit</a></li>
+  <li><a href="http://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods/">Notes on distributed systems for young bloods</a></li>
+  <li><a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.41.7628">A Note on Distributed Systems</a></li>
+  <li><a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.41.7628">The fallacies of distributed computing</a></li>
+</ul>
+
+<p>然后提到了设计分布式系统需要知道的一些基本知识和需要做的东西，如故障检测、弹力设计，与一致性相关的二阶段提交、三阶段提交，还有 Gossip 算法，还有 CAP 定理等等。</p>
+
+<p>这些都是我架构师成长之路上的必经学习之路啊 🎓，需要慢慢去消化吸收了。</p>
+
+<h2 id="tip"><strong>Tip</strong></h2>
+
+<p>这里分享 Python 的两个工具函数，一个是利用线程池将某个函数转换为 Python 的异步函数，返回一个协程对象。另一个是将异步函数转换为同步函数，将其结果直接返回。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">import</span> <span class="nn">functools</span>
+<span class="err">​</span>    
+    <span class="k">def</span> <span class="nf">force_async</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+        <span class="s">"""
+        turns a sync function to async function using threads
+        """</span>
+        <span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+        <span class="kn">import</span> <span class="nn">asyncio</span>
+        <span class="n">pool</span> <span class="o">=</span> <span class="n">ThreadPoolExecutor</span><span class="p">()</span>
+    
+        <span class="o">@</span><span class="n">functools</span><span class="p">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">future</span> <span class="o">=</span> <span class="n">pool</span><span class="p">.</span><span class="n">submit</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">wrap_future</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>  <span class="c1"># make it awaitable
+</span>    
+        <span class="k">return</span> <span class="n">wrapper</span>
+<span class="err">​</span>    
+    <span class="k">def</span> <span class="nf">force_sync</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+        <span class="s">"""
+        turn an async function to sync function
+        """</span>
+        <span class="kn">import</span> <span class="nn">asyncio</span>
+    
+        <span class="o">@</span><span class="n">functools</span><span class="p">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">iscoroutine</span><span class="p">(</span><span class="n">res</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">().</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+    
+        <span class="k">return</span> <span class="n">wrapper</span>
+</code></pre></div></div>
+
+<p>他们两个分别有什么用呢？</p>
+
+<p>举个例子，当我们用到一些第三方的库，他会调用 IO，比如网络请求，文件读取等等。我们在一些类中需要将类抽象为异步函数，抽象的方法返回的结果必须是一个 <code class="highlighter-rouge">awaitabale</code>对象即协程，但是我们调用的库恰好是同步的，这时候就可以利用第一个装饰器。</p>
+
+<p>第二个装饰器可以利用在测试中，比如某个函数它是异步的，我们需要在 <code class="highlighter-rouge">setup_*</code> 中调用，那么我们就可以利用装饰器将其变为同步函数。</p>
+
+<p>他们的实现原理非常简单，<code class="highlighter-rouge">force_async</code> 是利用线程池实现的，<code class="highlighter-rouge">force_sync</code> 则是将异步函数在事件循环中执行完后将结果返回。</p>
+
+<h2 id="share"><strong>Share</strong></h2>
+
+<p><a href="https://time.geekbang.org/column/article/3912">左耳听风 《41 弹力设计篇之“认识故障和弹力设计”》</a></p>
+
+<p>不要尝试去避免故障，而是要把处理故障的代码当成正常的功能坐在架构里写在代码里。</p>
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(102, 88, 192);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(102, 88, 192);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(102, 88, 192);
+        background-color: transparent;
+        border-left: 2px solid rgb(102, 88, 192);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>

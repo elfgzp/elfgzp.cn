@@ -1,0 +1,561 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>Github 上的个人项目开源心得</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(56, 173, 216) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(56, 173, 216);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">Github 上的个人项目开源心得</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(56, 173, 216);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2019/07/26/arts-week-15.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(56, 173, 216)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(56, 173, 216);"><sapn class="main">ARTS 第十五周</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">Github 上的个人项目开源心得</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2020/03/21/%E4%B8%BA%E4%BD%A0%E7%9A%84-github-%E5%8D%9A%E5%AE%A2%E5%8A%A0%E4%B8%AA-cms-%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(56, 173, 216)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(56, 173, 216);"><sapn class="main">为你的 Github 博客加个 CMS -「内容管理」</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2019/07/26/arts-week-15.html" class="leftchange" style="border-right: 1px solid rgb(56, 173, 216);border-bottom: 2px solid rgb(56, 173, 216);"><span>上一篇<br><br>ARTS 第十五周</span></a>
+    
+    
+    <a href="/2020/03/21/%E4%B8%BA%E4%BD%A0%E7%9A%84-github-%E5%8D%9A%E5%AE%A2%E5%8A%A0%E4%B8%AA-cms-%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86.html" class="rightchange" style="border-left: 1px solid rgb(56, 173, 216);border-bottom: 2px solid rgb(56, 173, 216);"><span>下一篇<br><br>为你的 Github 博客加个 CMS -「内容管理」</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(56, 173, 216); border-right: 8px solid rgb(56, 173, 216)">
+        🚪「gortal」一个使用 Go 语言开发的，超级轻量的堡垒机（跳板机）服务
+    </div>
+    
+    
+    <img src="/assets/images/2019-12-09-gortal-site-project/github.jpeg" style="margin:auto;">
+    <!-- 文章内容 -->
+    <p>由于最近在 Github 发了一个个人开源项目 - <a href="https://github.com/TNK-Studio/gortal">「gortal」一个使用 Go 语言开发的，超级轻量的堡垒机（跳板机）服务</a>，于是想写一篇博文来记录一下自己的开源心得。</p>
+
+<p><img src="/assets/images/2019-12-09-gortal-site-project/gortal.gif" alt="gortal" /></p>
+
+<p>虽然不是第一次写开源项目了，但是不能放过这次写博文的热情，下一次就不知道啥时候写了。</p>
+
+<p>而且这篇文章的主要目的也是想分享一些开源的心得给读者们。</p>
+
+<h2 id="产生-idea-">产生 Idea 💡</h2>
+
+<p>首先不管是个人项目还是开源项目都得有一个 Idea，我先来说说 <code class="highlighter-rouge">gortal</code> 这个项目的 idea 是怎么来的。</p>
+
+<p>笔者有一群热爱开源技术的小伙伴们，<a href="https://github.com/TNK-Studio/gortal">TNK-Studio</a> - <code class="highlighter-rouge">technical studio</code> 技术小作坊。</p>
+
+<p><a href="https://github.com/mayneyao">@mayneyao</a> 同学的开源项目 <a href="https://github.com/TNK-Studio/zh-independent-blog-research">中文独立博客调研</a> 需要服务器来跑爬虫，于是我们便将手上的闲置云计算资源都贡献出来。</p>
+
+<p>我想了想没准以后还会有这样的需求，于是想到了公司使用的 <a href="https://github.com/jumpserver/jumpserver">jumpserver 堡垒机</a>，想在组织的其中一个服务器搭起来。</p>
+
+<p>于是就 <code class="highlighter-rouge">docker</code> 一把梭，两三下就跑起来了。</p>
+
+<p>结果就是，服务器卡死了 …</p>
+
+<p>去 <code class="highlighter-rouge">jumpserver</code> 的官方文档看了一眼。</p>
+<blockquote>
+  <p>Jumpserver 环境要求：<br />
+硬件配置: 2个CPU核心, 4G 内存, 50G 硬盘（最低）<br />
+…</p>
+</blockquote>
+
+<p><img src="/assets/images/2019-12-09-gortal-site-project/ni-rang-wo-shuo-dian-shen-me-hao.jpeg" alt="ni-rang-wo-shuo-dian-shen-me-hao" /></p>
+
+<p>我们闲置的云计算资源基本都是 <code class="highlighter-rouge">1 核 2 G</code> 的配置，这配置要求玩不起呀。</p>
+
+<p>然后搜了一下有没有其他同类型的，轻量一点的项目能拿来用，最后也是没有找到合适的。</p>
+
+<h2 id="自己来造-">自己来造 🔧</h2>
+
+<p>既然没有，那就自己来造！</p>
+
+<p><code class="highlighter-rouge">Idea</code> 有了，就差程序员了，现在程序员也不缺了，就差用啥语言了。  这时候肯定是选世界上最好的语言 P ..</p>
+
+<p><img src="/assets/images/2019-12-09-gortal-site-project/kan-zhe-wo-de-dao.jpeg" alt="kan-zhe-wo-de-dao" /></p>
+
+<p>刚开始想考虑使用自己的本命语言 <code class="highlighter-rouge">Python</code>，但是后来考虑到 <code class="highlighter-rouge">Go</code> 语言相比之下部署简单，而且不管是生成的可执行程序还是 <code class="highlighter-rouge">docker</code> 镜像都非常的小，于是果断选择了 <code class="highlighter-rouge">Go</code>。</p>
+
+<p>那么应该做成什么样子的呢，因为体验过了 <code class="highlighter-rouge">jumpserver</code> 的终端交互的模式，所以也想开发成相同的方式。当然为了轻量，肯定是抛弃了 <code class="highlighter-rouge">Web</code>，完全使用终端来交互。</p>
+
+<p>接下来就是开源的轮子选择了，当然在实现你的 Idea 的时候切忌从头到位自己做，如果有优秀的开源方案一定要拿来用，如果不满足自己的需求在针对其进行修改。在使用其中一个开源项目 <a href="https://github.com/manifoldco/promptui">manifoldco/promptui</a> 的时候就发现不满足需求的地方，这时候就可以 fork 一份到自己的仓库，自己改了自己用。</p>
+
+<p>最终根据技术方案选择的轮子如下：</p>
+
+<ul>
+  <li>
+    <p>终端交互 - <a href="https://github.com/manifoldco/promptui">manifoldco/promptui</a></p>
+  </li>
+  <li>
+    <p>sshd 服务开发 - <a href="github.com/gliderlabs/ssh">gliderlabs/ssh</a></p>
+  </li>
+  <li>
+    <p>ssh 中转客户端 - <a href="&quot;github.com/helloyi/go-sshclient&quot;">helloyi/go-sshclient</a></p>
+  </li>
+  <li>
+    <p>其他个人开源项目 - <a href="github.com/fatih/color">fatih/color</a>、<a href="github.com/op/go-logging">op/go-logging</a> 等等</p>
+  </li>
+</ul>
+
+<h2 id="项目-to-do-">项目 To-do 📝</h2>
+
+<p>啥都选好了，准备开始动手了，却发现我该从哪里开始好呢？</p>
+
+<p>这时候就需要列一个 <code class="highlighter-rouge">To-do</code> 了，笔者使用的是 <a href="https://www.notion.so/?r=617c987258674dbb9fc8d31f1dcc0b9d">notion</a> 的笔记工具。使用看板将项目各个待实现的功能列出来，实现完一个将其拖入完成项中。</p>
+
+<p><img src="/assets/images/2019-12-09-gortal-site-project/notion.gif" alt="notion-gif" /></p>
+
+<p>这样不仅仅是自己可以梳理当前需要做的，而且在多人协作开发也非常有帮助。</p>
+
+<p><a href="https://www.notion.so/?r=617c987258674dbb9fc8d31f1dcc0b9d">Notion</a> 牛批！！！</p>
+
+<p>准备好 To-do 就可以正式开工了，当功能完成得差不多的时候，才是正式开始的时候。</p>
+
+<h2 id="加个-ci-️">加个 CI ⚙️</h2>
+
+<p>基础功能做好了，准备发布 <code class="highlighter-rouge">Release</code> 了，<code class="highlighter-rouge">Go</code> 开发的程序只需要打包成不同平台的二进制可执行文件就可以了。</p>
+
+<p>但是那么多平台，一个一个的手动 <code class="highlighter-rouge">build</code> 然后上传，这哪是程序员干的事，这是 <code class="highlighter-rouge">CI</code> - 持续集成（Continuous integration，简称CI）要干的事情。</p>
+
+<p>在开发这个项目之前，有使用过 <code class="highlighter-rouge">Travis CI</code>，它对 <code class="highlighter-rouge">Github</code> 开源项目是免费的。  但是前一段时间 <code class="highlighter-rouge">Github</code> 推出了 <code class="highlighter-rouge">Github Actions</code> 于是抱着尝尝鲜的态度就选择了它。</p>
+
+<p>它使用起来也非常的简单，点击仓库上方的 <code class="highlighter-rouge">Actions</code> 菜单就可以进入仓库的 <code class="highlighter-rouge">Actions</code> 配置页面。</p>
+
+<p>笔者在使用过程中觉得 <code class="highlighter-rouge">Github Actions</code> 跟 <code class="highlighter-rouge">Travis CI</code> 相比，其最大的优势是它的 <code class="highlighter-rouge">Marketplace</code>，里面有非常多开源的别人写好的 <code class="highlighter-rouge">Actions</code>，可以直接拿来简单修改后使用，而且这些 <code class="highlighter-rouge">Actions</code> 当然也是使用 <code class="highlighter-rouge">Github</code> 进行版本管理的。</p>
+
+<p><img src="/assets/images/2019-12-09-gortal-site-project/github-actions.gif" alt="github-actions" /></p>
+
+<p>如何使用这里就不做详细介绍了，感兴趣的可以查看 <a href="https://help.github.com/en/actions/automating-your-workflow-with-github-actions">Github Actions 官方文档</a>。</p>
+
+<p>这里我给仓库添加了一个「创建 Release」就自动打包所有镜像的 <code class="highlighter-rouge">actions</code>，它的仓库地址我也放在这里 <a href="https://github.com/ngs/go-release.action">ngs/go-release.action</a>。</p>
+
+<p>最后它的效果就是自动帮你打包所有平台的二进制可执行程序，并压缩上传到 <code class="highlighter-rouge">Github</code>。</p>
+
+<p><img src="/assets/images/2019-12-09-gortal-site-project/github-release.png" alt="github-release" /></p>
+
+<h2 id="来个-docker-镜像-">来个 Docker 镜像 🐳</h2>
+
+<p>当然一个服务怎么少的了 <code class="highlighter-rouge">Docker</code> 镜像，还不了解 <code class="highlighter-rouge">Docker</code> 的同学可以看看<a href="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html">阮一峰的 Docker 入门教程</a>，笔者觉得 <code class="highlighter-rouge">Docker</code> 简直就是 21 世纪程序员最伟大的发明之一。</p>
+
+<p>而且官方的 <code class="highlighter-rouge">Docker Hub</code> 与 <code class="highlighter-rouge">Github</code> 结合使用简直不能再香。</p>
+
+<p>不需要写额外的 <code class="highlighter-rouge">Github Actions</code> 配置或其他的 <code class="highlighter-rouge">CI</code> 配置文件，你只需要将你的仓库与 <code class="highlighter-rouge">Docker Hub</code> 仓库关联起来，当然不要忘了在你的仓库放 <code class="highlighter-rouge">Dockerfile</code> 文件。</p>
+
+<p>然后在 <code class="highlighter-rouge">Docker Hub</code> 仓库配置好自动构建镜像的逻辑，就大功告成了。</p>
+
+<p>而且 <code class="highlighter-rouge">Docker Hub</code> 的配置指引也做的非常好，非常容易理解。</p>
+
+<p><img src="/assets/images/2019-12-09-gortal-site-project/docker-hub.gif" alt="docker-hub" /></p>
+
+<p>当然这里非常非常重要的就是如果你是用的是 <code class="highlighter-rouge">Go</code> 语言进行开发的项目，<code class="highlighter-rouge">Docker</code> 镜像构建一定要分成两步。一个是编译镜像，一个是正式镜像，这样最终打包的镜像只会包含一个二进制文件，而不是将源码一起打包。</p>
+
+<div class="language-Dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> golang:1.12-alpine AS builder</span>
+<span class="c"># ... 省略代码</span>
+
+<span class="k">FROM</span><span class="s"> alpine:latest</span>
+<span class="k">LABEL</span><span class="s"> maintainer="Elf Gzp &lt;gzp@741424975@gmail.com&gt; (https://elfgzp.cn)"</span>
+<span class="k">COPY</span><span class="s"> --from=builder /opt/gortal ./</span>
+<span class="k">RUN </span><span class="nb">chmod</span> +x /gortal
+<span class="c"># ... 省略代码</span>
+</code></pre></div></div>
+
+<p>本项目完整的 <code class="highlighter-rouge">Dockerfile</code> 链接如下，可以通过链接查看完整的 <code class="highlighter-rouge">Dockerfile</code>。</p>
+
+<p><a href="https://github.com/TNK-Studio/gortal/blob/master/Dockerfile">https://github.com/TNK-Studio/gortal/blob/master/Dockerfile</a></p>
+
+<p>可以通过图片看到使用分两步构建和一步构建，最终打包的 <code class="highlighter-rouge">Docker</code> 镜像大小差异是非常大的。</p>
+
+<p><img src="/assets/images/2019-12-09-gortal-site-project/docker-hub-2.png" alt="docker-hub-2" /></p>
+
+<h2 id="让-readme-看着更高大上-">让 Readme 看着更高大上 🤪</h2>
+
+<p>接下来是最重要的一步，写好 <code class="highlighter-rouge">Readme</code>，它是你项目的封面。 很多时候我在浏览别人的开源项目，我可能都不在乎他这个项目做了什么，但从他的 <code class="highlighter-rouge">Readme</code> 写的非常的好，我就给他点个 <code class="highlighter-rouge">star</code> ⭐️。</p>
+
+<p>而且最好是能弄双语的 <code class="highlighter-rouge">Readme</code>，这样能让老外也能看懂，再不行就写一份中文的，剩下交给谷歌翻译。</p>
+
+<p>当然 <code class="highlighter-rouge">Readme</code> 最好不能都是字，要有演示的 <code class="highlighter-rouge">GIF</code>，这样进来的人第一眼就知道你这个项目是干啥的。</p>
+
+<p>这里笔者推荐 <a href="https://www.cockos.com/licecap/">LICEcap</a> 这个工具，本片文章所有的动图都是使用这个工具录制的。</p>
+
+<p><code class="highlighter-rouge">Readme</code> 写好之后，给它加上 <code class="highlighter-rouge">Badges</code> - 徽章 就是画龙点睛之笔了。</p>
+
+<p><img src="/assets/images/2019-12-09-gortal-site-project/badges.png" alt="badges" /></p>
+
+<p><code class="highlighter-rouge">Badges</code> 的添加也是非常简单的，我们只需要使用这个开源项目 <a href="https://shields.io/">shields</a>，并选择我们想要的徽章、填写好 URL、复制粘贴到 <code class="highlighter-rouge">Readme</code>，搞定。</p>
+
+<p><img src="/assets/images/2019-12-09-gortal-site-project/shields.gif" alt="shields" /></p>
+
+<p>复制粘贴后你会得到一个 <code class="highlighter-rouge">shields</code> 的链接，你只需要将链接改成 <code class="highlighter-rouge">Markdown</code> 的图片链接格式就可以了，<a href="https://raw.githubusercontent.com/TNK-Studio/gortal/master/README.md">参考链接</a>。</p>
+
+<h2 id="乞讨-star-️">乞讨 Star ⭐️</h2>
+
+<p>项目做完了，当然不能就放着不管了，除非你的项目非常非常的优秀，否则他是不会自己涨星星的。</p>
+
+<p>以本项目为例，笔者就去 <a href="https://www.v2ex.com/t/626902">V2EX</a> 分享了自己的项目，也收获了不少星星 ⭐️。</p>
+
+<p>你需要去各种社区分享你的开源项目，例如：<a href="https://v2ex.com/go/create">V2EX</a>、<a href="https://v2ex.com/go/create">稀土掘金</a>、<a href="https://segmentfault.com/">segmentfault</a> 等等。</p>
+
+<p>让你的项目给更多的人看到，同理写博客也是如此，不分享出去就没有正反馈，就少了很多动力。</p>
+
+<h2 id="稍微总结一下-">稍微总结一下 👻</h2>
+
+<p>笔者在这片文章没有过多的去介绍项目的开发过程，因为觉得开发以外的过程更值得分享。</p>
+
+<p>开源项目不只是实现了 <code class="highlighter-rouge">Idea</code> 就完事了，你可能还需要去让它更加的方便维护，自动的做一些重复的事情。还要去包装它分享它，这样才会有更多的人使用。当有更多人时候的时候，这个项目就需要花时间去迭代和维护了。<br />
+最后的最后，觉得文章还不错的，觉得这个开源项目还可以的，赏个 <code class="highlighter-rouge">star</code> ⭐️ 吧，<a href="https://github.com/TNK-Studio/gortal">https://github.com/TNK-Studio/gortal</a>。</p>
+
+<p><img src="/assets/images/2019-12-09-gortal-site-project/qi-tao.gif" alt="qi-tao" /></p>
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(56, 173, 216);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(56, 173, 216);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(56, 173, 216);
+        background-color: transparent;
+        border-left: 2px solid rgb(56, 173, 216);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>

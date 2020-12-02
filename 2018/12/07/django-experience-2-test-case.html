@@ -1,0 +1,824 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>Django使用心得（二） 使用TestCase测试接口</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(110, 120, 50) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(110, 120, 50);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">Django使用心得（二） 使用TestCase测试接口</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(110, 120, 50);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2018/12/04/django-experience-1-migrations.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(110, 120, 50)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(110, 120, 50);"><sapn class="main">Django使用心得（一） 善用migrations</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">Django使用心得（二） 使用TestCase测试接口</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2019/01/09/django-experience-3-create-by.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(110, 120, 50)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(110, 120, 50);"><sapn class="main">Django 使用心得 （三）利用 middleware 和 signal 实现数据的 「create_by」 记录功能</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2018/12/04/django-experience-1-migrations.html" class="leftchange" style="border-right: 1px solid rgb(110, 120, 50);border-bottom: 2px solid rgb(110, 120, 50);"><span>上一篇<br><br>Django使用心得（一） 善用migrations</span></a>
+    
+    
+    <a href="/2019/01/09/django-experience-3-create-by.html" class="rightchange" style="border-left: 1px solid rgb(110, 120, 50);border-bottom: 2px solid rgb(110, 120, 50);"><span>下一篇<br><br>Django 使用心得 （三）利用 middleware 和 signal 实现数据的 「create_by」 记录功能</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(110, 120, 50); border-right: 8px solid rgb(110, 120, 50)">
+        使用TestCase测试接口，养成良好的编码测试习惯
+    </div>
+    
+    
+    <img src="/assets/images/2018-12-07-django-experience-2-test-case/django-test-case.png" style="margin:auto;">
+    <!-- 文章内容 -->
+    <p>在接触开源社区<code class="highlighter-rouge">Github</code>之后，发现特别多的开源项目都会有单元测试<code class="highlighter-rouge">TestCase</code>。但是在步入工作后，从业了两个创业公司，发现大多数程序员都没有养成写单元测试的习惯。</p>
+
+<p>在目前的公司面试了一些程序员，他们的工作经验平均都有三年以上，但是都没有编写单元测试的习惯。
+问到<code class="highlighter-rouge">"为什么不去编写单元测试呢？"</code>，无非就是回答<code class="highlighter-rouge">"没有时间"</code>、<code class="highlighter-rouge">"写的都是接口，直接用客户端工具测试一下就可以了"</code>。</p>
+
+<p>在笔者使用了<code class="highlighter-rouge">Django</code>框架自带的<code class="highlighter-rouge">TestCase</code>之后，发现用<code class="highlighter-rouge">TestCase</code>测试接口不仅比一些<code class="highlighter-rouge">客户端工具</code>方便，而且还能降低在对代码进行修改之后出现<code class="highlighter-rouge">BUG</code>的几率，
+特别是一些对代码有严重的洁癖喜欢优化代码的程序员来说真的非常有用。</p>
+
+<p>而且运用框架的<code class="highlighter-rouge">TestCase</code>编写单元测试，还能结合一些<code class="highlighter-rouge">CI</code>工具来实现自动化测试，这个我也会专门写一篇文章来介绍我利用<code class="highlighter-rouge">Gitlab CI</code>结合<code class="highlighter-rouge">Django</code>的<code class="highlighter-rouge">TestCase</code>实现自动化测试的一些心得。</p>
+
+<h2 id="testcase-类的结构">TestCase 类的结构</h2>
+
+<p>为了方便没用用过<code class="highlighter-rouge">TestCase</code>的读者，先简单介绍一下<code class="highlighter-rouge">TestCase</code>的类结构。</p>
+
+<p>常见的<code class="highlighter-rouge">TestCase</code>由<code class="highlighter-rouge">setUp</code>函数、<code class="highlighter-rouge">tearDown</code>函数和<code class="highlighter-rouge">test_func</code>组成。</p>
+
+<p>这里<code class="highlighter-rouge">test_func</code>是指你编写了测试逻辑的函数，而<code class="highlighter-rouge">setUp</code>函数则是在<code class="highlighter-rouge">test_func</code>函数之前执行的函数，<code class="highlighter-rouge">tearDown</code>函数则是在<code class="highlighter-rouge">test_func</code>执行之后执行的函数。</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/885880f4c44192a7802a52f2135fe81acf7c12b1/development_of_test_habits/tests/test_demo.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    development_of_test_habits/tests/test_demo.py <a href="https://github.com/elfgzp/django_experience/blob/885880f4c44192a7802a52f2135fe81acf7c12b1/development_of_test_habits/tests/test_demo.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/885880f4c44192a7802a52f2135fe81acf7c12b1/development_of_test_habits/tests/test_demo.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span>
+
+
+<span class="k">class</span> <span class="nc">Demo</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'setUp'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'tearDown'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_demo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'test_demo'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_demo_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'test_demo2'</span><span class="p">)</span></code></pre></figure>
+
+<p>我们可以通过在<code class="highlighter-rouge">Django</code>项目的根目录运行以下命令来运行这个单元测试</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python manage.py <span class="nb">test </span>development_of_test_habits.tests.test_demo.Demo
+</code></pre></div></div>
+
+<p>如果使用<code class="highlighter-rouge">Pycharm</code>来运行的话可以直接点击类左侧的运行箭头，更加方便地运行或者<code class="highlighter-rouge">Debug</code>这个单元测试。<br />
+<img src="/assets/images/2018-12-07-django-experience-2-test-case/QQ20181209-101327@2x.png" alt="img" /></p>
+
+<p>可以从运行后的结果清晰的看到这个单元测试的执行顺序。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+setUp
+test_demo
+tearDown
+.setUp
+test_demo2
+tearDown
+.
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK
+Destroying test database for alias 'default'...
+</code></pre></div></div>
+
+<p>此外还可以从运行结果看到，在测试之前单元测试创建了一个测试数据库。</p>
+<blockquote>
+  <p>Creating test database for alias ‘default’…</p>
+</blockquote>
+
+<p>然后在测试结束将数据库摧毁。</p>
+<blockquote>
+  <p>Destroying test database for alias ‘default’…</p>
+</blockquote>
+
+<p>这个也就是在继承了<code class="highlighter-rouge">Django</code>框架中的<code class="highlighter-rouge">TestCase</code>，它已经帮你实现的一些逻辑方便用于测试，所以我们不需要在<code class="highlighter-rouge">setUp</code>和<code class="highlighter-rouge">tearDown</code>函数中实现这些逻辑。</p>
+
+<h2 id="利用testcase测试接口">利用TestCase测试接口</h2>
+
+<p>接下来讲一下我们如何使用<code class="highlighter-rouge">TestCase</code>来测试接口的，首先我们编写一个简单的接口，这里笔者是用<code class="highlighter-rouge">Django Rest Framework</code>的<code class="highlighter-rouge">APIView</code>来编写的，读者也可以使用自己管用的方法来编写。</p>
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/885880f4c44192a7802a52f2135fe81acf7c12b1/development_of_test_habits/views/hello_test_case.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    development_of_test_habits/views/hello_test_case.py <a href="https://github.com/elfgzp/django_experience/blob/885880f4c44192a7802a52f2135fe81acf7c12b1/development_of_test_habits/views/hello_test_case.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/885880f4c44192a7802a52f2135fe81acf7c12b1/development_of_test_habits/views/hello_test_case.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">rest_framework.views</span> <span class="kn">import</span> <span class="n">APIView</span>
+<span class="kn">from</span> <span class="nn">rest_framework.response</span> <span class="kn">import</span> <span class="n">Response</span>
+
+
+<span class="k">class</span> <span class="nc">HelloTestCase</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span>
+            <span class="s">'msg'</span><span class="p">:</span> <span class="s">'Hello %s I am a test Case'</span> <span class="o">%</span> <span class="n">request</span><span class="p">.</span><span class="n">query_params</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'name'</span><span class="p">,</span> <span class="s">','</span><span class="p">)</span>
+        <span class="p">})</span></code></pre></figure>
+
+<p>然后这个接口类加到我们的路由中。</p>
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/885880f4c44192a7802a52f2135fe81acf7c12b1/development_of_test_habits/urls.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    development_of_test_habits/urls.py <a href="https://github.com/elfgzp/django_experience/blob/885880f4c44192a7802a52f2135fe81acf7c12b1/development_of_test_habits/urls.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/885880f4c44192a7802a52f2135fe81acf7c12b1/development_of_test_habits/urls.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">development_of_test_habits</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s">'hello_test_case'</span><span class="p">,</span> <span class="n">views</span><span class="p">.</span><span class="n">HelloTestCase</span><span class="p">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s">'hello_test_case'</span><span class="p">),</span>
+<span class="p">]</span></code></pre></figure>
+
+<p>接下来我们编写一个<code class="highlighter-rouge">HelloTestCase</code>的单元测试类来测试我们的测试用例。</p>
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/a0bb6105921c5fc92c5a26580ca2fa3158da6aae/development_of_test_habits/tests/test_hello_test_case.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    development_of_test_habits/tests/test_hello_test_case.py <a href="https://github.com/elfgzp/django_experience/blob/a0bb6105921c5fc92c5a26580ca2fa3158da6aae/development_of_test_habits/tests/test_hello_test_case.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/a0bb6105921c5fc92c5a26580ca2fa3158da6aae/development_of_test_habits/tests/test_hello_test_case.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">resolve</span><span class="p">,</span> <span class="n">reverse</span>
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span>
+
+
+<span class="k">class</span> <span class="nc">HelloTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">'Django'</span>
+
+    <span class="k">def</span> <span class="nf">test_hello_test_case</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">'/test_case/hello_test_case'</span>
+        <span class="c1"># url = reverse('hello_test_case')
+</span>        <span class="c1"># Input: print(resolve(url))
+</span>        <span class="c1"># Output: ResolverMatch(func=development_of_test_habits.views.hello_test_case.HelloTestCase, args=(), kwargs={}, url_name=hello_test_case, app_names=[], namespaces=[])
+</span>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># 期望的Http相应码为200
+</span>        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'msg'</span><span class="p">],</span> <span class="s">'Hello , I am a test Case'</span><span class="p">)</span>  <span class="c1"># 期望的msg返回结果为'Hello , I am a test Case'
+</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">})</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># 期望的Http相应码为200
+</span>        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'msg'</span><span class="p">],</span> <span class="s">'Hello Django I am a test Case'</span><span class="p">)</span>  <span class="c1"># 期望的msg返回结果为'Hello Django I am a test Case'</span></code></pre></figure>
+
+<p>在<code class="highlighter-rouge">setUp</code>函数中，我定义了一个<code class="highlighter-rouge">name</code>属性并且赋值为<code class="highlighter-rouge">Django</code>便于后面使用。</p>
+
+<p>单元测试测试接口主要分为下面几个重要的内容。</p>
+
+<h3 id="请求的路由地址">请求的路由地址</h3>
+<p>在测试接口时无非就是发起请求，检查返回的状态嘛和响应内容是否正确。发请求肯定少不了<code class="highlighter-rouge">url</code>地址，这里有两种方式来配置请求地址。   <br />
+1.直接设置请求地址</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span> <span class="o">=</span> <span class="s">'/test_case/hello_test_case'</span>
+</code></pre></div></div>
+<p>2.透过<code class="highlighter-rouge">django.urls.reverse</code>函数和在路由设置的<code class="highlighter-rouge">name</code>来得到请求的地址</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span> <span class="o">=</span>  <span class="n">reverse</span><span class="p">(</span><span class="s">'hello_test_case'</span><span class="p">)</span>
+</code></pre></div></div>
+<p>这里在介绍以下我们还可以通过<code class="highlighter-rouge">django.urls.resolve</code>和<code class="highlighter-rouge">url</code>得到对应的接口类或者接口函数`。</p>
+
+<h3 id="请求的客户端">请求的客户端</h3>
+<p>发起请求我们除了需要路由外，我们还需要一个发起请求的客户端。python的<code class="highlighter-rouge">requests</code>库就是很好的客户端工具，只不过<code class="highlighter-rouge">Django</code>在它的<code class="highlighter-rouge">TestCase</code>类
+中已经集成了一个客户端工具，我们只需要调用<code class="highlighter-rouge">TestCase</code>的<code class="highlighter-rouge">client</code>属性就可以得到一个客户端。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span>
+</code></pre></div></div>
+
+<h3 id="发起请求">发起请求</h3>
+<p>发起请求非常简单只需要一行代码，我们就可以通过请求得到它的响应体。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</code></pre></div></div>
+<p>如果需要携带参数只需要传入<code class="highlighter-rouge">data</code>参数。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">})</span>
+</code></pre></div></div>
+<h3 id="验证响应体">验证响应体</h3>
+<p>在单元测试中，<code class="highlighter-rouge">TestCase</code>的<code class="highlighter-rouge">assertEqual</code>有点类似<code class="highlighter-rouge">python</code>的<code class="highlighter-rouge">assert</code>函数，除了<code class="highlighter-rouge">assertEqual</code>外还有<code class="highlighter-rouge">assertNotEqual</code>、<code class="highlighter-rouge">assertGreater</code>、<code class="highlighter-rouge">assertIn</code>等等。
+这里笔者主要做了两个检查，一个是检查<code class="highlighter-rouge">status_code</code>是否等于<code class="highlighter-rouge">200</code>。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># 期望的Http相应码为200
+</span></code></pre></div></div>
+<p>另一个是检查响应内容是否正确。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'msg'</span><span class="p">],</span> <span class="s">'Hello , I am a test Case'</span><span class="p">)</span>  <span class="c1"># 期望的msg返回结果为'Hello , I am a test Case'
+</span></code></pre></div></div>
+
+<p>这个就是最简单的测试请求的单元测试，但是在实际的接口中，我们是需要数据的，所以我们还需要生成测试数据。 <br />
+这里介绍一个非常方便的库<code class="highlighter-rouge">mixer</code>，可以方便在我们的单元测试中生成测试数据。</p>
+
+<h2 id="利用mixer在testcase中生成测试数据">利用mixer在TestCase中生成测试数据</h2>
+
+<p>首先我们定一个场景，比如说我们记录了学校班级的学生的作业，需要一个接口来返回学生的作业列表，并且这个接口是需要用户登陆后才可以请求的，定义的<code class="highlighter-rouge">models</code>和接口类如下。</p>
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/1af8ab6839cc1e38c857e64a8cc3d13d0c536ecc/development_of_test_habits/models.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    development_of_test_habits/models.py <a href="https://github.com/elfgzp/django_experience/blob/1af8ab6839cc1e38c857e64a8cc3d13d0c536ecc/development_of_test_habits/models.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/1af8ab6839cc1e38c857e64a8cc3d13d0c536ecc/development_of_test_habits/models.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+
+<span class="k">class</span> <span class="nc">School</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Class</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">school_id</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="n">School</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="p">.</span><span class="n">PROTECT</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">class_id</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="n">Class</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="p">.</span><span class="n">PROTECT</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HomeWork</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">student_id</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="n">Student</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">Student</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span></code></pre></figure>
+
+<p>接口笔者用的是<code class="highlighter-rouge">Django rest framework</code>的<code class="highlighter-rouge">ReadOnlyModelViewSet</code>视图类实现的，实现的功能就是返回一个<code class="highlighter-rouge">json</code>结果集，
+并且<code class="highlighter-rouge">json</code>中有<code class="highlighter-rouge">HomeWork</code>的<code class="highlighter-rouge">School Name</code>、<code class="highlighter-rouge">Class Name</code>和<code class="highlighter-rouge">Student Name</code>，视图类代码和序列化代码如下。</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/f2652f53291fa5eb59767eb26c88cc1ff79ab199/development_of_test_habits/views/api/home_work.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    development_of_test_habits/views/api/home_work.py <a href="https://github.com/elfgzp/django_experience/blob/f2652f53291fa5eb59767eb26c88cc1ff79ab199/development_of_test_habits/views/api/home_work.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/f2652f53291fa5eb59767eb26c88cc1ff79ab199/development_of_test_habits/views/api/home_work.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">rest_framework.viewsets</span> <span class="kn">import</span> <span class="n">ReadOnlyModelViewSet</span>
+<span class="kn">from</span> <span class="nn">rest_framework.permissions</span> <span class="kn">import</span> <span class="n">IsAuthenticated</span>
+
+<span class="kn">from</span> <span class="nn">development_of_test_habits.models</span> <span class="kn">import</span> <span class="n">HomeWork</span>
+<span class="kn">from</span> <span class="nn">development_of_test_habits.serializers</span> <span class="kn">import</span> <span class="n">HomeWorkSerializer</span>
+
+
+<span class="k">class</span> <span class="nc">HomeWorkViewSet</span><span class="p">(</span><span class="n">ReadOnlyModelViewSet</span><span class="p">):</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">HomeWork</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="nb">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">HomeWorkSerializer</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">(</span><span class="n">IsAuthenticated</span><span class="p">,</span> <span class="p">)</span></code></pre></figure>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/f2652f53291fa5eb59767eb26c88cc1ff79ab199/development_of_test_habits/serializers.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    development_of_test_habits/serializers.py <a href="https://github.com/elfgzp/django_experience/blob/f2652f53291fa5eb59767eb26c88cc1ff79ab199/development_of_test_habits/serializers.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/f2652f53291fa5eb59767eb26c88cc1ff79ab199/development_of_test_habits/serializers.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">serializers</span>
+
+<span class="kn">from</span> <span class="nn">development_of_test_habits.models</span> <span class="kn">import</span> <span class="n">HomeWork</span>
+
+
+<span class="k">class</span> <span class="nc">HomeWorkSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="p">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">HomeWork</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s">'school_name'</span><span class="p">,</span> <span class="s">'class_name'</span><span class="p">,</span> <span class="s">'student_name'</span><span class="p">,</span> <span class="s">'name'</span><span class="p">)</span>
+
+    <span class="n">school_name</span> <span class="o">=</span> <span class="n">serializers</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s">'student_id.class_id.school_id.name'</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">class_name</span> <span class="o">=</span> <span class="n">serializers</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s">'student_id.class_id.name'</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">student_name</span> <span class="o">=</span> <span class="n">serializers</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s">'student_id.name'</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></figure>
+
+<p>最后把我们的接口类添加到路由中。</p>
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/f2652f53291fa5eb59767eb26c88cc1ff79ab199/development_of_test_habits/serializers.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    development_of_test_habits/serializers.py <a href="https://github.com/elfgzp/django_experience/blob/f2652f53291fa5eb59767eb26c88cc1ff79ab199/development_of_test_habits/serializers.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/f2652f53291fa5eb59767eb26c88cc1ff79ab199/development_of_test_habits/serializers.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s">'hello_test_case'</span><span class="p">,</span> <span class="n">views</span><span class="p">.</span><span class="n">HelloTestCase</span><span class="p">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s">'hello_test_case'</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s">'api/home_works'</span><span class="p">,</span> <span class="n">views</span><span class="p">.</span><span class="n">HomeWorkViewSet</span><span class="p">.</span><span class="n">as_view</span><span class="p">({</span><span class="s">'get'</span><span class="p">:</span> <span class="s">'list'</span><span class="p">}),</span> <span class="n">name</span><span class="o">=</span><span class="s">'home_works_list'</span><span class="p">)</span>
+<span class="p">]</span></code></pre></figure>
+
+<p>完成接口的编写，可以开始写单元测试了，定义<code class="highlighter-rouge">HomeWorkAPITestCase</code>测试类并且在<code class="highlighter-rouge">setUp</code>中生成测试数据。</p>
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/f2652f53291fa5eb59767eb26c88cc1ff79ab199/development_of_test_habits/tests/test_home_works_api.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    development_of_test_habits/tests/test_home_works_api.py <a href="https://github.com/elfgzp/django_experience/blob/f2652f53291fa5eb59767eb26c88cc1ff79ab199/development_of_test_habits/tests/test_home_works_api.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/f2652f53291fa5eb59767eb26c88cc1ff79ab199/development_of_test_habits/tests/test_home_works_api.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+
+<span class="kn">from</span> <span class="nn">mixer.backend.django</span> <span class="kn">import</span> <span class="n">mixer</span>
+
+<span class="kn">from</span> <span class="nn">development_of_test_habits</span> <span class="kn">import</span> <span class="n">models</span>
+
+
+<span class="k">class</span> <span class="nc">HomeWorkAPITestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="p">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">random_home_works</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">mixer</span><span class="p">.</span><span class="n">blend</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">HomeWork</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+        <span class="p">]</span></code></pre></figure>
+
+<p>这里介绍一下<code class="highlighter-rouge">mixer</code>这个模块，这个模块会根据你定义的模型和模型的字段来随机生成测试数据，<code class="highlighter-rouge">包括这个数据的外键数据</code>。
+这样在我们这种层级非常多的关系型数据就非常的方便，否则需要一层一层的去生成数据。
+代码中就利用<code class="highlighter-rouge">mixer</code>生成了一个随机的用户和11个随机的<code class="highlighter-rouge">HomeWork</code>数据。</p>
+
+<p>接下来编写测试的逻辑代码。</p>
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/a00adf79bf8a3c5003a4cacc8c18fcf3bf977d02/development_of_test_habits/tests/test_home_works_api.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    development_of_test_habits/tests/test_home_works_api.py <a href="https://github.com/elfgzp/django_experience/blob/a00adf79bf8a3c5003a4cacc8c18fcf3bf977d02/development_of_test_habits/tests/test_home_works_api.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/a00adf79bf8a3c5003a4cacc8c18fcf3bf977d02/development_of_test_habits/tests/test_home_works_api.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">HomeWorkAPITestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="p">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">random_home_works</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">mixer</span><span class="p">.</span><span class="n">blend</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">HomeWork</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">test_home_works_list_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s">'home_works_list'</span><span class="p">)</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">403</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">force_login</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">random_home_works</span><span class="p">))</span>
+
+        <span class="n">data_fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">keys</span><span class="p">()]</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s">'school_name'</span><span class="p">,</span> <span class="n">data_fields</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s">'class_name'</span><span class="p">,</span> <span class="n">data_fields</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s">'student_name'</span><span class="p">,</span> <span class="n">data_fields</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s">'name'</span><span class="p">,</span> <span class="n">data_fields</span><span class="p">)</span></code></pre></figure>
+
+<p>首先通过<code class="highlighter-rouge">django.urls.reverse</code>函数和接口的路由名称获得<code class="highlighter-rouge">url</code>，第一步先测试用户在没有登陆的情况下请求接口，这里期望的请求响应码为<code class="highlighter-rouge">403</code>。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">403</span><span class="p">)</span>
+</code></pre></div></div>
+<p>我们通过<code class="highlighter-rouge">client</code>的一个<code class="highlighter-rouge">登陆</code>函数<code class="highlighter-rouge">force_login</code>来登陆我们随机生成的用户，再次请求接口，这次的期望的请求相应码就为<code class="highlighter-rouge">200</code>。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">force_login</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">user</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</code></pre></div></div>
+<p>最后验证返回的结果数量是和结果中定义的字段是否正确。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">random_home_works</span><span class="p">))</span>
+
+<span class="n">data_fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">keys</span><span class="p">()]</span>
+
+<span class="bp">self</span><span class="p">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s">'school_name'</span><span class="p">,</span> <span class="n">data_fields</span><span class="p">)</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s">'class_name'</span><span class="p">,</span> <span class="n">data_fields</span><span class="p">)</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s">'student_name'</span><span class="p">,</span> <span class="n">data_fields</span><span class="p">)</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s">'name'</span><span class="p">,</span> <span class="n">data_fields</span><span class="p">)</span>
+</code></pre></div></div>
+<p>以上就是在项目中测试接口的最常见的流程。</p>
+
+<h2 id="testcase在使用中需要注意的一些问题">TestCase在使用中需要注意的一些问题</h2>
+<p>假设我们要在接口中增加<code class="highlighter-rouge">请求头</code>，以<code class="highlighter-rouge">HelloTestCase</code>接口为例，我们要增加一个<code class="highlighter-rouge">TEST_HEADER</code>的请求头，则在接口的逻辑处理中，就需要给这个请求头
+加上<code class="highlighter-rouge">HTTP_</code>前缀。</p>
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/c61cb9d9cee5fe64ef6faadd053a4b92062c1d5e/development_of_test_habits/views/hello_test_case.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    development_of_test_habits/views/hello_test_case.py <a href="https://github.com/elfgzp/django_experience/blob/c61cb9d9cee5fe64ef6faadd053a4b92062c1d5e/development_of_test_habits/views/hello_test_case.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/c61cb9d9cee5fe64ef6faadd053a4b92062c1d5e/development_of_test_habits/views/hello_test_case.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">HelloTestCase</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">'msg'</span><span class="p">:</span> <span class="s">'Hello %s I am a test Case'</span> <span class="o">%</span> <span class="n">request</span><span class="p">.</span><span class="n">query_params</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'name'</span><span class="p">,</span> <span class="s">','</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">test_header</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">META</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'HTTP_TEST_HEADER'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">test_header</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s">'test_header'</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_header</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code></pre></figure>
+
+<p>如果我们用客户端工具类似<code class="highlighter-rouge">Post Man</code>、<code class="highlighter-rouge">RestFul Client</code>等等，请求时只要在请求头中加上<code class="highlighter-rouge">TEST_HEADER</code>即可。
+但是在单元测试中，我们也需要把<code class="highlighter-rouge">HTTP_</code>这个前缀加上，否则接口逻辑是无法获取的。</p>
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/c61cb9d9cee5fe64ef6faadd053a4b92062c1d5e/development_of_test_habits/tests/test_hello_test_case.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    development_of_test_habits/tests/test_hello_test_case.py <a href="https://github.com/elfgzp/django_experience/blob/c61cb9d9cee5fe64ef6faadd053a4b92062c1d5e/development_of_test_habits/tests/test_hello_test_case.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/c61cb9d9cee5fe64ef6faadd053a4b92062c1d5e/development_of_test_habits/tests/test_hello_test_case.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test_hello_test_case</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s">'/test_case/hello_test_case'</span>
+    <span class="c1"># url = reverse('hello_test_case')
+</span>    <span class="c1"># Input: print(resolve(url))
+</span>    <span class="c1"># Output: ResolverMatch(func=development_of_test_habits.views.hello_test_case.HelloTestCase, args=(), kwargs={}, url_name=hello_test_case, app_names=[], namespaces=[])
+</span>    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># 期望的Http相应码为200
+</span>    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'msg'</span><span class="p">],</span> <span class="s">'Hello , I am a test Case'</span><span class="p">)</span>  <span class="c1"># 期望的msg返回结果为'Hello , I am a test Case'
+</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">})</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># 期望的Http相应码为200
+</span>    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'msg'</span><span class="p">],</span> <span class="s">'Hello Django I am a test Case'</span><span class="p">)</span>  <span class="c1"># 期望的msg返回结果为'Hello Django I am a test Case'
+</span>
+    <span class="c1"># 假设我们要在接口中增加请求头'TEST_HEADER'
+</span>    <span class="c1"># 则在测试时需要加上前缀'HTTP_'最终的结果为'HTTP_TEST_HEADER'
+</span>    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s">'HTTP_TEST_HEADER'</span><span class="p">:</span> <span class="s">'This is a test header.'</span><span class="p">})</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'test_header'</span><span class="p">],</span> <span class="s">'This is a test header.'</span><span class="p">)</span></code></pre></figure>
+
+<h2 id="总结">总结</h2>
+<p>在用测试用例来测试接口后，笔者已经开始养成写完接口直接用单元测试来测试的习惯，这样不单是在给别人说明自己的接口的功能，还是减少线上环境的BUG都有明显的帮助，
+希望读者也能用这种方式不断的养成写单元测试的好习惯。</p>
+
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(110, 120, 50);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(110, 120, 50);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(110, 120, 50);
+        background-color: transparent;
+        border-left: 2px solid rgb(110, 120, 50);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>

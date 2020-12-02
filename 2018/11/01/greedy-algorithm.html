@@ -1,0 +1,548 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>贪心算法的转化</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(101, 200, 160) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(101, 200, 160);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">贪心算法的转化</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(101, 200, 160);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2018/10/03/emqttd-django.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(101, 200, 160)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(101, 200, 160);"><sapn class="main">MQTT消息服务器EMQ部署，并改造Mysql鉴权，通过Django进行用户管理</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">贪心算法的转化</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2018/12/04/django-experience-1-migrations.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(101, 200, 160)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(101, 200, 160);"><sapn class="main">Django使用心得（一） 善用migrations</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2018/10/03/emqttd-django.html" class="leftchange" style="border-right: 1px solid rgb(101, 200, 160);border-bottom: 2px solid rgb(101, 200, 160);"><span>上一篇<br><br>MQTT消息服务器EMQ部署，并改造Mysql鉴权，通过Django进行用户管理</span></a>
+    
+    
+    <a href="/2018/12/04/django-experience-1-migrations.html" class="rightchange" style="border-left: 1px solid rgb(101, 200, 160);border-bottom: 2px solid rgb(101, 200, 160);"><span>下一篇<br><br>Django使用心得（一） 善用migrations</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(101, 200, 160); border-right: 8px solid rgb(101, 200, 160)">
+        算法练习题
+    </div>
+    
+    
+    <img src="/assets/images/2018-11-01-greedy-algorithm/贪心算法.png" style="margin:auto;">
+    <!-- 文章内容 -->
+    <h1 id="贪心算法的转化">贪心算法的转化</h1>
+
+<ul>
+  <li>最大连续子数组和</li>
+  <li>分糖果</li>
+  <li>跳远游戏</li>
+</ul>
+
+<h2 id="贪心算法">贪心算法</h2>
+<p>不是对所有问题都得到整体最优解，这种策略必须具备无后效性，它只与当前状态有关。</p>
+
+<p>首先建立数学模型，然后把求解的问题分成若干个小问题，对每个小问题求解，得到子问题的最优解，然后根据子问题的最优解，得到问题的解。</p>
+
+<p>主要思想是局部最优解推出全局最优解，是贪心算法的核心思想。</p>
+
+<h3 id="最大连续子数组和">最大连续子数组和</h3>
+<p>题目要求:
+求一个数组，连续子数组的和最大值，数组中允许有负数。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">max_sub_num_array_sum</span><span class="p">(</span><span class="n">num_array</span><span class="p">):</span>
+    <span class="s">"""
+    :param num_array: number array
+    :return: max sub number array sum
+    """</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num_array</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_array</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+    <span class="n">max_sum</span> <span class="o">=</span> <span class="n">num_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">current_max_sum</span> <span class="o">=</span> <span class="n">num_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">sub_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">num_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">num_array</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">current_max_sum</span> <span class="o">+=</span> <span class="n">num</span>
+        <span class="n">sub_array</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">current_max_sum</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">current_max_sum</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">sub_array</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">current_max_sum</span> <span class="o">&gt;</span> <span class="n">max_sum</span><span class="p">:</span>
+            <span class="n">max_sum</span> <span class="o">=</span> <span class="n">current_max_sum</span>
+
+    <span class="k">if</span> <span class="n">max_sum</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">max_sum</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">num_array</span><span class="p">)</span>
+        <span class="n">sub_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">max_sum</span><span class="p">]</span>
+
+    <span class="k">print</span> <span class="p">(</span><span class="n">sub_array</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">max_sum</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+    <span class="k">print</span> <span class="p">(</span><span class="n">max_sub_num_array_sum</span><span class="p">(</span><span class="n">array</span><span class="p">))</span>
+</code></pre></div></div>
+<p>运行结果</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[4, -1, 2, 1, -5, 4]
+6
+</code></pre></div></div>
+
+<h3 id="分糖果">分糖果</h3>
+<p>题目要求:
+现在为已经站成一排的小朋友分糖果，保证每个小朋友至少有一个糖果，同时保证个子比相邻小朋友高的所分的糖果要比他的邻居多，按照这样的分食方法，最少需要多少糖果。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">dividing_candy</span><span class="p">(</span><span class="n">childs_height</span><span class="p">):</span>
+    <span class="s">"""
+    :param childs_height:a list of child height
+    :return:
+        Make sure that each child has at least one candy, and that the number of sweets
+        that are higher than the neighbors is
+        higher than that of his neighbors. According to this method of feeding,
+        at least how many candies are needed.
+    """</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">childs_height</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="n">candies_array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">childs_height</span><span class="p">)</span>
+
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">last_height</span> <span class="o">=</span> <span class="n">childs_height</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">next_height</span> <span class="ow">in</span> <span class="n">childs_height</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="k">if</span> <span class="n">next_height</span> <span class="o">&gt;</span> <span class="n">last_height</span><span class="p">:</span>
+            <span class="n">candies_array</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">candies_array</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="n">last_height</span> <span class="o">=</span> <span class="n">next_height</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">candies_array</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="n">childs_height</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">last_height</span> <span class="o">=</span> <span class="n">childs_height</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">next_height</span> <span class="ow">in</span> <span class="n">childs_height</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="k">if</span> <span class="n">next_height</span> <span class="o">&gt;</span> <span class="n">last_height</span> <span class="ow">and</span> <span class="n">candies_array</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">candies_array</span><span class="p">[</span><span class="n">index</span><span class="p">]:</span>
+            <span class="n">candies_array</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">candies_array</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="n">last_height</span> <span class="o">=</span> <span class="n">next_height</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">candies_array</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="n">childs_height</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
+
+    <span class="k">print</span> <span class="p">(</span><span class="n">childs_height</span><span class="p">)</span>
+    <span class="k">print</span> <span class="p">(</span><span class="n">candies_array</span><span class="p">)</span>
+
+    <span class="n">candies</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">candies_array</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">candies</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="k">print</span> <span class="p">(</span><span class="n">dividing_candy</span><span class="p">(</span><span class="n">array</span><span class="p">))</span>
+</code></pre></div></div>
+<p>运行结果</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[4, 2, 6, 8, 5]
+[2, 1, 2, 3, 1]
+9
+</code></pre></div></div>
+<h3 id="跳远游戏">跳远游戏</h3>
+<p>题目要求:
+给定一个整数数组，数组中的元素代表在当前位置能够向前跳的最远距离，判断给定的这个跳远策略能否跳到最后的位置。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
+</span><span class="n">__author__</span> <span class="o">=</span> <span class="s">'gzp'</span>
+
+
+<span class="k">def</span> <span class="nf">can_jump</span><span class="p">(</span><span class="n">jump_array</span><span class="p">):</span>
+    <span class="s">"""
+    :param jump_array:
+    :return:
+    Given an array of integers, the elements in the array represent the farthest distance
+    that can be jumped forward at the current position,
+    and whether the given long jump strategy can jump to the last position.
+
+    """</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">jump_array</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="n">max_jump</span> <span class="o">=</span> <span class="n">jump_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">last_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">jump_array</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="k">for</span> <span class="n">location</span><span class="p">,</span> <span class="n">jump_num</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">jump_array</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">max_jump</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="n">max_jump</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">max_jump</span> <span class="o">&lt;</span> <span class="n">jump_num</span><span class="p">:</span>
+            <span class="n">max_jump</span> <span class="o">=</span> <span class="n">jump_num</span>
+
+        <span class="k">if</span> <span class="n">max_jump</span> <span class="o">+</span> <span class="n">location</span> <span class="o">&gt;</span> <span class="n">last_steps</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="k">return</span> <span class="bp">False</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">print</span> <span class="p">(</span><span class="n">can_jump</span><span class="p">(</span><span class="n">array</span><span class="p">))</span>
+
+    <span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+    <span class="k">print</span> <span class="p">(</span><span class="n">can_jump</span><span class="p">(</span><span class="n">array</span><span class="p">))</span>
+
+    <span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="k">print</span> <span class="p">(</span><span class="n">can_jump</span><span class="p">(</span><span class="n">array</span><span class="p">))</span>
+</code></pre></div></div>
+<p>运行结果</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+True
+False
+</code></pre></div></div>
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(101, 200, 160);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(101, 200, 160);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(101, 200, 160);
+        background-color: transparent;
+        border-left: 2px solid rgb(101, 200, 160);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>

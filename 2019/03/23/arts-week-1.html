@@ -1,0 +1,551 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>ARTS 第一周</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(32, 31, 49) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(32, 31, 49);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">ARTS 第一周</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(32, 31, 49);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2019/03/11/consul-template-python-micro-service.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(32, 31, 49)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(32, 31, 49);"><sapn class="main">使用 Consul 作为 Python 微服务的配置中心</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">ARTS 第一周</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2019/03/31/arts-week-2.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(32, 31, 49)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(32, 31, 49);"><sapn class="main">ARTS 第二周</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2019/03/11/consul-template-python-micro-service.html" class="leftchange" style="border-right: 1px solid rgb(32, 31, 49);border-bottom: 2px solid rgb(32, 31, 49);"><span>上一篇<br><br>使用 Consul 作为 Python 微服务的配置中心</span></a>
+    
+    
+    <a href="/2019/03/31/arts-week-2.html" class="rightchange" style="border-left: 1px solid rgb(32, 31, 49);border-bottom: 2px solid rgb(32, 31, 49);"><span>下一篇<br><br>ARTS 第二周</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(32, 31, 49); border-right: 8px solid rgb(32, 31, 49)">
+        ARTS Week-1
+    </div>
+    
+    
+    <img src="https://www.notion.so/image/https%3A%2F%2Fwww.notion.so%2Fimages%2Fpage-cover%2Fmet_vincent_van_gogh_ginoux.jpg?table=block&id=d9369eec-8744-4ac3-ada9-24e181550658&width=3730&cache=v2" style="margin:auto;">
+    <!-- 文章内容 -->
+    <h2 id="algorithm"><strong>Algorithm</strong></h2>
+
+<p><a href="https://leetcode-cn.com/contest/weekly-contest-128/problems/capacity-to-ship-packages-within-d-days/">1014. 在 D 天内送达包裹的能力</a></p>
+
+<h3 id="题目描述"><strong>题目描述:</strong></h3>
+
+<p>传送带上的包裹必须在 D 天内从一个港口运送到另一个港口。</p>
+
+<p>传送带上的第 <code class="highlighter-rouge">i</code> 个包裹的重量为 <code class="highlighter-rouge">weights[i]</code>。每一天，我们都会按给出重量的顺序往传送带上装载包裹。我们装载的重量不会超过船的最大运载重量。</p>
+
+<p>返回能在 <code class="highlighter-rouge">D</code> 天内将传送带上的所有包裹送达的船的最低运载能力。</p>
+
+<h3 id="示例">示例：</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>输入：weights = [1,2,3,4,5,6,7,8,9,10], D = 5
+输出：15
+解释：
+船舶最低载重 15 就能够在 5 天内送达所有包裹，如下所示：
+第 1 天：1, 2, 3, 4, 5
+第 2 天：6, 7
+第 3 天：8
+第 4 天：9
+第 5 天：10
+
+请注意，货物必须按照给定的顺序装运，因此使用载重能力为 14 的船舶并将包装分成 (2, 3, 4, 5), (1, 6, 7), (8), (9), (10) 是不允许的。
+</code></pre></div></div>
+
+<h3 id="解题思路">解题思路：</h3>
+
+<p>这道题主要利用二分法解题，用二分法则需要起始的最大最小值，即左区间和右区间。</p>
+
+<p>我们不妨设定区间为，[max(weights), sum(weights)] ：</p>
+
+<p>然后取中间值尝试运送货物，中间值记为 <code class="highlighter-rouge">mid</code>，并用 <code class="highlighter-rouge">day</code> 计算使用 <code class="highlighter-rouge">mid</code> 作为船舶的最低载重时需要运送多少天。</p>
+
+<p>当 <code class="highlighter-rouge">day</code> 大于 <code class="highlighter-rouge">D</code> 则 <code class="highlighter-rouge">mid</code> 值小了，左区间变为 <code class="highlighter-rouge">mid + 1</code>。</p>
+
+<p>档 <code class="highlighter-rouge">day</code> 小于等于 <code class="highlighter-rouge">D</code> 则 <code class="highlighter-rouge">mid</code> 值大了，右区间变为 <code class="highlighter-rouge">mid - 1</code>。</p>
+
+<p>直到左区间无法在变大，右区间无法在变小，即限制条件 <code class="highlighter-rouge">[left, right]</code>，<code class="highlighter-rouge">left ≤ right</code>。</p>
+
+<h3 id="代码">代码：</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution:
+    def shipWithinDays(self, weights: List[int], D: int) -&gt; int:
+        left, right = max(weights), sum(weights)
+        
+        while left &lt;= right:
+
+            day_weight = 0
+            day = 1
+            mid = (left + right) // 2
+
+            for w in weights:
+                if day_weight + w &lt;= mid:
+                    day_weight += w
+                else:
+                    day_weight = w
+                    day += 1
+            
+            if day &gt; D:
+                left = mid + 1
+            else:
+                right = mid - 1
+        
+        return left
+</code></pre></div></div>
+
+<p><a href="https://github.com/elfgzp/Leetcode/blob/master/1014.capacity-to-ship-packages-within-d-days.py">Github 仓库地址</a></p>
+
+<h2 id="review"><strong>Review</strong></h2>
+
+<p><a href="https://www.notion.so/d9369eec87444ac3ada924e181550658#77ac2fea66ea4c5a9feb1f66f0f85084">Fallacies of Distributed Computing
+Explained.pdf</a></p>
+
+<h3 id="分布式系统的谬论解释">《分布式系统的谬论解释》</h3>
+
+<p>这篇英文文章主要介绍并解释了 8 条分布式系统的谬论，它们分别是：</p>
+
+<ol>
+  <li>网络是可靠的</li>
+  <li>网络没有延迟</li>
+  <li>网络带宽是无限大的</li>
+  <li>网络是安全的</li>
+  <li>网络拓扑是不会变的</li>
+  <li>只有一个超级管理员</li>
+  <li>网络传输没有消耗</li>
+  <li>网络是同构的</li>
+</ol>
+
+<p>由于存在非常多的不可抗力会导致网络问题，如：交换机的故障、网络供应商服务提供故障，甚至有可能是某人把你的网线弄断了等等原因都可能导致网络不可用。</p>
+
+<p>所以在设计分布式系统时，需要从硬件和软件两方面考虑</p>
+
+<p>从基础设施方面，你需要考虑硬件和软件的冗余，并且权衡投入的资金和风险带来的损失。我们经常听到的风控就是与之相关的，若避免这方面的问题的投入非常大，还不如利用风控资金来补偿用户。</p>
+
+<p>在软件方面，你要考虑无论你是发出消息还是发出请求，都有不可达的情况。当消息非常重要时，需要做到发送重试、响应到达、保证消息不重复和幂等性等等。</p>
+
+<p>文章还提到了网络延迟问题比带宽问题更大，网络延迟往往也会影响数据的一致性。</p>
+
+<p>除了这些还需要考虑网络的安全性，一些公司为安全问题赔偿了大量的资金，所以安全尤为重要。</p>
+
+<p>文章指出，通常可以考虑多层安全的解决方案来保证安全性，从保证网络、基础服务和应用层次的安全来保证系统的安全。</p>
+
+<p>我对这几点谬论的解释和相应的解决方案印象比较深刻，所以在这里简要说明了一下，其他几点也是在分布式系统设计时也是要考虑的，当然有兴趣的可以和我一样去阅读一下这篇文章。</p>
+
+<h2 id="tip">Tip</h2>
+
+<h3 id="利用-pytest-中的-monkeypatch-来进行单元测试">利用 <code class="highlighter-rouge">Pytest</code> 中的 <code class="highlighter-rouge">monkeypatch</code> 来进行单元测试</h3>
+
+<p>由于 Python 是一门动态语言，他与强类型语言不同，任何变量的类型随时可能会变化，因此写出来的代码非常容易出 BUG，所以单元测试在 Python 开发中尤为重要。</p>
+
+<p>但是一旦想开始写测试，就有一个问题。“我的代码该如何测试？”</p>
+
+<p>这里有一份适合初学者的文档 《<a href="https://learning-pytest.readthedocs.io/zh/latest/">learning-pytest</a>》，我觉得作者写的很好但是为什么 star 这么少呢，赶紧给个 🌟 吧。</p>
+
+<p>其中我觉得最为精髓，pytest 最强大的地方就是 <code class="highlighter-rouge">monkeypatch</code> 。</p>
+
+<p>举个例子，当我们要测试的类或函数，需要调用另一个类的方法，而另一个类的方法恰好有调用了其他服务的接口。这里我们就可以 <code class="highlighter-rouge">Mock</code> 我们需要调用的类或方法，比如说：</p>
+
+<p>我们要调用一个第三方的天气服务：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class WeatherService:
+	def get_weather(city_id, **kwargs, #... 非常多的参数，可能参数是字典并且带有格式):
+			# requests....
+			return # Somethings
+
+class MyService:
+	_weather_service_cls = monkeypatch
+	def run(city_id, **kwargs):
+		return self._weather_service_cls().get_weather(city_id, **kwargs)
+</code></pre></div></div>
+
+<p>我们需要写单元测试保证我们调用时的传入参数正确，这里就利用 <code class="highlighter-rouge">monkeypatch</code> 来 <code class="highlighter-rouge">Mock</code> 一个 <code class="highlighter-rouge">WeatherService</code> ：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import pytest
+from . import MyService
+
+class MockWeatherService:
+	 get_weather_locals = None
+	 def def get_weather(city_id, **kwargs):
+			MockWeatherService.get_weather_locals = locals()
+
+# 利用 monkeypatch 修改 MyService 的 _weather_service_cls
+@pytest.fixture(autouse=True)
+def mocker(monkeypatch):
+    monkeypatch.setattr(MyService, '_weather_service_cls', MockWeatherService)
+
+def test_run():
+	  ms = MyService()
+		city_id = 'xxxx'
+    kwargs = {'xxx':'xxx', 'xxxx':'xxxx'}
+    ms.run(city_id, **kwargs)
+    assert MockWeatherService.get_weather_locals['city_id'] == city_id
+		# assert kwargs ...
+</code></pre></div></div>
+
+<p>利用 pytest 的 monkeypatch 我们就可以专注与测试我们想测试的类，不用考虑其他依赖的类。</p>
+
+<h2 id="share"><strong>Share</strong></h2>
+
+<p><a href="https://zhuanlan.zhihu.com/p/30477400">左耳听风 《程序员如何利用技术变现 下》</a></p>
+
+<p>在学习技术的过程中一定要多问自己两个问题：“一，这个技术解决了什么问题？为什么别的同类技术做不到？二，为什么是这样解决的？有没有更好的方式？“</p>
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(32, 31, 49);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(32, 31, 49);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(32, 31, 49);
+        background-color: transparent;
+        border-left: 2px solid rgb(32, 31, 49);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>

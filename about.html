@@ -1,0 +1,589 @@
+<!-- 首页及其他页面的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 引入head标签 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>关于我</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+</head>
+<body>
+<!-- 页面主体 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<header id="index-header">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/">首页</a></li>
+              
+                <li><a href="/tags.html">标签</a></li>
+              
+                <li><a href="/timeline.html">时间线</a></li>
+              
+                <li><a href="/about.html">关于博主</a></li>
+              
+                <li><a href="/friendLink.html">友情链接</a></li>
+              
+          </ul>
+      </nav>
+
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot.png" alt=""></a>
+      </div>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+  </div>
+
+</header>
+
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<main>
+    <div class="dr"></div>
+    <div class="wow fadeIn top" data-wow-duration="3.5s" style="background-color:rgb(0, 0, 0);">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">aboutMe</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s">Show you about me.</span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s"></span>
+</div>
+
+    <ul class="ex-list">
+        <li class="fadeInUp animated">
+        
+          <div class="portraits"><img src="/assets/images/profile.jpeg" alt=""></div>
+          <span id="yourname">官智鹏</span>
+          <span id="yourbio">一个兴趣使然的程序员</span>
+          
+            <span id="aboutyou">本人于17年毕业于广东省惠州学院，专业是软件工程，目前就职于腾讯科技股份有限公司，任职后端工程师，选择这个专业和毕业后做软件开发都是因为个人的兴趣爱好，喜欢折腾技术方面的问题。
+通过这个博客希望可以认识更多拥有相同兴趣爱好的人，并记录自己在技术路上的坎坷和积累。</span>
+          
+        
+        
+          
+            <a href="mailto:741424975@qq.com" title="mail">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-mail"></use>
+              </svg>
+            </a>
+          
+            <a href="/assets/images/wechat.png" title="weixin">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-weixin"></use>
+              </svg>
+            </a>
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=741424975&site=qq&menu=yes" title="qq">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-qq"></use>
+              </svg>
+            </a>
+          
+            <a href="https://github.com/elfgzp" title="github">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-github"></use>
+              </svg>
+            </a>
+          
+        
+      </li>
+      <li class="fadeInUp animated">
+      
+                      
+          
+          
+                
+                
+              <a href="tags.html#感悟记录" class="tag">感悟记录</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#日常" class="tag">日常</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#Travis" class="tag">Travis</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#Jekyll" class="tag">Jekyll</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#Docker" class="tag">Docker</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#技术" class="tag">技术</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#Linux" class="tag">Linux</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#MQTT" class="tag">MQTT</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#EMQ" class="tag">EMQ</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#MySQL" class="tag">MySQL</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#Django" class="tag">Django</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#IOT" class="tag">IOT</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#算法" class="tag">算法</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#Consul" class="tag">Consul</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#Python" class="tag">Python</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#Micro-service" class="tag">Micro-service</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#ARTS" class="tag">ARTS</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#Github" class="tag">Github</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#gortal" class="tag">gortal</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#siteproject" class="tag">siteproject</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#netlifycms" class="tag">netlifycms</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#博客" class="tag">博客</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#CMS" class="tag">CMS</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#K8s" class="tag">K8s</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#Kubernetes" class="tag">Kubernetes</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#Vultr" class="tag">Vultr</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#ServiceMesh" class="tag">ServiceMesh</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#Istio" class="tag">Istio</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#微服务" class="tag">微服务</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#K8s入门教程" class="tag">K8s入门教程</a>
+                
+          
+          
+                
+                
+              <a href="tags.html#K8s上手教程" class="tag">K8s上手教程</a>
+                
+          
+      
+      </li>
+        
+    </ul>
+    <script>
+      if (os.isAndroid || os.isPhone) {
+        $('.hacknical').hide()
+      }
+      function r(from, to) {
+  return ~~(Math.random() * (to - from + 1) + from);
+}
+function pick() {
+  return arguments[r(0, arguments.length - 1)];
+}
+function getChar() {
+  return String.fromCharCode(pick(
+    r(0x3041, 0x30ff),
+    r(0x2000, 0x206f),
+    r(0x0020, 0x003f)
+  ));
+}
+function loop(fn, delay) {
+  let stamp = Date.now();
+  function _loop() {
+    if (Date.now() - stamp >= delay) {
+      fn(); stamp = Date.now();
+    }
+    requestAnimationFrame(_loop);
+  }
+  requestAnimationFrame(_loop);
+}
+class Char {
+  constructor() {
+    this.element = document.createElement('span');
+    this.element.className = 'dr'
+    this.mutate();
+  }
+  mutate() {
+    this.element.textContent = getChar();
+  }
+}
+class Trail {
+  constructor(list = [], options) {
+    this.list = list;
+    this.options = Object.assign(
+      { size: 10, offset: 0 }, options
+    );
+    this.body = [];
+    this.move();
+  }
+  traverse(fn) {
+    this.body.forEach((n, i) => {
+      let last = (i == this.body.length - 1);
+      if (n) fn(n, i, last);
+    });
+  }
+  move() {
+    this.body = [];
+    let { offset, size } = this.options;
+    for (let i = 0; i < size; ++i) {
+      let item = this.list[offset + i - size + 1];
+      this.body.push(item);
+    }
+    this.options.offset = 
+      (offset + 1) % (this.list.length + size - 1);
+  }
+}
+class Rain {
+  constructor({ target, row }) {
+    this.element = document.createElement('p');
+    this.element.className = 'dr'
+    this.build(row);
+    if (target) {
+      target.appendChild(this.element);
+    }
+    this.drop();
+  }
+  build(row = 20) {
+    let root = document.createDocumentFragment();
+    let chars = [];
+    for (let i = 0; i < row; ++i) {
+      let c = new Char();
+      root.appendChild(c.element);
+      chars.push(c);
+      if (Math.random() < .5) {
+        loop(() => c.mutate(), r(1e3, 5e3));
+      }
+    }
+    this.trail = new Trail(chars, { 
+      size: r(10, 30), offset: r(0, 100) 
+    });
+    this.element.appendChild(root); 
+  }
+  drop() {
+    let trail = this.trail;
+    let len = trail.body.length;
+    let delay = r(10, 100);
+    loop(() => {
+      trail.move();
+      trail.traverse((c, i, last) => {
+        c.element.style = `
+          color: hsl(136, 100%, ${85 / len * (i + 1)}%)
+        `;
+        if (last) {
+          c.mutate();
+          c.element.style = `
+            color: hsl(136, 100%, 85%);
+            text-shadow:
+              0 0 .5em #fff,
+              0 0 .5em currentColor;
+          `;
+        }
+      });
+    }, delay);
+  }
+}
+
+    const main = document.querySelector('div.dr');
+    for (let i = 0; i < 50; ++i) {
+      new Rain({ target: main, row: 50 });
+    }
+    </script>
+    
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+</main>
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+<!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+
+
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+    var wow = new WOW({
+        boxClass: 'wow',
+        animateClass: 'animated',
+        // offset: 5,
+        mobile: true,
+        live: true
+    });
+    wow.init();
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+    window.onbeforeunload = function(){
+        //刷新后页面自动回到顶部
+        document.documentElement.scrollTop = 0;  //ie下
+        document.body.scrollTop = 0;  //非ie
+    }
+</script>
+
+</body>
+</html>

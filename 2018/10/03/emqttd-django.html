@@ -1,0 +1,1173 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>MQTT消息服务器EMQ部署，并改造Mysql鉴权，通过Django进行用户管理</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(87, 163, 243) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(87, 163, 243);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">MQTT消息服务器EMQ部署，并改造Mysql鉴权，通过Django进行用户管理</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(87, 163, 243);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2018/10/02/travis-jekyll-docker.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(87, 163, 243)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(87, 163, 243);"><sapn class="main">Travis CI  Jekyll  Docker 自动化部署博客到云服务器</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">MQTT消息服务器EMQ部署，并改造Mysql鉴权，通过Django进行用户管理</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2018/11/01/greedy-algorithm.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(87, 163, 243)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(87, 163, 243);"><sapn class="main">贪心算法的转化</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2018/10/02/travis-jekyll-docker.html" class="leftchange" style="border-right: 1px solid rgb(87, 163, 243);border-bottom: 2px solid rgb(87, 163, 243);"><span>上一篇<br><br>Travis CI  Jekyll  Docker 自动化部署博客到云服务器</span></a>
+    
+    
+    <a href="/2018/11/01/greedy-algorithm.html" class="rightchange" style="border-left: 1px solid rgb(87, 163, 243);border-bottom: 2px solid rgb(87, 163, 243);"><span>下一篇<br><br>贪心算法的转化</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(87, 163, 243); border-right: 8px solid rgb(87, 163, 243)">
+        百万级分布式开源物联网MQTT消息服务器
+    </div>
+    
+    
+    <img src="/assets/images/2018-10-03-emqttd-django/emqlogo.jpg" style="margin:auto;">
+    <!-- 文章内容 -->
+    <h2 id="emq">EMQ</h2>
+<p>在介绍EMQ之前，先对比一下几个不同的mqtt消息服务器</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Server</th>
+      <th>QoS 0</th>
+      <th>QoS 1</th>
+      <th>QoS 2</th>
+      <th>auth</th>
+      <th><a href="bridge_protocol">bridge</a></th>
+      <th><a href="conventions#$sys">$SYS</a></th>
+      <th>SSL</th>
+      <th><a href="are_topics_dynamic">dynamic topics</a></th>
+      <th>cluster</th>
+      <th>websockets</th>
+      <th>plugin system</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="http://2lemetry.com/platform/">2lemetry</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>§</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+    </tr>
+    <tr>
+      <td><a href="http://activemq.apache.org/">Apache ActiveMQ</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+    </tr>
+    <tr>
+      <td><a href="http://activemq.apache.org/artemis">Apache ActiveMQ Artemis</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.bevywise.com/iot-platform/">Bevywise IoT Platform</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td><strong>rm</strong></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td><strong>rm</strong></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/emitter-io/emitter">emitter</a></td>
+      <td>✔</td>
+      <td>§</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+    </tr>
+    <tr>
+      <td><a href="http://emqtt.io">🌟emqttd</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+    </tr>
+    <tr>
+      <td><a href="https://flespi.com/mqtt-broker">flespi</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/ppatierno/gnatmq">GnatMQ</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✘</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✘</td>
+      <td>✘</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/beerfactory/hbmqtt">HBMQTT</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✔</td>
+    </tr>
+    <tr>
+      <td><a href="http://www.hivemq.com">HiveMQ</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+    </tr>
+    <tr>
+      <td><a href="http://www-03.ibm.com/software/products/en/messagesight/">IBM MessageSight</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>§</td>
+      <td>✔</td>
+      <td>✘</td>
+    </tr>
+    <tr>
+      <td><a href="http://mqtt.jorammq.com">JoramMQ</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/cesanta/mongoose">Mongoose</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/andsel/moquette">moquette</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>?</td>
+      <td>?</td>
+      <td>✔</td>
+      <td>?</td>
+      <td><strong>rm</strong></td>
+      <td>✔</td>
+      <td>✘</td>
+    </tr>
+    <tr>
+      <td><a href="mosca">mosca</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✘</td>
+    </tr>
+    <tr>
+      <td><a href="mosquitto_message_broker">mosquitto</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>§</td>
+      <td>✔</td>
+      <td>✔</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/mqttjs/MQTT.js">MQTT.js</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>§</td>
+      <td>✘</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✘</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/Wizzercn/MqttWk">MqttWk</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>?</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+    </tr>
+    <tr>
+      <td><a href="http://www.rabbitmq.com/blog/2012/09/12/mqtt-adapter/">RabbitMQ</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+    </tr>
+    <tr>
+      <td><a href="Really-Small-Message-Broker">RSMB</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✘</td>
+      <td>?</td>
+    </tr>
+    <tr>
+      <td><a href="http://um.terracotta.org/#page/%2Fum.terracotta.org%2Funiversal-messaging-webhelp%2Fto-mqttoverview.html%23">Software AG Universal Messaging</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>rm</td>
+      <td>✘</td>
+    </tr>
+    <tr>
+      <td><a href="http://dev.solacesystems.com/tech">Solace</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>§</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+    </tr>
+    <tr>
+      <td><a href="http://www.swiftmq.com/landing/router/index.html">SwiftMQ</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✔</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/trafero/tstack">Trafero Tstack</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✘</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✘</td>
+      <td>✘</td>
+      <td>✘</td>
+    </tr>
+    <tr>
+      <td><a href="https://verne.mq">VerneMQ</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+    </tr>
+    <tr>
+      <td><a href="http://www-03.ibm.com/software/products/en/wmq/">WebSphere MQ</a></td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Key: ✔ supported ✘ not supported ? unknown § see limitations <strong>rm</strong> roadmap (planned)</p>
+<blockquote>
+  <p><a href="https://github.com/mqtt/mqtt.github.io/wiki/server-support">https://github.com/mqtt/mqtt.github.io/wiki/server-support</a></p>
+</blockquote>
+
+<p>在众多的MQTT Broker中，EMQ支持的功能很全，是一个用<code class="highlighter-rouge">Scale</code>开发的开源项目，并且拥有一个有基本调试功能的后台，最总要的是它能进行插件开发，这是我选择EMQ作为我的MQTT Broker的重要原因。</p>
+
+<blockquote>
+  <p>EMQ 控制台
+<img src="/assets/images/2018-10-03-emqttd-django/WX20181008-213304@2x.png" alt="WX20181008-213304@2x.png" /></p>
+
+  <p>EMQ 插件管理
+<img src="/assets/images/2018-10-03-emqttd-django/WX20181008-213346@2x.png" alt="WX20181008-213346@2x.png" /></p>
+</blockquote>
+
+<h2 id="emq-部署">EMQ 部署</h2>
+
+<p>官方提供了各式各样平台的编译后的可运行程序、Docker镜像，当然也提供源文件自行编译<a href="http://emqtt.com/downloads">【下载页面】</a>。</p>
+
+<p>我的开发环境为Mac，所以这里我选择OSX版本的EMQ。</p>
+
+<p>将<code class="highlighter-rouge">zip</code>文件下载后，解压到目录下，然后运行：</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./bin/emqttd star
+</code></pre></div></div>
+<p>等待一会后，控制台会输出：</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emqttd 2.3.11 is started successfully!
+</code></pre></div></div>
+<p>就是这么简单。</p>
+
+<p>打开浏览器通过访问<a href="127.0.0.1:18083">127.0.0.1:18083</a>进入控制台，默认账号密码为[<code class="highlighter-rouge">admin</code>, <code class="highlighter-rouge">public</code>]。</p>
+
+<h2 id="emq-mysql-用户鉴权插件">EMQ MySQL 用户鉴权插件</h2>
+
+<blockquote>
+  <p>MySQL 认证/访问控制插件，基于 MySQL 库表认证鉴权: https://github.com/emqtt/emq-auth-MySQL</p>
+</blockquote>
+
+<p>在官方提供的EMQ中已经包含了，MySQL 鉴权插件。
+首先我们需要修改MySQL鉴权插件的配置文件，并填写好相应的配置：</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi etc/plugins/emq_auth_mysql.conf
+</code></pre></div></div>
+<p>然后我们只需要在EMQ的目录下运行：</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./bin/emqttd_ctl plugins load emq_auth_mysql
+</code></pre></div></div>
+<p>控制台输出：</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Start apps: <span class="o">[</span>emq_auth_mysql]
+Plugin emq_auth_mysql loaded successfully.
+</code></pre></div></div>
+<p>插件就加载成功了。</p>
+
+<p><strong>注意</strong>：这里若出现以下错误：</p>
+<pre><code class="language-scale">load plugin error:  {emq_auth_mysql,
+                     {bad_return,
+                      { {emq_auth_mysql_app,start,[normal,[]]  },
+                       {'EXIT',
+                        { {badmatch,
+                          {error,
+                           {shutdown,
+                            {failed_to_start_child,emq_auth_mysql,
+                             {shutdown,
+                              {failed_to_start_child,worker_sup,
+                               {shutdown,
+                                {failed_to_start_child,
+                                 {worker,1  },
+                                 {1045,&lt;&lt;"28000"&gt;&gt;,
+                                 &lt;&lt;"Access denied for user ''@'localhost' (using password: NO)"&gt;&gt;  }  }  }  }  }  }  }  }  },
+                        [ {emq_auth_mysql_app,start,2,
+                          [ {file,"src/emq_auth_mysql_app.erl"  }, {line,33  }]  },
+                          {application_master,start_it_old,4,
+                          [ {file,"application_master.erl"  }, {line,273  }]  }]  }  }  }  }  }
+</code></pre>
+<p>需要删除<code class="highlighter-rouge">data/configs/</code>目录下的所有文件，该目录下的文件为EMQ的配置缓存，删除后重新运行<code class="highlighter-rouge">./bin/emqttd_ctl plugins load emq_auth_mysql</code>即可。</p>
+
+<h2 id="emq-mysql-用户鉴权控制改造并使用django后台进行管理">EMQ MySQL 用户鉴权控制改造，并使用Django后台进行管理</h2>
+
+<p>又官方文档的<code class="highlighter-rouge">SQL</code>代码可以知道，鉴权主要由两个表组成。</p>
+<blockquote>
+  <p>用户表</p>
+  <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">`mqtt_user`</span> <span class="p">(</span>
+      <span class="nv">`id`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="nb">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+      <span class="nv">`username`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+      <span class="nv">`password`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+      <span class="nv">`salt`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">35</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+      <span class="nv">`is_superuser`</span> <span class="nb">tinyint</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="nv">`created`</span> <span class="nb">datetime</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+      <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">`id`</span><span class="p">),</span>
+      <span class="k">UNIQUE</span> <span class="k">KEY</span> <span class="nv">`mqtt_username`</span> <span class="p">(</span><span class="nv">`username`</span><span class="p">)</span>
+    <span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">MyISAM</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span>
+</code></pre></div>  </div>
+
+  <p>Topic权限控制表</p>
+  <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">`mqtt_acl`</span> <span class="p">(</span>
+      <span class="nv">`id`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="nb">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+      <span class="nv">`allow`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">'0: deny, 1: allow'</span><span class="p">,</span>
+      <span class="nv">`ipaddr`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">'IpAddress'</span><span class="p">,</span>
+      <span class="nv">`username`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">'Username'</span><span class="p">,</span>
+      <span class="nv">`clientid`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">'ClientId'</span><span class="p">,</span>
+      <span class="nv">`access`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">'1: subscribe, 2: publish, 3: pubsub'</span><span class="p">,</span>
+      <span class="nv">`topic`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="s1">''</span> <span class="k">COMMENT</span> <span class="s1">'Topic Filter'</span><span class="p">,</span>
+      <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">`id`</span><span class="p">)</span>
+    <span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span>
+</code></pre></div>  </div>
+  <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">INSERT</span> <span class="k">INTO</span> <span class="nv">`mqtt_acl`</span> <span class="p">(</span><span class="nv">`id`</span><span class="p">,</span> <span class="nv">`allow`</span><span class="p">,</span> <span class="nv">`ipaddr`</span><span class="p">,</span> <span class="nv">`username`</span><span class="p">,</span> <span class="nv">`clientid`</span><span class="p">,</span> <span class="nv">`access`</span><span class="p">,</span> <span class="nv">`topic`</span><span class="p">)</span>
+    <span class="k">VALUES</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="s1">'$all'</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">'#'</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="s1">'$all'</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">'$SYS/#'</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="s1">'$all'</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">'eq #'</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">'127.0.0.1'</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">'$SYS/#'</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">'127.0.0.1'</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">'#'</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="s1">'dashboard'</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">'$SYS/#'</span><span class="p">);</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>接下来我们改造以下表结构和默认配置文件中的SQL查询语句，来实现<code class="highlighter-rouge">用户权限组</code>、<code class="highlighter-rouge">用户账户有效判断</code>、<code class="highlighter-rouge">用户密码有效期</code>功能。
+这里使用<code class="highlighter-rouge">Django ORM</code>进行表结构设计和实现，这里使用的<code class="highlighter-rouge">Django</code>版本为<code class="highlighter-rouge">2.0.7</code>，代码如下：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">ugettext_lazy</span> <span class="k">as</span> <span class="n">_</span>
+
+<span class="k">class</span> <span class="nc">BaseFieldsModal</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="s">"""
+    模型基础类
+    """</span>
+    
+    <span class="n">create_date</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'create date'</span><span class="p">),</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">auto_now_add</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">update_date</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'update date'</span><span class="p">),</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">auto_now</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">abstract</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="k">class</span> <span class="nc">AccessControl</span><span class="p">(</span><span class="n">BaseFieldsModal</span><span class="p">):</span>
+    <span class="s">"""
+    Topic权限控制表模型
+    """</span>
+    <span class="n">allow_choices</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s">'deny'</span><span class="p">)),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s">'allow'</span><span class="p">))]</span>
+    <span class="n">allow</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">IntegerField</span><span class="p">(</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'allow access'</span><span class="p">),</span>
+        <span class="n">choices</span><span class="o">=</span><span class="n">allow_choices</span><span class="p">,</span>
+        <span class="n">blank</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+    <span class="n">ip_address</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'ip address'</span><span class="p">),</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">client_id</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'client id'</span><span class="p">),</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">access_choices</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s">'subscribe'</span><span class="p">)),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s">'publish'</span><span class="p">)),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s">'pub&amp;sub'</span><span class="p">))]</span>
+    <span class="n">access</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">IntegerField</span><span class="p">(</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'access type'</span><span class="p">),</span>
+        <span class="n">choices</span><span class="o">=</span><span class="n">access_choices</span><span class="p">,</span>
+        <span class="n">blank</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span>
+    <span class="p">)</span>
+    <span class="c1"># (3, 'pub&amp;sub') not work ?
+</span>    <span class="n">topic</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="n">is_active</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'active'</span><span class="p">),</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">db_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">verbose_name</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s">'access control'</span><span class="p">)</span>
+        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s">'access control'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_</span><span class="p">(</span><span class="s">'{allow_or_deny} access to {access_type} {topic}'</span>
+                 <span class="s">' from {ip} with client id: {client_id}'</span><span class="p">).</span><span class="nb">format</span><span class="p">(</span>
+            <span class="n">allow_or_deny</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">allow_choices</span><span class="p">)[</span><span class="bp">self</span><span class="p">.</span><span class="n">allow</span><span class="p">],</span>
+            <span class="n">access_type</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">access_choices</span><span class="p">)[</span><span class="bp">self</span><span class="p">.</span><span class="n">access</span><span class="p">],</span>
+            <span class="n">topic</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">topic</span><span class="p">,</span>
+            <span class="n">ip</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">ip_address</span> <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">ip_address</span> <span class="k">else</span> <span class="n">_</span><span class="p">(</span><span class="s">'all ip'</span><span class="p">),</span>
+            <span class="n">client_id</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">client_id</span> <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">client_id</span> <span class="k">else</span> <span class="n">_</span><span class="p">(</span><span class="s">'any client id'</span><span class="p">)</span>
+        <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">UserGroup</span><span class="p">(</span><span class="n">BaseFieldsModal</span><span class="p">):</span>
+    <span class="s">"""
+    用户组表模型
+    """</span>
+    <span class="n">group_name</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'group name'</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">db_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">is_active</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'active'</span><span class="p">),</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">db_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">access_control_ids</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">ManyToManyField</span><span class="p">(</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'access control'</span><span class="p">),</span> <span class="n">to</span><span class="o">=</span><span class="n">AccessControl</span>
+    <span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">verbose_name</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s">'group'</span><span class="p">)</span>
+        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s">'groups'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">group_name</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">BaseFieldsModal</span><span class="p">):</span>
+    <span class="s">"""
+    用户表模型
+    """</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'username'</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                <span class="n">db_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'password'</span><span class="p">),</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">salt</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'salt'</span><span class="p">),</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">is_superuser</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">IntegerField</span><span class="p">(</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'is superuser'</span><span class="p">),</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s">'normal user'</span><span class="p">)),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s">'superuser'</span><span class="p">))],</span>
+        <span class="n">blank</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">db_index</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+    <span class="n">is_active</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'active'</span><span class="p">),</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">db_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">access_control_ids</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">ManyToManyField</span><span class="p">(</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'access control'</span><span class="p">),</span> <span class="n">to</span><span class="o">=</span><span class="n">AccessControl</span>
+    <span class="p">)</span>
+    <span class="n">user_group_ids</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'user group'</span><span class="p">),</span> <span class="n">to</span><span class="o">=</span><span class="n">UserGroup</span><span class="p">)</span>
+    <span class="n">password_will_expire</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'the password will expire'</span><span class="p">),</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                               <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">db_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">password_expiration</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">'password expire timestamp'</span><span class="p">),</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                              <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">db_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">verbose_name</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s">'user'</span><span class="p">)</span>
+        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s">'users'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">username</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>最后生成的表结构<code class="highlighter-rouge">ER</code>图为：
+<img src="/assets/images/2018-10-03-emqttd-django/WX20181008-223028@2x.png" alt="WX20181008-223028@2x.png" /></p>
+
+<p>生成表结构了，我们还需要改造插件配置文件中的<code class="highlighter-rouge">SQL</code>语句，需要根据<code class="highlighter-rouge">用户组</code>、<code class="highlighter-rouge">用户有效期</code>和<code class="highlighter-rouge">用户密码有效期</code>来判断用户鉴权是否有效。
+改造后对应的<code class="highlighter-rouge">SQL</code>如下：</p>
+<ol>
+  <li>auth.mysql.auth_query
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+ <span class="p">(</span>
+ <span class="k">CASE</span>
+			
+         <span class="k">WHEN</span> <span class="n">is_active</span> <span class="o">=</span> <span class="mi">1</span> 
+         <span class="k">AND</span> <span class="p">(</span> <span class="n">password_will_expire</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">OR</span> <span class="p">(</span> <span class="n">password_will_expire</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">AND</span> <span class="n">password_expiration</span> <span class="o">&gt;</span> <span class="n">unix_timestamp</span><span class="p">(</span> <span class="n">now</span><span class="p">(</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span> <span class="k">THEN</span>
+             <span class="n">PASSWORD</span> <span class="k">ELSE</span> <span class="s1">'error'</span> 
+         <span class="k">END</span> 
+         <span class="p">)</span> <span class="k">AS</span> <span class="n">PASSWORD</span> 
+     <span class="k">FROM</span>
+         <span class="n">emq_auth_user</span> 
+     <span class="k">WHERE</span>
+     <span class="n">username</span> <span class="o">=</span> <span class="s1">'%u'</span> 
+ <span class="k">LIMIT</span> <span class="mi">1</span>
+</code></pre></div>    </div>
+  </li>
+  <li>auth.mysql.super_query
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+ <span class="n">is_superuser</span> 
+<span class="k">FROM</span>
+ <span class="n">emq_auth_user</span> 
+<span class="k">WHERE</span>
+ <span class="n">username</span> <span class="o">=</span> <span class="s1">'%u'</span> 
+ <span class="k">AND</span> <span class="n">is_active</span> <span class="o">=</span> <span class="mi">1</span> 
+ <span class="k">LIMIT</span> <span class="mi">1</span>
+</code></pre></div>    </div>
+  </li>
+  <li>auth.mysql.acl_query
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+ <span class="k">c</span><span class="p">.</span><span class="n">allow</span><span class="p">,</span>
+ <span class="k">c</span><span class="p">.</span><span class="n">ip_address</span> <span class="k">AS</span> <span class="n">ipaddr</span><span class="p">,</span>
+ <span class="n">a</span><span class="p">.</span><span class="n">username</span><span class="p">,</span>
+ <span class="k">c</span><span class="p">.</span><span class="n">client_id</span> <span class="k">AS</span> <span class="n">clientid</span><span class="p">,</span>
+ <span class="k">c</span><span class="p">.</span><span class="k">access</span><span class="p">,</span>
+ <span class="k">c</span><span class="p">.</span><span class="n">topic</span> 
+<span class="k">FROM</span>
+ <span class="p">(</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">emq_auth_user</span> <span class="k">WHERE</span> <span class="p">(</span> <span class="n">username</span> <span class="o">=</span> <span class="s1">'%u'</span> <span class="k">OR</span> <span class="n">username</span> <span class="o">=</span> <span class="s1">'$all'</span> <span class="p">)</span> <span class="k">AND</span> <span class="n">is_active</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span> <span class="n">a</span><span class="p">,</span>
+ <span class="n">emq_auth_user_access_control_ids</span> <span class="n">b</span><span class="p">,</span>
+ <span class="n">emq_auth_accesscontrol</span> <span class="k">c</span> 
+<span class="k">WHERE</span>
+ <span class="p">(</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">user_id</span> <span class="k">AND</span> <span class="n">b</span><span class="p">.</span><span class="n">accesscontrol_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span> <span class="k">AND</span> <span class="k">c</span><span class="p">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span> <span class="k">UNION</span> <span class="k">ALL</span>
+<span class="k">SELECT</span>
+ <span class="k">c</span><span class="p">.</span><span class="n">allow</span><span class="p">,</span>
+ <span class="k">c</span><span class="p">.</span><span class="n">ip_address</span> <span class="k">AS</span> <span class="n">ipaddr</span><span class="p">,</span>
+ <span class="n">a</span><span class="p">.</span><span class="n">username</span><span class="p">,</span>
+ <span class="k">c</span><span class="p">.</span><span class="n">client_id</span> <span class="k">AS</span> <span class="n">clientid</span><span class="p">,</span>
+ <span class="k">c</span><span class="p">.</span><span class="k">access</span><span class="p">,</span>
+ <span class="k">c</span><span class="p">.</span><span class="n">topic</span> 
+<span class="k">FROM</span>
+ <span class="p">(</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">emq_auth_user</span> <span class="k">WHERE</span> <span class="p">(</span> <span class="n">username</span> <span class="o">=</span> <span class="s1">'%u'</span> <span class="k">OR</span> <span class="n">username</span> <span class="o">=</span> <span class="s1">'$all'</span> <span class="p">)</span> <span class="k">AND</span> <span class="n">is_active</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span> <span class="n">a</span><span class="p">,</span>
+ <span class="n">emq_auth_user_user_group_ids</span> <span class="n">b</span><span class="p">,</span>
+ <span class="n">emq_auth_accesscontrol</span> <span class="k">c</span><span class="p">,</span>
+ <span class="n">emq_auth_usergroup_access_control_ids</span> <span class="n">d</span><span class="p">,</span>
+ <span class="n">emq_auth_usergroup</span> <span class="n">e</span> 
+<span class="k">WHERE</span>
+ <span class="p">(</span>
+     <span class="n">a</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">user_id</span> 
+     <span class="k">AND</span> <span class="n">b</span><span class="p">.</span><span class="n">usergroup_id</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">id</span> 
+     <span class="k">AND</span> <span class="n">e</span><span class="p">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="mi">1</span> 
+     <span class="k">AND</span> <span class="n">b</span><span class="p">.</span><span class="n">usergroup_id</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">usergroup_id</span> 
+     <span class="k">AND</span> <span class="n">d</span><span class="p">.</span><span class="n">accesscontrol_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span> 
+ <span class="k">AND</span> <span class="k">c</span><span class="p">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="mi">1</span> 
+ <span class="p">)</span>
+</code></pre></div>    </div>
+    <p>当然这里同样需要插入默认的权限控制数据</p>
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
+</span><span class="p">{</span><span class="w">  </span><span class="nl">"allow  "</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">   </span><span class="nl">"ip_address  "</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">   </span><span class="nl">"access  "</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="nl">"topic  "</span><span class="p">:</span><span class="w">   </span><span class="s2">"#  "</span><span class="p">},</span><span class="w">
+</span><span class="p">{</span><span class="w">  </span><span class="nl">"allow  "</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">   </span><span class="nl">"ip_address  "</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">   </span><span class="nl">"access  "</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">   </span><span class="nl">"topic  "</span><span class="p">:</span><span class="w">   </span><span class="s2">"#  "</span><span class="p">},</span><span class="w">
+</span><span class="p">{</span><span class="w">  </span><span class="nl">"allow  "</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">   </span><span class="nl">"ip_address  "</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">   </span><span class="nl">"access  "</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">   </span><span class="nl">"topic  "</span><span class="p">:</span><span class="w">   </span><span class="s2">"$SYS/#  "</span><span class="p">},</span><span class="w">
+</span><span class="p">{</span><span class="w">  </span><span class="nl">"allow  "</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">   </span><span class="nl">"ip_address  "</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">   </span><span class="nl">"access  "</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="nl">"topic  "</span><span class="p">:</span><span class="w">   </span><span class="s2">"$SYS/#  "</span><span class="p">},</span><span class="w">
+</span><span class="p">{</span><span class="w">  </span><span class="nl">"allow  "</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">   </span><span class="nl">"ip_address  "</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">   </span><span class="nl">"access  "</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="nl">"topic  "</span><span class="p">:</span><span class="w">   </span><span class="s2">"eq #  "</span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>最后的<code class="highlighter-rouge">emq_auth_mysql.conf</code>配置文件如下：</p>
+<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">##--------------------------------------------------------------------
+## MySQL Auth/ACL Plugin
+##--------------------------------------------------------------------
+</span>
+<span class="c">## MySQL server address.
+##
+## Value: Port | IP:Port
+##
+## Examples: 3306, 127.0.0.1:3306, localhost:3306
+</span><span class="n">auth</span>.<span class="n">mysql</span>.<span class="n">server</span> = <span class="m">127</span>.<span class="m">0</span>.<span class="m">0</span>.<span class="m">1</span>:<span class="m">3306</span>
+
+<span class="c">## MySQL pool size.
+##
+## Value: Number
+</span><span class="n">auth</span>.<span class="n">mysql</span>.<span class="n">pool</span> = <span class="m">8</span>
+
+<span class="c">## MySQL username.
+##
+## Value: String
+</span><span class="n">auth</span>.<span class="n">mysql</span>.<span class="n">username</span> = <span class="n">root</span>
+
+<span class="c">## MySQL password.
+##
+## Value: String
+</span><span class="n">auth</span>.<span class="n">mysql</span>.<span class="n">password</span> = <span class="n">root</span>
+
+<span class="c">## MySQL database.
+##
+## Value: String
+</span><span class="n">auth</span>.<span class="n">mysql</span>.<span class="n">database</span> = <span class="n">db_name</span>
+
+<span class="c">## Variables: %u = username, %c = clientid
+</span>
+<span class="c">## Authentication query.
+##
+## Note that column names should be 'password' and 'salt' (if used).
+## In case column names differ in your DB - please use aliases,
+## e.g. "my_column_name as password".
+##
+## Value: SQL
+##
+## Variables:
+##  - %u: username
+##  - %c: clientid
+##
+</span><span class="n">auth</span>.<span class="n">mysql</span>.<span class="n">auth_query</span> = <span class="n">SELECT</span> (<span class="n">CASE</span> <span class="n">WHEN</span> <span class="n">is_active</span>=<span class="m">1</span> <span class="n">AND</span> (<span class="n">password_will_expire</span>=<span class="m">0</span> <span class="n">OR</span> (<span class="n">password_will_expire</span>=<span class="m">1</span> <span class="n">AND</span> <span class="n">password_expiration</span>&gt; <span class="n">unix_timestamp</span>(<span class="n">now</span>()))) <span class="n">THEN</span> <span class="n">password</span> <span class="n">ELSE</span> <span class="s1">'error'</span> <span class="n">END</span>) <span class="n">AS</span> <span class="n">password</span> <span class="n">FROM</span> <span class="n">emq_auth_user</span> <span class="n">WHERE</span> <span class="n">username</span>=<span class="s1">'%u'</span> <span class="n">LIMIT</span> <span class="m">1</span>
+<span class="c">## auth.mysql.auth_query = select password_hash as password from mqtt_user where username = '%u' limit 1
+</span>
+<span class="c">## Password hash.
+##
+## Value: plain | md5 | sha | sha256 | bcrypt
+</span><span class="n">auth</span>.<span class="n">mysql</span>.<span class="n">password_hash</span> = <span class="n">sha256</span>
+
+<span class="c">## sha256 with salt prefix
+## auth.mysql.password_hash = salt,sha256
+</span>
+<span class="c">## bcrypt with salt only prefix
+## auth.mysql.password_hash = salt,bcrypt
+</span>
+<span class="c">## sha256 with salt suffix
+## auth.mysql.password_hash = sha256,salt
+</span>
+<span class="c">## pbkdf2 with macfun iterations dklen
+## macfun: md4, md5, ripemd160, sha, sha224, sha256, sha384, sha512
+## auth.mysql.password_hash = pbkdf2,sha256,1000,20
+</span>
+<span class="c">## Superuser query.
+##
+## Value: SQL
+##
+## Variables:
+##  - %u: username
+##  - %c: clientid
+</span><span class="n">auth</span>.<span class="n">mysql</span>.<span class="n">super_query</span> = <span class="n">SELECT</span> <span class="n">is_superuser</span> <span class="n">FROM</span> <span class="n">emq_auth_user</span> <span class="n">WHERE</span> <span class="n">username</span> = <span class="s1">'%u'</span> <span class="n">AND</span> <span class="n">is_active</span> = <span class="m">1</span> <span class="n">LIMIT</span> <span class="m">1</span>
+
+<span class="c">## ACL query.
+##
+## Value: SQL
+##
+## Variables:
+##  - %a: ipaddr
+##  - %u: username
+##  - %c: clientid
+</span><span class="n">auth</span>.<span class="n">mysql</span>.<span class="n">acl_query</span> = <span class="n">SELECT</span> <span class="n">c</span>.<span class="n">allow</span>, <span class="n">c</span>.<span class="n">ip_address</span> <span class="n">AS</span> <span class="n">ipaddr</span>, <span class="n">a</span>.<span class="n">username</span>, <span class="n">c</span>.<span class="n">client_id</span> <span class="n">AS</span> <span class="n">clientid</span>, <span class="n">c</span>.<span class="n">access</span> , <span class="n">c</span>.<span class="n">topic</span> <span class="n">FROM</span> ( <span class="n">SELECT</span> * <span class="n">FROM</span> <span class="n">emq_auth_user</span> <span class="n">WHERE</span> (<span class="n">username</span> = <span class="s1">'%u'</span> <span class="n">OR</span> <span class="n">username</span> = <span class="s1">'$all'</span>) <span class="n">AND</span> <span class="n">is_active</span> = <span class="m">1</span> ) <span class="n">a</span>, <span class="n">emq_auth_user_access_control_ids</span> <span class="n">b</span>, <span class="n">emq_auth_accesscontrol</span> <span class="n">c</span> <span class="n">WHERE</span> (<span class="n">a</span>.<span class="n">id</span> = <span class="n">b</span>.<span class="n">user_id</span> <span class="n">AND</span> <span class="n">b</span>.<span class="n">accesscontrol_id</span> = <span class="n">c</span>.<span class="n">id</span> <span class="n">AND</span> <span class="n">c</span>.<span class="n">is_active</span> = <span class="m">1</span>) <span class="n">UNION</span> <span class="n">ALL</span> <span class="n">SELECT</span> <span class="n">c</span>.<span class="n">allow</span>, <span class="n">c</span>.<span class="n">ip_address</span> <span class="n">AS</span> <span class="n">ipaddr</span>, <span class="n">a</span>.<span class="n">username</span>, <span class="n">c</span>.<span class="n">client_id</span> <span class="n">AS</span> <span class="n">clientid</span>, <span class="n">c</span>.<span class="n">access</span> , <span class="n">c</span>.<span class="n">topic</span> <span class="n">FROM</span> ( <span class="n">SELECT</span> * <span class="n">FROM</span> <span class="n">emq_auth_user</span> <span class="n">WHERE</span> (<span class="n">username</span> = <span class="s1">'%u'</span> <span class="n">OR</span> <span class="n">username</span> = <span class="s1">'$all'</span>) <span class="n">AND</span> <span class="n">is_active</span> = <span class="m">1</span> ) <span class="n">a</span>, <span class="n">emq_auth_user_user_group_ids</span> <span class="n">b</span>, <span class="n">emq_auth_accesscontrol</span> <span class="n">c</span>, <span class="n">emq_auth_usergroup_access_control_ids</span> <span class="n">d</span>, <span class="n">emq_auth_usergroup</span> <span class="n">e</span> <span class="n">WHERE</span> (<span class="n">a</span>.<span class="n">id</span> = <span class="n">b</span>.<span class="n">user_id</span> <span class="n">AND</span> <span class="n">b</span>.<span class="n">usergroup_id</span> = <span class="n">e</span>.<span class="n">id</span> <span class="n">AND</span> <span class="n">e</span>.<span class="n">is_active</span> = <span class="m">1</span> <span class="n">AND</span> <span class="n">b</span>.<span class="n">usergroup_id</span> = <span class="n">d</span>.<span class="n">usergroup_id</span> <span class="n">AND</span> <span class="n">d</span>.<span class="n">accesscontrol_id</span> = <span class="n">c</span>.<span class="n">id</span> <span class="n">AND</span> <span class="n">c</span>.<span class="n">is_active</span> = <span class="m">1</span>)
+</code></pre></div></div>
+
+<p>最后只需要重启<code class="highlighter-rouge">EMQ</code>即可，在<code class="highlighter-rouge">EMQ</code>目录下输入：</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./bin/emqttd restart
+</code></pre></div></div>
+<p>出现<code class="highlighter-rouge">ok</code>字样则重启成功。</p>
+
+<p>要查看<code class="highlighter-rouge">emq_auth_mysql</code>插件是否配置成功，可以打开<a href="127.0.0.1:18083">EMQ控制台</a>，选择<a href="http://127.0.0.1:18083/#/plugins">插件</a>菜单后，点击<code class="highlighter-rouge">emq_auth_mysql配置</code>按钮。
+<img src="/assets/images/2018-10-03-emqttd-django/WX20181008-224744@2x.png" alt="WX20181008-224744@2x.png" />
+检查配置是否正确。</p>
+
+<h2 id="总结">总结</h2>
+<p>本片文章只提供改造MySQL鉴权的思路和管理鉴权的方式的思路，以上配置完成后如何使用请读者自行摸索，若有问题可以留言。</p>
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(87, 163, 243);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(87, 163, 243);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(87, 163, 243);
+        background-color: transparent;
+        border-left: 2px solid rgb(87, 163, 243);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>

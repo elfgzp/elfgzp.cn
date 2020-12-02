@@ -1,0 +1,706 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>「K8s 学习日记」Kubeadm 部署 kubernetes 集群</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(37, 126, 235) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(37, 126, 235);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">「K8s 学习日记」Kubeadm 部署 kubernetes 集群</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(37, 126, 235);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2020/03/21/%E4%B8%BA%E4%BD%A0%E7%9A%84-github-%E5%8D%9A%E5%AE%A2%E5%8A%A0%E4%B8%AA-cms-%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(37, 126, 235)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(37, 126, 235);"><sapn class="main">为你的 Github 博客加个 CMS -「内容管理」</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">「K8s 学习日记」Kubeadm 部署 kubernetes 集群</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2020/06/21/%E6%96%B0%E4%B8%80%E4%BB%A3%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84-service-mesh.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(37, 126, 235)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(37, 126, 235);"><sapn class="main">新一代的微服务架构 Service Mesh</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2020/03/21/%E4%B8%BA%E4%BD%A0%E7%9A%84-github-%E5%8D%9A%E5%AE%A2%E5%8A%A0%E4%B8%AA-cms-%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86.html" class="leftchange" style="border-right: 1px solid rgb(37, 126, 235);border-bottom: 2px solid rgb(37, 126, 235);"><span>上一篇<br><br>为你的 Github 博客加个 CMS -「内容管理」</span></a>
+    
+    
+    <a href="/2020/06/21/%E6%96%B0%E4%B8%80%E4%BB%A3%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84-service-mesh.html" class="rightchange" style="border-left: 1px solid rgb(37, 126, 235);border-bottom: 2px solid rgb(37, 126, 235);"><span>下一篇<br><br>新一代的微服务架构 Service Mesh</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(37, 126, 235); border-right: 8px solid rgb(37, 126, 235)">
+        在 Vultr 上部署 kubernetest 集群
+    </div>
+    
+    
+    <img src="/assets/uploads/kuberneteshero.jpg" style="margin:auto;">
+    <!-- 文章内容 -->
+    <p>最近在学习 <code class="highlighter-rouge">kubernetest</code> 但是 Google 上有非常多的教程关于如何部署 <code class="highlighter-rouge">kubernetes</code>。</p>
+
+<p>原本是想在自己买的 <code class="highlighter-rouge">JD</code> 和 <code class="highlighter-rouge">HUAWEI</code> 的 <code class="highlighter-rouge">ECS</code> 上面部署的，但是折腾了很久无果。无奈还是选用同一个云服务商提供的 ECS，在同一个 <code class="highlighter-rouge">VPC</code> 的条件下部署会更方便。</p>
+
+<p>本文中的所有脚本均可以在这里找到 <a href="https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140">https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140</a>。</p>
+
+<h2 id="ecs-配置选择">ECS 配置选择</h2>
+
+<p>由于只是学习，笔者就不部署高可用的 <code class="highlighter-rouge">k8s</code> 集群了，所以准备一台 <code class="highlighter-rouge">Master</code> 和 <code class="highlighter-rouge">Node</code> 节点。</p>
+
+<p>由于 <code class="highlighter-rouge">Master</code> 至少需要 2 个 CPU 核心。这里选择了 <code class="highlighter-rouge">Vultr</code> 上 <code class="highlighter-rouge">2 核 4G 内存</code> 配置的 <code class="highlighter-rouge">ECS</code>。</p>
+
+<p><img src="/assets/uploads/wx20200411-125004-2x.png" alt="2c4g" /></p>
+
+<p><code class="highlighter-rouge">Node</code> 节点配置当然是内存越大越好，当然只是处于学习的目的，这里就选择与 <code class="highlighter-rouge">Master</code> 相同的配置。</p>
+
+<p>国外的云服务厂商一般是没有带宽限制的，一般是按照流量计算的，这个配置有 <code class="highlighter-rouge">3T</code> 的流量是肯定够的。</p>
+
+<p>然后他的收费模式是按小时计算的这个配置 <code class="highlighter-rouge">0.03 $ / h</code> 相当于 <code class="highlighter-rouge">0.21 ¥ / h</code>，也就是每小时两毛钱！就算你用一天也就四块钱。</p>
+
+<p>笔者打算在学习 <code class="highlighter-rouge">k8s</code> 的时候在部署两个实例，不用了直接销毁，岂不美哉。</p>
+
+<p>新用户的话还能免费到账 <code class="highlighter-rouge">100 $</code> ，这里是邀请的连接 <a href="https://www.vultr.com/?ref=8382877-6G">Vultr Give $100</a>，要是觉得还不错的话可以试试，笔者是真的觉得他们的服务还不错，所以给他们打个广告。</p>
+
+<p>这里选择两个 <code class="highlighter-rouge">CentOS 7 Without SELinux</code> 的实例。</p>
+
+<p><code class="highlighter-rouge">SELinux</code> 是 <code class="highlighter-rouge">Linux</code> 下的一个安全相关的软件，为了方便学习和部署，我们直接关闭它，所以选择 <code class="highlighter-rouge">Without SELinux</code> 就准备开始部署了。</p>
+
+<p>注意在 <code class="highlighter-rouge">Additional Features</code> 处勾选 <code class="highlighter-rouge">Enable Private Networking</code>，让 <code class="highlighter-rouge">Vultr</code> 为你的服务器分配内网 <code class="highlighter-rouge">IP</code>。</p>
+
+<p>设置好两个节点的 <code class="highlighter-rouge">HostName</code> 防止待会节点名称冲突。</p>
+
+<p><img src="/assets/uploads/wx20200411-160357-2x.png" alt="hostname" /></p>
+
+<p>在 <code class="highlighter-rouge">Deploy Now</code> 之前将 <code class="highlighter-rouge">Servers Qty</code> 增加为 <code class="highlighter-rouge">2</code> ，这样就不用反复打开部署页面了，直接部署两个实例。</p>
+
+<p>别被这 <code class="highlighter-rouge">$20.00 /mo</code> 吓到了，这是每月 <code class="highlighter-rouge">$20</code>，我们只需要用完了及时销毁就好，而且新用户赠送的 <code class="highlighter-rouge">100$</code> 可以用很久了。</p>
+
+<h2 id="ecs-环境配置">ECS 环境配置</h2>
+
+<p>部署完成两个实例后，就可以在 <code class="highlighter-rouge">Instances</code> 列表找到他们。  （考虑到没有使用过云服务的读者，这里笔者讲详细一点。）</p>
+
+<p><img src="/assets/uploads/wx20200411-132424-2x.png" alt="ins2" /></p>
+
+<p>在点进这个实例可以在 <code class="highlighter-rouge">Overview</code> 找到他的登录账号密码，默认用户是 <code class="highlighter-rouge">root</code>。</p>
+
+<p>然后在 <code class="highlighter-rouge">Settings</code> 可以看到这两个实例的内网 <code class="highlighter-rouge">IP</code>。</p>
+
+<p>这里笔者的两个实例的内网如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>实例</th>
+      <th>核心数</th>
+      <th>内存</th>
+      <th>内网 IP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Master</td>
+      <td>2</td>
+      <td>4G</td>
+      <td>10.24.96.3</td>
+    </tr>
+    <tr>
+      <td>Node</td>
+      <td>2</td>
+      <td>4G</td>
+      <td>10.24.96.4</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>接下来就正式开始了，不过 <code class="highlighter-rouge">ssh</code> 进入系统后还需要做一些准备工作。</p>
+
+<h2 id="k8s-部署准备工作">K8s 部署准备工作</h2>
+
+<p>首先避免不必要的麻烦，先关闭 <code class="highlighter-rouge">CentOS 7</code> 的防火墙，因为本身云服务厂商会有安全组，我们也可以通过配置安全组来实现网络安全防护。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl disable firewalld <span class="o">&amp;&amp;</span> systemctl stop firewalld
+</code></pre></div></div>
+
+<p>若是前面在部署实例的时候没有选择 <code class="highlighter-rouge">Without SELinux</code> 这里则需要让容器可以访问主机文件，需要输入以下命令。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 将 SELinux 设置为 permissive 模式（相当于将其禁用）</span>
+setenforce 0
+<span class="nb">sed</span> <span class="nt">-i</span> <span class="s1">'s/^SELINUX=enforcing$/SELINUX=permissive/'</span> /etc/selinux/config
+</code></pre></div></div>
+
+<p>我们还需要关闭 swap，至于为什么感兴趣可以去搜一下。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>swapoff <span class="nt">-a</span>
+</code></pre></div></div>
+
+<p>确保在 <code class="highlighter-rouge">sysctl</code> 配置中的 <code class="highlighter-rouge">net.bridge.bridge-nf-call-iptables</code> 被设置为 1。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh"> &gt;  /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+</span><span class="no">EOF
+</span>sysctl <span class="nt">--system</span>
+</code></pre></div></div>
+
+<p>确保已加载了 <code class="highlighter-rouge">br_netfilter</code> 模块。这可以通过运行 <code class="highlighter-rouge">lsmod | grep br_netfilter</code> 来完成。要显示加载它，请调用 <code class="highlighter-rouge">modprobe br_netfilter</code>。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>modprobe br_netfilter
+lsmod | <span class="nb">grep </span>br_netfilter
+</code></pre></div></div>
+
+<p>安装 <code class="highlighter-rouge">docker</code>：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum <span class="nb">install</span> <span class="nt">-y</span> docker
+systemctl <span class="nb">enable </span>docker <span class="o">&amp;&amp;</span> systemctl start docker
+</code></pre></div></div>
+
+<p>笔者已经将上述步骤做成了脚本，可以查看 <a href="https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_prepare-sh">https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_prepare-sh</a>。 为了快速进入下一步可以执行以下命令直接跳过准备操作。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/raw/781c2cd7e6dba8f099e2b6b1aba9bb91d9f60fe2/vultr_k8s_prepare.sh | sh
+</code></pre></div></div>
+
+<h2 id="安装-kubeadm">安装 Kubeadm</h2>
+
+<p>接下来的步骤可以完全参考官方文档来了，<a href="https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/install-kubeadm/">官方文档链接</a>。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 配置 yum 源</span>
+<span class="nb">cat</span> <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh"> &gt; /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+</span><span class="no">EOF
+
+</span><span class="c"># 安装 kubelet kubeadm kubectl</span>
+yum <span class="nb">install</span> <span class="nt">-y</span> kubelet kubeadm kubectl <span class="nt">--disableexcludes</span><span class="o">=</span>kubernetes
+
+<span class="c"># 启动 kubelet</span>
+systemctl <span class="nb">enable</span> <span class="nt">--now</span> kubelet
+</code></pre></div></div>
+
+<p>由于 <code class="highlighter-rouge">Vultr</code> 是国外的云主机，所以我们根本不用考虑 <code class="highlighter-rouge">Google</code> 的访问问题，但是如果是国内的主机需要将 <code class="highlighter-rouge">yum</code> 源的 <code class="highlighter-rouge">repo</code> 修改为以下配置。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> <span class="o">&lt;&lt;</span> <span class="no">EOF</span><span class="sh"> &gt; /etc/yum.repos.d/kubernetes.repo
+[kuebrnetes]
+name=KubernetesRepository
+baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+enabled=1
+gpgcheck=0
+</span><span class="no">EOF
+</span></code></pre></div></div>
+
+<p>上述操作的脚本，<a href="https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_install_kubeadm-sh">https://gist.github.com/elfgzp/02485648297823060a7d8ddbafebf140#file-vultr_k8s_install_kubeadm-sh</a>。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/raw/#/vultr_k8s_prepare.sh | sh
+</code></pre></div></div>
+
+<h2 id="使用-kubeadm-创建-k8s-集群">使用 Kubeadm 创建 k8s 集群</h2>
+
+<h3 id="创建-k8s-master-节点">创建 k8s Master 节点</h3>
+
+<p>我们首先要在 <code class="highlighter-rouge">Master</code> 的实例上执行 <code class="highlighter-rouge">kubeadm</code>。但是我们先使用 <code class="highlighter-rouge">kubeadm config print init-defaults</code> 来看看它的默认初始化文件。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubeadm config print init-defaults
+</code></pre></div></div>
+
+<p>接下来直接执行 <code class="highlighter-rouge">kubeadm init</code> 进行初始化。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubeadm init
+</code></pre></div></div>
+
+<p>当然你也可以生成一个配置文件后，指定配置文件进行初始化：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubeadm config print init-defaults <span class="o">&gt;</span> kubeadm.yaml
+<span class="c"># 修改 kubeadm.yml</span>
+kubeadm init <span class="nt">--config</span> kubeadm.yaml
+</code></pre></div></div>
+
+<p>国内的主机可能需要修改 <code class="highlighter-rouge">imageRepository</code> 的配置，来修改 <code class="highlighter-rouge">k8s</code> 的镜像仓库。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh"> &gt; kubeadm.yaml
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: ClusterConfiguration
+apiServer:
+    extraArgs:
+        runtime-config: "api/all=true"
+kubernetesVersion: "v1.18.1"
+imageRepository: registry.aliyuncs.com/google_containers
+</span><span class="no">EOF
+</span>kubeadm init <span class="nt">--config</span> kubeadm.yaml
+</code></pre></div></div>
+
+<p>如果初始化失败可以执行以下命令，进行重制：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubeadm reset
+<span class="nb">rm</span> <span class="nt">-rf</span> <span class="nv">$HOME</span>/.kube/config
+<span class="nb">rm</span> <span class="nt">-rf</span> /var/lib/cni/
+<span class="nb">rm</span> <span class="nt">-rf</span> /etc/kubernetes/
+<span class="nb">rm</span> <span class="nt">-rf</span> /etc/cni/
+ifconfig cni0 down
+ip <span class="nb">link </span>delete cni0
+</code></pre></div></div>
+
+<p>执行完成后，我们会得到以下输出：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join {你的IP}:6443 --token 3prn7r.iavgjxcmrlh3ust3 \
+    --discovery-token-ca-cert-hash sha256:95283a2e81464ba5290bf4aeffc4376b6d708f506fcee278cd2a647f704ed55d
+</code></pre></div></div>
+
+<p>按照他的提示，我们将 <code class="highlighter-rouge">kubectl</code> 的配置放到 <code class="highlighter-rouge">$HOME/.kube/config</code> 下，注意每次执行完成 <code class="highlighter-rouge">kubeadm init</code> 之后，配置文件都会变化，所以需要重新复制。<code class="highlighter-rouge">kubeadm</code> 还会输出 join 命令的配置信息，用于 <code class="highlighter-rouge">Node</code> 加入集群。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$HOME</span>/.kube
+<span class="nb">sudo cp</span> <span class="nt">-i</span> /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
+<span class="nb">sudo chown</span> <span class="si">$(</span><span class="nb">id</span> <span class="nt">-u</span><span class="si">)</span>:<span class="si">$(</span><span class="nb">id</span> <span class="nt">-g</span><span class="si">)</span> <span class="nv">$HOME</span>/.kube/config
+</code></pre></div></div>
+
+<p>如果你们是使用 <code class="highlighter-rouge">root</code> 用户的话，可以直接利用环境变量指定配置文件：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s1">'export KUBECONFIG=/etc/kubernetes/admin.conf'</span> <span class="o">&gt;&gt;</span> ~/.bashrc
+<span class="nb">.</span> ~/.bashrc
+</code></pre></div></div>
+
+<p>接下来使用 <code class="highlighter-rouge">kubectl get nodes</code> 来查看节点的状态：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME      STATUS   ROLES    AGE     VERSION
+master1   NotReady    master   6m52s   v1.18.1
+</code></pre></div></div>
+
+<p>此时的状态为 <code class="highlighter-rouge">NotReady</code> 当然这个状态是对的，因为我们还没有安装网络插件。接下来安装网络插件，这里是用的是 <code class="highlighter-rouge">Weave</code> 网络插件：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> <span class="s2">"https://cloud.weave.works/k8s/net?k8s-version=</span><span class="si">$(</span>kubectl version | <span class="nb">base64</span> | <span class="nb">tr</span> <span class="nt">-d</span> <span class="s1">'\n'</span><span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>还有其他的网络插件可以参考官方文档，<a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network">Installing a Pod network add-on</a>。</p>
+
+<p>可以通过查看 <code class="highlighter-rouge">Pods</code> 状态查看是否安装成功：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get pods <span class="nt">-A</span>
+NAMESPACE     NAME                       READY   STATUS    RESTARTS   AGE
+kube-system   coredns-66bff467f8-br94l   1/1     Running   0          14m
+kube-system   coredns-66bff467f8-pvsfn   1/1     Running   0          14m
+kube-system   kube-proxy-b2phr           1/1     Running   0          14m
+kube-system   weave-net-8wv4k            2/2     Running   0          2m2s
+</code></pre></div></div>
+
+<p>如果发现 <code class="highlighter-rouge">STATUS</code> 不是 <code class="highlighter-rouge">Running</code> 可以通过，<code class="highlighter-rouge">kubectl logs</code> 和 <code class="highlighter-rouge">kubectl describe</code> 命令查看详细的错误信息。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl logs weave-net-8wv4k <span class="nt">-n</span> kube-system weave
+kubectl logs weave-net-8wv4k <span class="nt">-n</span> kube-system weave-npc
+kubectl describe pods weave-net-8wv4k <span class="nt">-n</span> kube-system 
+</code></pre></div></div>
+
+<p>此时的 <code class="highlighter-rouge">Master</code> 节点状态就变为 <code class="highlighter-rouge">Ready</code> 了。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME      STATUS   ROLES    AGE     VERSION
+master1   Ready    master   6m52s   v1.18.1
+</code></pre></div></div>
+
+<h3 id="部署-node-节点">部署 <code class="highlighter-rouge">Node</code> 节点</h3>
+
+<p>部署 <code class="highlighter-rouge">Node</code> 节点同样需要「准备阶段」的工作，这里就不一一讲解了，直接执行脚本：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/raw/781c2cd7e6dba8f099e2b6b1aba9bb91d9f60fe2/vultr_k8s_prepare.sh | sh
+curl https://gist.githubusercontent.com/elfgzp/02485648297823060a7d8ddbafebf140/raw/781c2cd7e6dba8f099e2b6b1aba9bb91d9f60fe2/vultr_k8s_install_kubeadm.sh | sh
+</code></pre></div></div>
+
+<p>我们需要执行 <code class="highlighter-rouge">kubeadm</code> 在 <code class="highlighter-rouge">Master</code> 节点初始化后输出的 <code class="highlighter-rouge">join</code> 命令。如果不记得了，可以通过在 <code class="highlighter-rouge">Master</code> 执行以下命令重新获得 <code class="highlighter-rouge">join</code> 命令。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubeadm token create <span class="nt">--print-join-command</span>
+kubeadm <span class="nb">join</span> <span class="o">{</span>你的IP<span class="o">}</span>:6443 <span class="nt">--token</span> m239ha.ot52q6goyq0pcadx     <span class="nt">--discovery-token-ca-cert-hash</span> sha256:95283a2e81464ba5290bf4aeffc4376b6d708f506fcee278cd2a647f704ed55d
+</code></pre></div></div>
+
+<p>若加入时出现问题同样可以使用 <code class="highlighter-rouge">kubeadm rest</code> 来重置。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubeadm reset
+</code></pre></div></div>
+
+<p>当然 <code class="highlighter-rouge">join</code> 命令也是可以提供配置文件的，我们只需要在 <code class="highlighter-rouge">Node</code> 上执行以下命令就可以生成默认配置文件了。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubeadm config print join-defaults <span class="o">&gt;</span> kubeadm-join.yaml
+kubeadm <span class="nb">join</span> <span class="nt">--config</span> kubeadm-join.yaml
+</code></pre></div></div>
+
+<p>然后再次通过 <code class="highlighter-rouge">kubectl</code> 查看 <code class="highlighter-rouge">nodes</code> 状态，如果希望在 <code class="highlighter-rouge">Node</code> 节点上执行的话，需要将 <code class="highlighter-rouge">Master</code> 上的 <code class="highlighter-rouge">/etc/kubernetes/admin.conf</code> 复制到 <code class="highlighter-rouge">Node</code> 节点上。</p>
+
+<p>接下来我们验证 <code class="highlighter-rouge">Node</code> 的状态为 <code class="highlighter-rouge">Ready</code> 则加入成功：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get nodes
+NAME      STATUS   ROLES    AGE     VERSION
+master1   Ready    master   6m52s   v1.18.1
+node1     Ready    &lt;none&gt;   29s     v1.18.1
+</code></pre></div></div>
+
+<h2 id="总结">总结</h2>
+
+<p>以上就是在 <code class="highlighter-rouge">Vultr</code> 上使用 <code class="highlighter-rouge">kubeadm</code> 部署 <code class="highlighter-rouge">k8s</code> 集群的所有过程啦，当然也是踩了很多坑。特别是想在不同的云主机上部署，最终还是选择使用同一个云服务商的 ECS。</p>
+
+<h2 id="参考文档">参考文档</h2>
+
+<p><a href="https://weread.qq.com/web/reader/9fc329507191463c9fcee6d">Kubernetes权威指南：从Docker到Kubernetes实践全接触（第4版）</a></p>
+
+<p><a href="https://time.geekbang.org/column/intro/100015201">深入剖析Kubernetes</a></p>
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(37, 126, 235);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(37, 126, 235);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(37, 126, 235);
+        background-color: transparent;
+        border-left: 2px solid rgb(37, 126, 235);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>

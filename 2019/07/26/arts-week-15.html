@@ -1,0 +1,535 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>ARTS 第十五周</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(198, 198, 198) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(198, 198, 198);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">ARTS 第十五周</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(198, 198, 198);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2019/07/14/arts-week-14.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(198, 198, 198)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(198, 198, 198);"><sapn class="main">ARTS 第十四周</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">ARTS 第十五周</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2019/12/09/gortal-site-project.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(198, 198, 198)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(198, 198, 198);"><sapn class="main">Github 上的个人项目开源心得</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2019/07/14/arts-week-14.html" class="leftchange" style="border-right: 1px solid rgb(198, 198, 198);border-bottom: 2px solid rgb(198, 198, 198);"><span>上一篇<br><br>ARTS 第十四周</span></a>
+    
+    
+    <a href="/2019/12/09/gortal-site-project.html" class="rightchange" style="border-left: 1px solid rgb(198, 198, 198);border-bottom: 2px solid rgb(198, 198, 198);"><span>下一篇<br><br>Github 上的个人项目开源心得</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(198, 198, 198); border-right: 8px solid rgb(198, 198, 198)">
+        ARTS Week-15
+    </div>
+    
+    
+    <img src="/assets/images/2019-07-26-arts-week-15/nasa_ibm_type_704.jpg" style="margin:auto;">
+    <!-- 文章内容 -->
+    <h2 id="algorithm"><strong>Algorithm</strong></h2>
+
+<p><a href="https://leetcode-cn.com/problems/house-robber-ii/submissions/">213. 打家劫舍 II</a></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都围成一圈，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+    
+    给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。
+    
+    示例 1:
+    
+    输入: [2,3,2]
+    输出: 3
+    解释: 你不能先偷窃 1 号房屋（金额 = 2），然后偷窃 3 号房屋（金额 = 2）, 因为他们是相邻的。
+    示例 2:
+    
+    输入: [1,2,3,1]
+    输出: 4
+    解释: 你可以先偷窃 1 号房屋（金额 = 1），然后偷窃 3 号房屋（金额 = 3）。
+         偷窃到的最高金额 = 1 + 3 = 4 。
+</code></pre></div></div>
+<p>这道题是在 <a href="https://leetcode-cn.com/problems/house-robber/">198. 打家劫舍</a> 的基础上增加了一个条件 「所有房屋都围成一圈」，但是思路还是一样的，这道也是一道动态规划的题目。</p>
+
+<p>首先我们来写出动态规划方程，根据规则我们可以知道：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    example: [1,2,3,1]
+    dp[0] = nums[0] = 1
+    dp[1] = max(dp[0], nums[1]) = max(1, 2) = 2
+    dp[2] = max(dp[0] + nums[2], dp[1]) = max(1 + 3, 2) = 4
+    dp[3] = max(dp[1] + nums[3], dp[2]) = max(2 + 1, 4) = 4
+    
+    example: [2, 7, 9, 3, 1]
+    dp[0] = nums[0] = 2
+    dp[1] = max(dp[0], nums[1]) = max(2, 7) = 7
+    dp[2] = max(dp[0] + nums[2], dp[1]) = max(2 + 9, 7) = 11
+    dp[3] = max(dp[1] + nums[3], dp[2]) = max(7 + 3, 11) = 11
+    dp[4] = max(dp[2] + nums[4], dp[3]) = max(11 + 1, 11) = 12
+    
+    example: [2, 1, 1, 2]
+    dp[0] = nums[0] = 2
+    dp[1] = max(dp[0], nums[1]) = max(2, 1) = 2
+    dp[2] = max(dp[0] + nums[2], dp[1]) = max(2 + 1, 2) = 3
+    dp[3] = max(dp[1] + nums[3], dp[2]) = max(2 + 2, 3) = 4
+</code></pre></div></div>
+<p><a href="https://leetcode-cn.com/problems/house-robber/">198. 打家劫舍</a> 这道题的动态规划方程还是很容易得到的：</p>
+
+<p><code class="highlighter-rouge">dp[i] = max(dp[i - 2] + nums[i], dp[i - 1])</code></p>
+
+<p>但是增加了一个条件后，数组的首尾值不能同时取，那么我们就分两种情况计算最大值，分别是去头和取尾的数组，接下来写一下代码：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">rob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">nums</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            
+    				<span class="c1"># 这个条件可以不加
+</span>            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+            
+    				<span class="c1"># 分别计算去头和去尾的数组最大值
+</span>            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_rob</span><span class="p">(</span><span class="n">nums</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="bp">self</span><span class="p">.</span><span class="n">_rob</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+        
+        <span class="k">def</span> <span class="nf">_rob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">):</span>
+            
+            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+            
+            <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">max</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+            
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+                <span class="n">dp</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            
+            <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+<p>这种解法的空间复杂度为 O(N)，时间复杂度也为 O(N)。</p>
+
+<p>空间复杂度还是可以优化的，优化后的代码如下：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">rob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">nums</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            
+            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+            
+            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_rob</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="p">.</span><span class="n">_rob</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="p">))</span>
+        
+        <span class="k">def</span> <span class="nf">_rob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+            
+            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+            
+            <span class="n">pre</span><span class="p">,</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">],</span> <span class="nb">max</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+            
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+                <span class="n">pre</span><span class="p">,</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">pre</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            
+            <span class="k">return</span> <span class="n">cur</span>
+</code></pre></div></div>
+<h2 id="review">Review</h2>
+
+<p>《<a href="http://boringtechnology.club/">Choose Boring Technology</a>》</p>
+
+<p>这是一篇非常有意思的文章，提醒着我们这群年轻人，不能盲目的选用新技术或者自己喜欢的技术，有时候需要优先考虑那些「无聊的」但往往适合目前开发团队的技术。</p>
+
+<p>而且不是引入越多的技术栈越好，恰恰相反引入更少的技术栈并且能优雅的解决大多数问题，并且只有较少的维护成本，才是更好的。</p>
+
+<p>英语不太好的可以看这篇译文，<a href="https://mp.weixin.qq.com/s?xtrack=1&amp;scene=0&amp;mid=2651017963&amp;sn=2f4da571976237ef4276f7afaced3c48&amp;idx=1&amp;__biz=MjM5MDE0Mjc4MA%253D%253D&amp;chksm=bdbeaab88ac923aea2edb57966581214691a8e5906a604099a2e240c2a976163d9020a280ec5%23rd">译文 《我是一名技术总监，被技术选型给埋坑里了》</a>。</p>
+
+<p><img src="/assets/images/2019-07-26-arts-week-15/slides-2974ca97-dc9b-4fa7-9bf3-6e416797efe7.003.jpeg" alt="img1" /></p>
+
+<h2 id="tip">Tip</h2>
+
+<p><a href="https://blog.docker.com/2019/07/intro-guide-to-dockerfile-best-practices/">Intro Guide to Dockerfile Best Practices</a> - 如何写好 Dockerfile<br />
+这篇文章将会教会你怎么样写出更好的 Dockerfile，如果你刚开始学习使用 Docker 那更应该看这篇文章！</p>
+
+<p><img src="/assets/images/2019-07-26-arts-week-15/ef41db8f-fe5e-4a78-940a-6a929db7929d-1.png" alt="img2" /></p>
+
+<h2 id="share">Share</h2>
+
+<p>笔者最近看到一篇文章的片段非常有感触。</p>
+
+<p>摘自<a href="https://juejin.im/post/5d3926176fb9a07ef161c719">《领域驱动设计在前端中的应用》</a>作者：Vince_</p>
+
+<h3 id="垃圾桶现象">垃圾桶现象</h3>
+
+<hr />
+
+<p>在开始本篇文章前，我给读者们分享一个很考验人性的有趣现象，在公司洗手间的洗漱台旁边，放置了一个垃圾桶，每次我洗完手，用纸巾擦干手后，将其扔进垃圾桶，但是偶尔扔不准会扔到垃圾桶外面。</p>
+
+<p>一般情况下，我会将其捡起，再放入垃圾桶，心里想着：“不能破坏这么干净的环境呀”。
+但是，当垃圾桶周边有很多别人没扔进去的餐巾纸时，我就不会那么愿意将自己没扔进去的餐巾纸再捡起来扔进去，想着：“反正都这么邋遢了，多了一个也不会怎样”。
+万恶的人心呀！</p>
+
+<p>过了很久，我接手了一个老的项目，这个项目经过近十个人手迭代，传到我这里时，已经是非常混乱的状态了，阅读代码时，发现了很多不合理的写法与隐藏式BUG，当我在写新的需求时，很自然地，我不会那么精益求精地编写业务逻辑，甚至也会留下一些隐藏的坑给后人。</p>
+
+<p>恰恰相反，前段时间有幸接手一个大佬的项目，阅读其代码仿佛如沐春风，整个结构堪称完美，逻辑条理清晰，看代码就像看需求文档一样，堪称一绝。这个时候，当我要在其写新的需求，我会模仿其设计，小心翼翼地将自己代码插入其中，就像不忍心破坏这件艺术品一样。</p>
+
+<p>以上故事纯属我一个理想主义程序员虚构。</p>
+
+<p>但是回到现实当中，我们维护一个混乱项目和一个优雅项目的心情肯定是不一样的，就像上面讲的那个垃圾桶现象，混乱的项目就像周围遍布很多垃圾的垃圾桶，当你在混乱项目里再添加一些混乱代码后会良心也不会很痛，而优雅的项目你就会注意自己的行为，不能一颗老鼠屎坏了一锅粥。</p>
+
+<hr />
+
+<h3 id="严格的-review">严格的 Review</h3>
+
+<p>在合入分支前进行严格的 Code Review 是非常有必要的，领域驱动设计是非常不抗“腐蚀”的，不能接受不规范的代码或结构，在初期的 Review 成本或许有些大，等成员之间认知统一后，后续便能愉快地一起写代码了～</p>
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(198, 198, 198);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(198, 198, 198);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(198, 198, 198);
+        background-color: transparent;
+        border-left: 2px solid rgb(198, 198, 198);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>

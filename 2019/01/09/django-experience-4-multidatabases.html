@@ -1,0 +1,671 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>Django 使用心得 （四）多数据库</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(222, 11, 123) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(222, 11, 123);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">Django 使用心得 （四）多数据库</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(222, 11, 123);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2019/01/09/django-experience-3-create-by.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(222, 11, 123)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(222, 11, 123);"><sapn class="main">Django 使用心得 （三）利用 middleware 和 signal 实现数据的 「create_by」 记录功能</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">Django 使用心得 （四）多数据库</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2019/03/11/consul-template-python-micro-service.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(222, 11, 123)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(222, 11, 123);"><sapn class="main">使用 Consul 作为 Python 微服务的配置中心</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2019/01/09/django-experience-3-create-by.html" class="leftchange" style="border-right: 1px solid rgb(222, 11, 123);border-bottom: 2px solid rgb(222, 11, 123);"><span>上一篇<br><br>Django 使用心得 （三）利用 middleware 和 signal 实现数据的 「create_by」 记录功能</span></a>
+    
+    
+    <a href="/2019/03/11/consul-template-python-micro-service.html" class="rightchange" style="border-left: 1px solid rgb(222, 11, 123);border-bottom: 2px solid rgb(222, 11, 123);"><span>下一篇<br><br>使用 Consul 作为 Python 微服务的配置中心</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(222, 11, 123); border-right: 8px solid rgb(222, 11, 123)">
+        django 多数据库
+    </div>
+    
+    
+    <img src="/assets/images/2019-01-27-django-experience-4-multidatabases/django-exp-4.png" style="margin:auto;">
+    <!-- 文章内容 -->
+    <p>相信有开发者在项目中可能会有需要将不同的 <code class="highlighter-rouge">app</code> 数据库分离，这样就需要使用多个数据库。<br />
+网上也有非常多的与 <code class="highlighter-rouge">db_router</code> 相关的文章，本篇文章也会简单介绍一下。<br />
+除此之外，还会介绍一下笔者在具体项目中使用多数据库的一些心得和一些<code class="highlighter-rouge">坑</code>。希望能给读者带来一定的帮助，若是读者们也有相关的心得别忘了留言，可以一起交流学习。</p>
+
+<h2 id="使用-router-来实现多数据库">使用 Router 来实现多数据库</h2>
+<p>首先我们可以从 <code class="highlighter-rouge">Django</code> 的官方文档了解到如何使用 <code class="highlighter-rouge">routers</code> 来使用多数据库。</p>
+
+<blockquote>
+  <p>官方文档 <a href="https://docs.djangoproject.com/zh-hans/2.1/topics/db/multi-db/#using-routers">Using Routers</a></p>
+</blockquote>
+
+<p>官方文档中定义了一个 <code class="highlighter-rouge">AuthRouter</code> 用于存储将 <code class="highlighter-rouge">Auth</code> app 相关的表结构。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AuthRouter</span><span class="p">:</span>
+    <span class="s">"""
+    A router to control all database operations on models in the
+    auth application.
+    """</span>
+    <span class="k">def</span> <span class="nf">db_for_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
+        <span class="s">"""
+        Attempts to read auth models go to auth_db.
+        """</span>
+        <span class="k">if</span> <span class="n">model</span><span class="p">.</span><span class="n">_meta</span><span class="p">.</span><span class="n">app_label</span> <span class="o">==</span> <span class="s">'auth'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">'auth_db'</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">db_for_write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
+        <span class="s">"""
+        Attempts to write auth models go to auth_db.
+        """</span>
+        <span class="k">if</span> <span class="n">model</span><span class="p">.</span><span class="n">_meta</span><span class="p">.</span><span class="n">app_label</span> <span class="o">==</span> <span class="s">'auth'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">'auth_db'</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">allow_relation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
+        <span class="s">"""
+        Allow relations if a model in the auth app is involved.
+        """</span>
+        <span class="k">if</span> <span class="n">obj1</span><span class="p">.</span><span class="n">_meta</span><span class="p">.</span><span class="n">app_label</span> <span class="o">==</span> <span class="s">'auth'</span> <span class="ow">or</span> \
+           <span class="n">obj2</span><span class="p">.</span><span class="n">_meta</span><span class="p">.</span><span class="n">app_label</span> <span class="o">==</span> <span class="s">'auth'</span><span class="p">:</span>
+           <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">allow_migrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">app_label</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
+        <span class="s">"""
+        Make sure the auth app only appears in the 'auth_db'
+        database.
+        """</span>
+        <span class="k">if</span> <span class="n">app_label</span> <span class="o">==</span> <span class="s">'auth'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">db</span> <span class="o">==</span> <span class="s">'auth_db'</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<p>但是我在实际使用中遇到一个问题，在运行 <code class="highlighter-rouge">python manage.py test</code> 来进行单元测试时，这个数据库内依然会生成其他 app 的表结构。<br />
+正常情况下是没什么问题的，但是我使用了 <code class="highlighter-rouge">mysql</code> 与 <code class="highlighter-rouge">mongodb</code> 的多数据库结构，造成了一些异常。</p>
+
+<p>于是我去查阅 <code class="highlighter-rouge">Django</code> 单元测试的源码发现这样一段代码，他是用于判断某个 app 的 <code class="highlighter-rouge">migrations</code> （数据库迁移）是否要在某个数据库执行。</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/django/django/blob/222caab68a2a7345043d0c50161203cb2cfe70eb/django/db/utils.py">This Github Sample</a> is by <a href="https://github.com/django">django</a>
+  </div>
+  <div class="meta-info">
+    django/db/utils.py <a href="https://github.com/django/django/blob/222caab68a2a7345043d0c50161203cb2cfe70eb/django/db/utils.py">view</a> <a href="https://raw.githubusercontent.com/django/django/222caab68a2a7345043d0c50161203cb2cfe70eb/django/db/utils.py">raw</a>
+  </div>
+</div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">allow_migrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">app_label</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">router</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">routers</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">method</span> <span class="o">=</span> <span class="n">router</span><span class="p">.</span><span class="n">allow_migrate</span>
+            <span class="k">except</span> <span class="nb">AttributeError</span><span class="p">:</span>
+                <span class="c1"># If the router doesn't have a method, skip to the next one.
+</span>                <span class="k">continue</span>
+
+            <span class="n">allow</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">app_label</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">allow</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">allow</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<p>他这个函数相当于是在执行 <code class="highlighter-rouge">Router</code> 中的 <code class="highlighter-rouge">allow_migrate</code>，并取其结果来判断是否要执行数据库迁移。<br />
+也就是官方给的例子：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">allow_migrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">app_label</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
+    <span class="s">"""
+    Make sure the auth app only appears in the 'auth_db'
+    database.
+    """</span>
+    <span class="k">if</span> <span class="n">app_label</span> <span class="o">==</span> <span class="s">'auth'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">db</span> <span class="o">==</span> <span class="s">'auth_db'</span>
+    <span class="k">return</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<p>但是这里有一个问题，假设 <code class="highlighter-rouge">app_label</code> 不等于 <code class="highlighter-rouge">auth</code>（相当于你设定的 app 名称），但是 db 却等于 <code class="highlighter-rouge">auth_db</code>，此时这个函数会返回 <code class="highlighter-rouge">None</code>。</p>
+
+<p>回到 <code class="highlighter-rouge">utils.py</code> 的函数中来，可以看到 <code class="highlighter-rouge">allow</code> 就得到了这个 <code class="highlighter-rouge">None</code> 的返回值，但是他判断了 <code class="highlighter-rouge">is not None</code> 为<code class="highlighter-rouge">假命题</code>，那么循环继续。</p>
+
+<p>这样导致了所有对于这个数据库 <code class="highlighter-rouge">auth_db</code> 并且 <code class="highlighter-rouge">app_label</code> 不为 <code class="highlighter-rouge">auth</code> 的结果均返回 <code class="highlighter-rouge">None</code>。最后循环结束，返回结果为 <code class="highlighter-rouge">True</code>，这意味着，
+所有其他 <code class="highlighter-rouge">app_label</code> 的数据库迁移均会在这个数据库中执行。</p>
+
+<p>为了解决这个问题，我们需要对官方给出的示例作出修改：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">allow_migrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">app_label</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
+    <span class="s">"""
+    Make sure the auth app only appears in the 'auth_db'
+    database.
+    """</span>
+    <span class="k">if</span> <span class="n">app_label</span> <span class="o">==</span> <span class="s">'auth'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">db</span> <span class="o">==</span> <span class="s">'auth_db'</span>
+    <span class="k">elif</span> <span class="n">db</span> <span class="o">==</span> <span class="s">'auth_db'</span><span class="p">:</span>  <span class="c1"># 若数据库名称为 auth_db 但 app_label 不为 auth 直接返回 False
+</span>        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<h2 id="执行-migrate-时指定-database">执行 migrate 时指定 –database</h2>
+
+<p>我们定义好 <code class="highlighter-rouge">Router</code> 后，在执行 <code class="highlighter-rouge">python manage.py migrate</code> 时可以发现，数据库迁移动作并没有执行到除默认数据库以外的数据库中，
+这是因为 <code class="highlighter-rouge">migrate</code> 这个 <code class="highlighter-rouge">command</code> 必须要指定额外的参数。</p>
+
+<blockquote>
+  <p>官方文档 <a href="https://docs.djangoproject.com/zh-hans/2.1/topics/db/multi-db/#synchronizing-your-databases">Synchronizing your databases</a></p>
+</blockquote>
+
+<p>阅读官方文档可以知道，若要将数据库迁移执行到非默认数据库中时，<code class="highlighter-rouge">必须</code>要指定数据库 <code class="highlighter-rouge">--database</code>。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./manage.py migrate <span class="nt">--database</span><span class="o">=</span><span class="nb">users</span>
+<span class="nv">$ </span>./manage.py migrate <span class="nt">--database</span><span class="o">=</span>customers
+</code></pre></div></div>
+
+<p>但是这样的话会导致我们使用 <code class="highlighter-rouge">CI/CD</code> 部署服务非常的不方便，所以我们可以通过自定义 <code class="highlighter-rouge">command</code> 来实现 <code class="highlighter-rouge">migrate</code> 指定数据库。</p>
+
+<p>其实实现方式非常简单，就是基于 django 默认的 migrate 进行改造，在最外层加一个循环，然后在自定义成一个新的命令 <code class="highlighter-rouge">multidbmigrate</code>。</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/5b863c23fe8637bcf127297cd2a5af2d34063ab4/multidatabases/management/commands/multidbmigrate.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    multidatabases/management/commands/multidbmigrate.py <a href="https://github.com/elfgzp/django_experience/blob/5b863c23fe8637bcf127297cd2a5af2d34063ab4/multidatabases/management/commands/multidbmigrate.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/5b863c23fe8637bcf127297cd2a5af2d34063ab4/multidatabases/management/commands/multidbmigrate.py">raw</a>
+  </div>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">verbosity</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s">'verbosity'</span><span class="p">]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">interactive</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s">'interactive'</span><span class="p">]</span>
+
+        <span class="c1"># Import the 'management' module within each installed app, to register
+</span>        <span class="c1"># dispatcher events.
+</span>        <span class="k">for</span> <span class="n">app_config</span> <span class="ow">in</span> <span class="n">apps</span><span class="p">.</span><span class="n">get_app_configs</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">module_has_submodule</span><span class="p">(</span><span class="n">app_config</span><span class="p">.</span><span class="n">module</span><span class="p">,</span> <span class="s">"management"</span><span class="p">):</span>
+                <span class="n">import_module</span><span class="p">(</span><span class="s">'.management'</span><span class="p">,</span> <span class="n">app_config</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="n">db_routers</span> <span class="o">=</span> <span class="p">[</span><span class="n">import_string</span><span class="p">(</span><span class="n">router</span><span class="p">)()</span> <span class="k">for</span> <span class="n">router</span> <span class="ow">in</span> <span class="n">conf</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">DATABASE_ROUTERS</span><span class="p">]</span> <span class="c1"># 对所有的 routers 进行 migrate 操作
+</span>        <span class="k">for</span> <span class="n">connection</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">.</span><span class="nb">all</span><span class="p">():</span>
+            <span class="c1"># Hook for backends needing any database preparation
+</span>            <span class="n">connection</span><span class="p">.</span><span class="n">prepare_database</span><span class="p">()</span>
+            <span class="c1"># Work out which apps have migrations and which do not
+</span>            <span class="n">executor</span> <span class="o">=</span> <span class="n">MigrationExecutor</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">migration_progress_callback</span><span class="p">)</span>
+
+            <span class="c1"># Raise an error if any migrations are applied before their dependencies.
+</span>            <span class="n">executor</span><span class="p">.</span><span class="n">loader</span><span class="p">.</span><span class="n">check_consistent_history</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+
+            <span class="c1"># Before anything else, see if there's conflicting apps and drop out
+</span>            <span class="c1"># hard if there are any
+</span>            <span class="n">conflicts</span> <span class="o">=</span> <span class="n">executor</span><span class="p">.</span><span class="n">loader</span><span class="p">.</span><span class="n">detect_conflicts</span><span class="p">()</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<p>由于代码过长，这里就不全部 copy 出来，只放出其中最关键部分，完整部分可以参阅 <a href="https://github.com/elfgzp/django_experience">elfgzp/django_experience</a> 仓库。</p>
+
+<h2 id="在支持事务数据库与不支持事务数据库混用在单元测试遇到的问题">在<code class="highlighter-rouge">支持事务</code>数据库与<code class="highlighter-rouge">不支持事务</code>数据库混用在单元测试遇到的问题</h2>
+
+<p>在笔者使用 Mysql 和 Mongodb 时，遇到了个问题。</p>
+
+<p>总所周知，Mysql 是支持事务的数据库，而 Mongodb 是不支持的。在项目中笔者同时使用了这两个数据库，并且运行了单元测试。</p>
+
+<p>发现在运行完某一个单元测试后，我在 Mysql 数据库所生成的初始化数据（即笔者在 migrate 中使用 RunPython 生成了一些 demo 数据）全部被清除了，导致其他单元测试测试失败。</p>
+
+<p>通过 TestCase 类的特性可以知道，单元测试在运行完后会去执行 <code class="highlighter-rouge">tearDown</code> 来做清除垃圾的操作。于是顺着这个函数，笔者去阅读了 <code class="highlighter-rouge">Django</code> 中对应函数的源码，发现有一段这样的逻辑。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="k">def</span> <span class="nf">connections_support_transactions</span><span class="p">():</span>  <span class="c1"># 判断是否所有数据库支持事务
+</span>    <span class="s">"""Return True if all connections support transactions."""</span>
+    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">conn</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">supports_transactions</span> <span class="k">for</span> <span class="n">conn</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">.</span><span class="nb">all</span><span class="p">())</span>
+<span class="p">...</span>
+
+<span class="k">class</span> <span class="nc">TransactionTestCase</span><span class="p">(</span><span class="n">SimpleTestCase</span><span class="p">):</span>
+    <span class="p">...</span>
+    <span class="n">multi_db</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="p">...</span>
+    <span class="o">@</span><span class="nb">classmethod</span>
+        <span class="k">def</span> <span class="nf">_databases_names</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">include_mirrors</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+            <span class="c1"># If the test case has a multi_db=True flag, act on all databases,
+</span>            <span class="c1"># including mirrors or not. Otherwise, just on the default DB.
+</span>            <span class="k">if</span> <span class="n">cls</span><span class="p">.</span><span class="n">multi_db</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span>
+                    <span class="n">alias</span> <span class="k">for</span> <span class="n">alias</span> <span class="ow">in</span> <span class="n">connections</span>
+                    <span class="k">if</span> <span class="n">include_mirrors</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">connections</span><span class="p">[</span><span class="n">alias</span><span class="p">].</span><span class="n">settings_dict</span><span class="p">[</span><span class="s">'TEST'</span><span class="p">][</span><span class="s">'MIRROR'</span><span class="p">]</span>
+                <span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">DEFAULT_DB_ALIAS</span><span class="p">]</span>
+    <span class="p">...</span>
+    <span class="k">def</span> <span class="nf">_fixture_teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Allow TRUNCATE ... CASCADE and don't emit the post_migrate signal
+</span>        <span class="c1"># when flushing only a subset of the apps
+</span>        <span class="k">for</span> <span class="n">db_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">_databases_names</span><span class="p">(</span><span class="n">include_mirrors</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+            <span class="c1"># Flush the database
+</span>            <span class="n">inhibit_post_migrate</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">available_apps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">or</span>
+                <span class="p">(</span>   <span class="c1"># Inhibit the post_migrate signal when using serialized
+</span>                    <span class="c1"># rollback to avoid trying to recreate the serialized data.
+</span>                    <span class="bp">self</span><span class="p">.</span><span class="n">serialized_rollback</span> <span class="ow">and</span>
+                    <span class="nb">hasattr</span><span class="p">(</span><span class="n">connections</span><span class="p">[</span><span class="n">db_name</span><span class="p">],</span> <span class="s">'_test_serialized_contents'</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">call_command</span><span class="p">(</span><span class="s">'flush'</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>  <span class="c1"># 清空数据库表
+</span>                         <span class="n">database</span><span class="o">=</span><span class="n">db_name</span><span class="p">,</span> <span class="n">reset_sequences</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                         <span class="n">allow_cascade</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">available_apps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">,</span>
+                         <span class="n">inhibit_post_migrate</span><span class="o">=</span><span class="n">inhibit_post_migrate</span><span class="p">)</span>
+    <span class="p">...</span>
+
+<span class="k">class</span> <span class="nc">TestCase</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
+    <span class="p">...</span>
+        <span class="k">def</span> <span class="nf">_fixture_teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">connections_support_transactions</span><span class="p">():</span>  <span class="c1"># 判断是否所有数据库支持事务
+</span>                <span class="k">return</span> <span class="nb">super</span><span class="p">().</span><span class="n">_fixture_teardown</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">db_name</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_databases_names</span><span class="p">()):</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">_should_check_constraints</span><span class="p">(</span><span class="n">connections</span><span class="p">[</span><span class="n">db_name</span><span class="p">]):</span>
+                        <span class="n">connections</span><span class="p">[</span><span class="n">db_name</span><span class="p">].</span><span class="n">check_constraints</span><span class="p">()</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">_rollback_atomics</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">atomics</span><span class="p">)</span>
+    <span class="p">...</span>
+</code></pre></div></div>
+
+<p>看到这段代码后笔者都快气死了，这个单元测试明明只是只对单个数据库起作用，<code class="highlighter-rouge">multi_db</code> 这个属性默认也是为 <code class="highlighter-rouge">False</code>，这个单元测试作用在 Mysql 跟 Mongodb 有什么关系呢！？正确的逻辑应应该是判断 <code class="highlighter-rouge">_databases_names</code> 即这个单元测试所涉及的数据库支不支持事务才对。</p>
+
+<p>于是需要对 TestCase 进行了改造，并且将单元测试继承的 TestCase 修改为新的 TestCase。修改结果如下：</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/5b863c23fe8637bcf127297cd2a5af2d34063ab4/multidatabases/testcases.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    multidatabases/testcases.py <a href="https://github.com/elfgzp/django_experience/blob/5b863c23fe8637bcf127297cd2a5af2d34063ab4/multidatabases/testcases.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/5b863c23fe8637bcf127297cd2a5af2d34063ab4/multidatabases/testcases.py">raw</a>
+  </div>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestCase</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
+    <span class="s">"""
+    此类修复 Django TestCase 中由于使用了多数据库，但是 multi_db 并未指定多数据库，单元测试依然只是在一个数据库上运行。
+    但是源码中的 connections_support_transactions 将所有数据库都包含进来了，导致在同时使用 MangoDB 和 MySQL 数据库时，
+    MySQL 数据库无法回滚，清空了所有的初始化数据，导致单元测试无法使用初始化的数据。
+    """</span>
+
+    <span class="o">@</span><span class="nb">classmethod</span>
+    <span class="k">def</span> <span class="nf">_databases_support_transactions</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span>
+            <span class="n">conn</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">supports_transactions</span>
+            <span class="k">for</span> <span class="n">conn</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">.</span><span class="nb">all</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">conn</span><span class="p">.</span><span class="n">alias</span> <span class="ow">in</span> <span class="n">cls</span><span class="p">.</span><span class="n">_databases_names</span><span class="p">()</span>
+        <span class="p">)</span>
+    <span class="p">...</span>
+    
+    <span class="k">def</span> <span class="nf">_fixture_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">_databases_support_transactions</span><span class="p">():</span>
+            <span class="c1"># If the backend does not support transactions, we should reload
+</span>            <span class="c1"># class data before each test
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">setUpTestData</span><span class="p">()</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">().</span><span class="n">_fixture_setup</span><span class="p">()</span>
+
+        <span class="k">assert</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">reset_sequences</span><span class="p">,</span> <span class="s">'reset_sequences cannot be used on TestCase instances'</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">atomics</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_enter_atomics</span><span class="p">()</span>
+    <span class="p">...</span> 
+</code></pre></div></div>
+
+<p>除了 <code class="highlighter-rouge">_fixture_setup</code> 以外还有其他成员函数需要将判断函数改为 <code class="highlighter-rouge">_databases_support_transactions</code>，完整代码参考 <a href="https://github.com/elfgzp/django_experience">elfgzp/django_experience</a> 仓库</p>
+
+<h2 id="总结">总结</h2>
+
+<p>踩过这些坑，笔者更加坚信不能太相信官方文档和源码，要自己去学习研究源码的实现，才能找到解决问题的办法。</p>
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(222, 11, 123);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(222, 11, 123);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(222, 11, 123);
+        background-color: transparent;
+        border-left: 2px solid rgb(222, 11, 123);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>

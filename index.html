@@ -1,0 +1,628 @@
+<!-- 首页及其他页面的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 引入head标签 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>Gzp的博客</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+</head>
+<body>
+<!-- 页面主体 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>Gzp的博客</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+<header id="index-header">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/">首页</a></li>
+              
+                <li><a href="/tags.html">标签</a></li>
+              
+                <li><a href="/timeline.html">时间线</a></li>
+              
+                <li><a href="/about.html">关于博主</a></li>
+              
+                <li><a href="/friendLink.html">友情链接</a></li>
+              
+          </ul>
+      </nav>
+
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot.png" alt=""></a>
+      </div>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+  </div>
+
+</header>
+
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<main>
+    <div class="wow fadeIn top" data-wow-duration="3.5s" style="background-color:;">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">Gzp 's blog.</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s">Gzp的博客.</span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">一个兴趣使然的程序员</span>
+</div>
+
+    <ul class="post-list">
+      
+
+    
+
+    
+
+
+    
+      <a href="/2020/06/21/%E6%96%B0%E4%B8%80%E4%BB%A3%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84-service-mesh.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="/assets/uploads/istio-and-kubernetes-1-.webp">
+          
+          <section class="post-preview">
+              <h2 class="post-title">新一代的微服务架构 Service Mesh</h2>
+              
+              <h3 class="post-subtitle">微服务架构治理方案</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#Kubernetes class="post-tag">Kubernetes</a>
+                    
+                    <a href=tags.html#K8s class="post-tag">K8s</a>
+                    
+                    <a href=tags.html#ServiceMesh class="post-tag">ServiceMesh</a>
+                    
+                    <a href=tags.html#Istio class="post-tag">Istio</a>
+                    
+                    <a href=tags.html#微服务 class="post-tag">微服务</a>
+                    
+                
+                <time class="post-date" datetime="20-06-21">21 Jun 2020</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+
+    
+      <a href="/2020/10/31/k8s-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B(%E4%BA%8C)%E4%B8%BA%E6%9C%8D%E5%8A%A1%E6%8C%82%E8%BD%BD%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E5%AD%98%E5%82%A8%E7%9B%98.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="/assets/uploads/kuberneteshero.jpg">
+          
+          <section class="post-preview">
+              <h2 class="post-title">K8s 快速上手 (二) 为服务挂载配置文件和存储盘</h2>
+              
+              <h3 class="post-subtitle">为部署在 K8s(k3s) 的服务挂载配置文件和存储盘</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#K8s入门教程 class="post-tag">K8s入门教程</a>
+                    
+                    <a href=tags.html#K8s上手教程 class="post-tag">K8s上手教程</a>
+                    
+                    <a href=tags.html#K8s class="post-tag">K8s</a>
+                    
+                
+                <time class="post-date" datetime="20-10-31">31 Oct 2020</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2020/10/25/k8s-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B(%E4%B8%80)%E5%9C%A8%E4%BA%91%E4%B8%BB%E6%9C%BA%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%88%91%E7%9A%84%E6%9C%8D%E5%8A%A1.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="/assets/uploads/kuberneteshero.jpg">
+          
+          <section class="post-preview">
+              <h2 class="post-title">K8s 快速上手（一) 在云主机上部署我的服务</h2>
+              
+              <h3 class="post-subtitle">在云主机上用上 K8s (K3s) 部署我的服务</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#K8s入门教程 class="post-tag">K8s入门教程</a>
+                    
+                    <a href=tags.html#K8s上手教程 class="post-tag">K8s上手教程</a>
+                    
+                    <a href=tags.html#K8s class="post-tag">K8s</a>
+                    
+                
+                <time class="post-date" datetime="20-10-25">25 Oct 2020</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+    
+
+
+    
+      <a href="/2020/04/11/k8s-%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0-kubeadm-%E9%83%A8%E7%BD%B2-kubernetes-%E9%9B%86%E7%BE%A4.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="/assets/uploads/kuberneteshero.jpg">
+          
+          <section class="post-preview">
+              <h2 class="post-title">「K8s 学习日记」Kubeadm 部署 kubernetes 集群</h2>
+              
+              <h3 class="post-subtitle">在 Vultr 上部署 kubernetest 集群</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#K8s class="post-tag">K8s</a>
+                    
+                    <a href=tags.html#Kubernetes class="post-tag">Kubernetes</a>
+                    
+                    <a href=tags.html#Vultr class="post-tag">Vultr</a>
+                    
+                
+                <time class="post-date" datetime="20-04-11">11 Apr 2020</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2020/03/21/%E4%B8%BA%E4%BD%A0%E7%9A%84-github-%E5%8D%9A%E5%AE%A2%E5%8A%A0%E4%B8%AA-cms-%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="/assets/uploads/screenshot-editor-1fa7f845bc0c9ed177d2c98a7339f2f6.jpg">
+          
+          <section class="post-preview">
+              <h2 class="post-title">为你的 Github 博客加个 CMS -「内容管理」</h2>
+              
+              <h3 class="post-subtitle">Github 博客内容管理解决方案 - 「netlifycms」</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#netlifycms class="post-tag">netlifycms</a>
+                    
+                    <a href=tags.html#博客 class="post-tag">博客</a>
+                    
+                    <a href=tags.html#CMS class="post-tag">CMS</a>
+                    
+                    <a href=tags.html#Github class="post-tag">Github</a>
+                    
+                
+                <time class="post-date" datetime="20-03-21">21 Mar 2020</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2019/12/09/gortal-site-project.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="/assets/images/2019-12-09-gortal-site-project/github.jpeg">
+          
+          <section class="post-preview">
+              <h2 class="post-title">Github 上的个人项目开源心得</h2>
+              
+              <h3 class="post-subtitle">🚪「gortal」一个使用 Go 语言开发的，超级轻量的堡垒机（跳板机）服务</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#Github class="post-tag">Github</a>
+                    
+                    <a href=tags.html#gortal class="post-tag">gortal</a>
+                    
+                    <a href=tags.html#siteproject class="post-tag">siteproject</a>
+                    
+                
+                <time class="post-date" datetime="19-12-09">09 Dec 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2019/07/26/arts-week-15.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="/assets/images/2019-07-26-arts-week-15/nasa_ibm_type_704.jpg">
+          
+          <section class="post-preview">
+              <h2 class="post-title">ARTS 第十五周</h2>
+              
+              <h3 class="post-subtitle">ARTS Week-15</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#ARTS class="post-tag">ARTS</a>
+                    
+                
+                <time class="post-date" datetime="19-07-26">26 Jul 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2019/07/14/arts-week-14.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="/assets/images/2019-07-14-arts-week-14/photo-1553792012-5c75e251255e.jpeg">
+          
+          <section class="post-preview">
+              <h2 class="post-title">ARTS 第十四周</h2>
+              
+              <h3 class="post-subtitle">ARTS Week-14</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#ARTS class="post-tag">ARTS</a>
+                    
+                
+                <time class="post-date" datetime="19-07-14">14 Jul 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2019/06/30/arts-week-13.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="/assets/images/2019-06-30-arts-week-13/woodcuts_13.jpg">
+          
+          <section class="post-preview">
+              <h2 class="post-title">ARTS 第十三周</h2>
+              
+              <h3 class="post-subtitle">ARTS Week-13</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#ARTS class="post-tag">ARTS</a>
+                    
+                
+                <time class="post-date" datetime="19-06-30">30 Jun 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2019/06/22/arts-week-12.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="/assets/images/2019-06-22-arts-week-12/photo-1488590528505-98d2b5aba04b.jpeg">
+          
+          <section class="post-preview">
+              <h2 class="post-title">ARTS 第十二周</h2>
+              
+              <h3 class="post-subtitle">ARTS Week-12</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#ARTS class="post-tag">ARTS</a>
+                    
+                
+                <time class="post-date" datetime="19-06-22">22 Jun 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+    </ul>
+</main>
+<nav class="pagination">
+  <div class="page-links">
+    
+        <a href="/" class="page-link" title="Index Page">1</a>
+    
+    
+    
+        <!-- 
+            <a href="/page2/" class="page-link" title="Next Page">&raquo;</a>
+         -->
+        <a href="/page2/" class="page-link" title="Next Page">&raquo;</a>
+    
+    
+  </div>
+
+</nav>
+
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+<!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+    var wow = new WOW({
+        boxClass: 'wow',
+        animateClass: 'animated',
+        // offset: 5,
+        mobile: true,
+        live: true
+    });
+    wow.init();
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+    window.onbeforeunload = function(){
+        //刷新后页面自动回到顶部
+        document.documentElement.scrollTop = 0;  //ie下
+        document.body.scrollTop = 0;  //非ie
+    }
+</script>
+
+</body>
+</html>

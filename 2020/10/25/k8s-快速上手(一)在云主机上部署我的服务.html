@@ -1,0 +1,732 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>K8s 快速上手（一) 在云主机上部署我的服务</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(49, 106, 223) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(49, 106, 223);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">K8s 快速上手（一) 在云主机上部署我的服务</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(49, 106, 223);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2020/06/21/%E6%96%B0%E4%B8%80%E4%BB%A3%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84-service-mesh.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(49, 106, 223)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(49, 106, 223);"><sapn class="main">新一代的微服务架构 Service Mesh</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">K8s 快速上手（一) 在云主机上部署我的服务</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2020/10/31/k8s-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B(%E4%BA%8C)%E4%B8%BA%E6%9C%8D%E5%8A%A1%E6%8C%82%E8%BD%BD%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E5%AD%98%E5%82%A8%E7%9B%98.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(49, 106, 223)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(49, 106, 223);"><sapn class="main">K8s 快速上手 (二) 为服务挂载配置文件和存储盘</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2020/06/21/%E6%96%B0%E4%B8%80%E4%BB%A3%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84-service-mesh.html" class="leftchange" style="border-right: 1px solid rgb(49, 106, 223);border-bottom: 2px solid rgb(49, 106, 223);"><span>上一篇<br><br>新一代的微服务架构 Service Mesh</span></a>
+    
+    
+    <a href="/2020/10/31/k8s-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B(%E4%BA%8C)%E4%B8%BA%E6%9C%8D%E5%8A%A1%E6%8C%82%E8%BD%BD%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E5%AD%98%E5%82%A8%E7%9B%98.html" class="rightchange" style="border-left: 1px solid rgb(49, 106, 223);border-bottom: 2px solid rgb(49, 106, 223);"><span>下一篇<br><br>K8s 快速上手 (二) 为服务挂载配置文件和存储盘</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(49, 106, 223); border-right: 8px solid rgb(49, 106, 223)">
+        在云主机上用上 K8s (K3s) 部署我的服务
+    </div>
+    
+    
+    <img src="/assets/uploads/kuberneteshero.jpg" style="margin:auto;">
+    <!-- 文章内容 -->
+    <p>由于在工作中使用了 <code class="highlighter-rouge">K8s</code> 并且深刻体会到了他带来的便利即好处，但是 <code class="highlighter-rouge">K8s</code> 学习还是有一定的门槛。
+而且在平常自己做一些开源项目时，或者自己做一些小的服务，由于 <code class="highlighter-rouge">K8s</code> 本身需要的 CPU 和内存较高，大部分薅羊毛买的云主机根本没法使用。</p>
+
+<p>于是笔者打算写一个系列的 <code class="highlighter-rouge">K8s</code> 上手教程分享给大家，并且分享一下 <code class="highlighter-rouge">K8s</code> 怎么用在我们平常做开源项目部署服务。</p>
+
+<h2 id="环境搭建">环境搭建</h2>
+
+<p>首先我们想要在我们的云主机上用上 <code class="highlighter-rouge">K8s</code> 自然先要搭建环境，但是这次我们不会直接搭建 <code class="highlighter-rouge">K8s</code> 环境，而是使用 <code class="highlighter-rouge">K3s</code>。</p>
+
+<p>如果对 <code class="highlighter-rouge">K8s</code> 搭建感兴趣的同学可以看我之前的博文 <a href="https://elfgzp.cn/2020/04/11/k8s-%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0-kubeadm-%E9%83%A8%E7%BD%B2-kubernetes-%E9%9B%86%E7%BE%A4.html">「K8s 学习日记」Kubeadm 部署 kubernetes 集群</a>，当然在生产环境中还是推荐大家使用托管的 K8s。</p>
+
+<p>有的同学可能就会问了，不是讲 <code class="highlighter-rouge">K8s</code> 吗 ？为什么又来一个 <code class="highlighter-rouge">K3s</code> ?</p>
+
+<p>这里就给大家简单说一下，因为搭建  本身较为繁琐，而且要求云主机的配置还比较高，当你把 <code class="highlighter-rouge">K8s</code> 搭建完成后你会发现服务器的 CPU 和内存基本上以及不足以让你部署服务了。</p>
+
+<p>所以如果打算在平常我们薅羊毛买的云主机上使用使用 <code class="highlighter-rouge">K8s</code> 或是体验 <code class="highlighter-rouge">K8s</code> 的功能，更推荐大家使用 K3s。</p>
+
+<p>关于 <code class="highlighter-rouge">K3s</code> 和 <code class="highlighter-rouge">K8s</code> 的区别笔者就不在这里介绍了，有兴趣的同学可以自行 Google。大家只要知道 <code class="highlighter-rouge">K3s</code> 在使用上跟 <code class="highlighter-rouge">K8s</code> 并无太大差异，当然使用时有什么疑惑可以查阅 <code class="highlighter-rouge">K8s</code> 的文档，而且足够满足我们在平常自己做小的开源项目部署服务使用，这也是笔者的使用感受。</p>
+
+<p>废话不多说我们直接开始，笔者的云主机是的操作系统是 <code class="highlighter-rouge">CentOS 7</code>，安装 <code class="highlighter-rouge">K3s</code> 只需要用他的官方一键安装脚本非常便捷。<a href="https://docs.rancher.cn/docs/k3s/installation/install-options/_index">(官方文档)</a></p>
+
+<p>国内的云主机：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-sfL</span> http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">"--tls-san {你的云服务器的 IP 地址}"</span> sh -
+</code></pre></div></div>
+
+<p>国外的云主机：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-sfL</span> https://get.k3s.io | <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">"--tls-san {你的云服务器的 IP 地址}"</span> sh -
+</code></pre></div></div>
+
+<p>看到如下输出表示安装完成了，是不是非常的简单，笔者在第一次安装时也被 <code class="highlighter-rouge">K3s</code> 的安装便捷震惊了。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>INFO]  Finding release <span class="k">for </span>channel stable
+<span class="o">[</span>INFO]  Using v1.18.9+k3s1 as release
+<span class="o">[</span>INFO]  Downloading <span class="nb">hash </span>http://rancher-mirror.cnrancher.com/k3s/v1.18.9-k3s1/sha256sum-amd64.txt
+<span class="o">[</span>INFO]  Downloading binary http://rancher-mirror.cnrancher.com/k3s/v1.18.9-k3s1/k3s
+<span class="o">[</span>INFO]  Verifying binary download
+<span class="o">[</span>INFO]  Installing k3s to /usr/local/bin/k3s
+<span class="o">[</span>INFO]  Creating /usr/local/bin/kubectl symlink to k3s
+<span class="o">[</span>INFO]  Creating /usr/local/bin/crictl symlink to k3s
+<span class="o">[</span>INFO]  Creating /usr/local/bin/ctr symlink to k3s
+<span class="o">[</span>INFO]  Creating killall script /usr/local/bin/k3s-killall.sh
+<span class="o">[</span>INFO]  Creating uninstall script /usr/local/bin/k3s-uninstall.sh
+<span class="o">[</span>INFO]  <span class="nb">env</span>: Creating environment file /etc/systemd/system/k3s.service.env
+<span class="o">[</span>INFO]  systemd: Creating service file /etc/systemd/system/k3s.service
+<span class="o">[</span>INFO]  systemd: Enabling k3s unit
+Created symlink from /etc/systemd/system/multi-user.target.wants/k3s.service to /etc/systemd/system/k3s.service.
+<span class="o">[</span>INFO]  systemd: Starting k3s
+</code></pre></div></div>
+
+<p>输入以下命令就可以知道我们目前 <code class="highlighter-rouge">K3s</code> 已经安装完成并且有一个节点。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get nodes
+NAME                STATUS   ROLES    AGE   VERSION
+instance-qgq0ripc   Ready    master   66s   v1.18.9+k3s1
+</code></pre></div></div>
+
+<p>为了方便后续的使用，直接在自己的电脑上操作，可以在自己的电脑上安装 <code class="highlighter-rouge">kubectl</code>，笔者用的是 <code class="highlighter-rouge">Mac</code> 所以这里介绍一下 Mac 如何安装，其他操作系统可以自行 Google，非常容易找到。当然如果不做这一步也可以直接在服务器上使用 <code class="highlighter-rouge">kubectl</code>。</p>
+
+<p>首先安装 kubectl：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>kubectl
+</code></pre></div></div>
+
+<p>然后将云主机上的 <code class="highlighter-rouge">/etc/rancher/k3s/k3s.yaml</code> 文件拷贝到电脑上的 <code class="highlighter-rouge">~/.kube/config</code> 目录。</p>
+
+<p>最后将 <code class="highlighter-rouge">~/.kube/config</code> 文件中的 <code class="highlighter-rouge">server: https://127.0.0.1:6443</code> 修改成 <code class="highlighter-rouge">server: https://{你的云服务器的 IP 地址}:6443</code>。</p>
+
+<p>这样你就可以在你的电脑上使用 <code class="highlighter-rouge">kubectl</code> 来访问云服务器的 <code class="highlighter-rouge">K3s</code> 集群了。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ kubectl get nodes
+NAME                STATUS   ROLES    AGE     VERSION
+instance-qgq0ripc   Ready    master   5h10m   v1.18.9+k3s1
+</code></pre></div></div>
+
+<h2 id="k8s-基础概念和如何部署一个服务"><code class="highlighter-rouge">K8s</code> 基础概念和如何部署一个服务</h2>
+
+<p>在部署服务之前我先来简单讲一下 <code class="highlighter-rouge">K8s</code> 中的一些基本概念，他们分别是：</p>
+
+<ul>
+  <li><strong>Pod</strong> <strong>容器组</strong>，一个 Pod 可能会有一个或多个容器。</li>
+  <li><strong>Deployment</strong> <strong>部署任务</strong>，用于定义 Pod 的部署参数，维护 Pod 的状态。</li>
+  <li><strong>Service</strong> <strong>服务定义</strong>，用于将一组 Pod 抽象定义为服务的资源。</li>
+  <li><strong>Namespace</strong> <strong>命名空间</strong>，用于分隔不同的资源如：Pod、Deployment、Service…，便于管理。</li>
+</ul>
+
+<p>一下说这么多的概念可能不方便记忆，我们通过部署一个服务一步一步的来理解这些资源的作用。</p>
+
+<p>首先 <code class="highlighter-rouge">K8s</code> 在容器的基础上引入了一个 Pod 的概念，大家可以将容器理解成一个<code class="highlighter-rouge">进程</code>，Pod 可以理解成一个进程组，这里不做过多的赘述，可以阅读一下我之前的一篇文章 <a href="https://elfgzp.cn/2020/06/21/%E6%96%B0%E4%B8%80%E4%BB%A3%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84-service-mesh.html#part-2docker%E5%88%B0-k8s">新一代的微服务架构 Service Mesh</a> 的 <strong>Part 2「Docker」到 「K8s」</strong> 部分。</p>
+
+<p>我这里也直接放一个 <code class="highlighter-rouge">Pod</code> 的定义：</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">myapp</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">myapp</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">myapp</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">&lt;Image&gt;</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">&lt;Port&gt;</span>
+</code></pre></div></div>
+
+<p>可以看到它有一个 <code class="highlighter-rouge">containers</code> 的属性，是一个 <code class="highlighter-rouge">Array</code> 数组，里面是一个容器的定义，包含了：</p>
+
+<ul>
+  <li><strong>name</strong> 容器名称</li>
+  <li><strong>image</strong> 容器镜像</li>
+  <li><strong>ports</strong> 容器端口</li>
+</ul>
+
+<p>这几个字段非常容易理解，但是我们一般在使用时不会直接写一个 Pod 的 <code class="highlighter-rouge">yaml</code> 定义，而是写一个 <code class="highlighter-rouge">Deployment</code> 的定义，主要原因如下：</p>
+
+<ul>
+  <li>Deployment 拥有更加灵活强大的升级、回滚功能,并且支持滚动更新。</li>
+  <li>使用 Deployment 升级 Pod 只需要定义 Pod 的最终状态，K8s 会为你执行必要的操作。</li>
+</ul>
+
+<p>我们再来看看 <code class="highlighter-rouge">Deployment</code> 的定义：</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">myapp</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">myapp</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">myapp</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">myapp</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">&lt;Image&gt;</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">&lt;Port&gt;</span>
+</code></pre></div></div>
+
+<p>这里就肯定有人会觉得，一下子记这么多的定义和字段好难记。这里教大家一个非常方便的记忆方法，可以注意到 Deployment 中的 <code class="highlighter-rouge">template</code> 字段的属性，其实就是一个 Pod 的定义，它也有 <code class="highlighter-rouge">containers</code>、<code class="highlighter-rouge">name</code>、<code class="highlighter-rouge">image</code>、<code class="highlighter-rouge">ports</code> 等属性，说白了 <code class="highlighter-rouge">template</code> 字段就是用于生成 Pod 的模板。</p>
+
+<p>这里主要注意 Deployment 中的 <code class="highlighter-rouge">selector.matchLabels</code> 字段，它是用于 <code class="highlighter-rouge">K8s</code> 识别这次部署任务所关联的 Pod，在 Pod 的定义中同样有 <code class="highlighter-rouge">app: myapp</code> 的字段，这是一个标签，你可以写成你自己定义的标签， 但是 <code class="highlighter-rouge">Pod</code> 中的 <code class="highlighter-rouge">labels</code> 必须是 <code class="highlighter-rouge">Deployment</code> 的 <code class="highlighter-rouge">selector.matchLabels</code> 的子集。</p>
+
+<p>这里说的比较绕，大家就可以理解成，Deployment 通过 <code class="highlighter-rouge">selector.matchLabels</code> 去寻找 <code class="highlighter-rouge">K8s</code> 中定义的 Pod，但是它怎么知道哪些 Pod 是自己创建的呢，所以 Pod 中也必须定义相应的标签，Deployment 才能找到它。</p>
+
+<p>接下来我先自己动手写一个 Deployment 将一个 nginx 服务部署到 <code class="highlighter-rouge">K3s</code> 中。</p>
+
+<h3 id="定义一个-deployment-将-nginx-部署到集群中">定义一个 Deployment 将 Nginx 部署到集群中</h3>
+
+<p>我们创建一个 <code class="highlighter-rouge">nginx.yaml</code> 的文件他的 Deployment 定义非常简单，如下所示：</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">nginx</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">nginx:latest</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">80</span>
+</code></pre></div></div>
+
+<p>然后我们执行如下命令将这个 Deployment 创建到 <code class="highlighter-rouge">K3s</code> 中：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ kubectl apply <span class="nt">-f</span> ./nginx.yaml
+deployment.apps/nginx created
+</code></pre></div></div>
+
+<p>我们就可以通过以下命令分别查看集群中创建的 Deployment 和 Pod 的状态：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ kubectl get deployment
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   1/1     1            1           3m14s
+➜ kubectl get pod
+NAME                    READY   STATUS    RESTARTS   AGE
+nginx-cc7df4f8f-r9z6d   1/1     Running   0          3m39s
+</code></pre></div></div>
+
+<p>这样就完成了一个服务的部署了，是不是非常简单。如果你想部署自己服务，只需要将 <code class="highlighter-rouge">image</code> 修改成你自己的镜像即可，当然 Deployment 中还有其他的字段，这里为了方便大家快速入门，就不会介绍那么多的字段。</p>
+
+<h3 id="定义一个-service-来让我们访问-nginx">定义一个 Service 来让我们访问 Nginx</h3>
+
+<p>服务部署完了，我们应该如何访问它呢？这里就需要用到 Service，我们先来看看 Service 的定义：</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span>  <span class="s">Service Name</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span>  <span class="s">Selector Label</span>
+  <span class="na">type</span><span class="pi">:</span>  <span class="s">NodePort</span>
+  <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">nodePort</span><span class="pi">:</span> <span class="m">8080</span>
+      <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
+      <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
+      <span class="na">targetPort</span><span class="pi">:</span> <span class="m">80</span>
+</code></pre></div></div>
+
+<p>它的定义也非常简单，很容易观察到它需要定义 <code class="highlighter-rouge">port</code> 和 <code class="highlighter-rouge">targetPort</code> 用于映射这个服务到目标 Pod 的端口。但是为什么还有一个 <code class="highlighter-rouge">nodePort</code> 呢？</p>
+
+<p>这里就要先介绍以下它的 type 字段，它的可选值为 <code class="highlighter-rouge">LoadBalancer</code>、<code class="highlighter-rouge">ClusterIP</code>、<code class="highlighter-rouge">NodePort</code>，一下子引入太多的概念可能会让大家消化不了。所以为了方便记忆，可以理解为 <code class="highlighter-rouge">ClusterIP</code> 模式时 Service 无法被外部访问，<code class="highlighter-rouge">NodePort</code> 模式时 Service 会在宿主机上映射一个端口供外部访问，<code class="highlighter-rouge">LoadBalancer</code> 模式主要时在使用托管的 <code class="highlighter-rouge">K8s</code> 中云厂商会提供负载均衡器让 Service 供外部访问。</p>
+
+<p>所以这里我们使用 <code class="highlighter-rouge">NodePort</code> 模式，当然如果有感兴趣的同学可以自行 Google，这里也同样不做过多的赘述。</p>
+
+<p>并且注意 Service 中也有一个 <code class="highlighter-rouge">selector</code> 字段也是用于关联 Pod，我们将其设置为跟 Pod 的标签相同的值。</p>
+
+<p>我们同样还是在刚刚的 <code class="highlighter-rouge">nginx.yaml</code> 文件下定义一个 Service 资源，用三个 “-“ 符号隔开：</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ...</span>
+<span class="nn">---</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">nginx</span>
+  <span class="na">type</span><span class="pi">:</span>  <span class="s">NodePort</span>
+  <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">nodePort</span><span class="pi">:</span> <span class="m">30080</span>
+      <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
+      <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
+      <span class="na">targetPort</span><span class="pi">:</span> <span class="m">80</span>
+</code></pre></div></div>
+
+<p>同样执行 <code class="highlighter-rouge">kubectl apply</code> 命令使 Service 生效。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ kubectl apply <span class="nt">-f</span> ./nginx.yaml
+deployment.apps/nginx unchanged
+service/nginx created
+</code></pre></div></div>
+
+<p>然后可以通过以下命令观察我们创建的 Service：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ kubectl get service
+NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>          AGE
+nginx        NodePort    10.43.67.147   &lt;none&gt;        8080:30080/TCP   7m25s
+</code></pre></div></div>
+
+<p>然后我们通过浏览器尝试访问云服务器的 <code class="highlighter-rouge">30080</code> 端口，记得在云厂商控制台安全组把这个端口打开。</p>
+
+<p><img src="/assets/uploads/f1c0e528-780f-424a-aba7-36ef7887c3cd.png" alt="image1" title="image1" /></p>
+
+<p>可以看到成功访问了，就这么简单，将服务。</p>
+
+<h3 id="通过-namespace-隔离资源">通过 Namespace 隔离资源</h3>
+
+<p>前面有提到 Namespace 资源，在我们日常使用 <code class="highlighter-rouge">K8s</code> 中，因为会创建非常多的 Deployment 或 Service，当这些这些资源过多时，他们的名称可能重复不便于管理，这里我们就使用 Namespace 将他们隔离开。</p>
+
+<p>首先我们先通过以下命令将刚刚创建的资源都删除，通过这样的方式可以方便的删除刚刚部署的 nginx：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ kubectl delete <span class="nt">-f</span> nginx.yaml 
+deployment.apps <span class="s2">"nginx"</span> deleted
+service <span class="s2">"nginx"</span> deleted
+</code></pre></div></div>
+
+<p>然后我们在 <code class="highlighter-rouge">nginx.yaml</code> 文件的头部定义一个 Namespace 资源，它的名称为 `nginx-1`，并且在 Deployment 和 Service 资源的 <code class="highlighter-rouge">metadata</code> 字段添加 <code class="highlighter-rouge">namespace</code> 属性，添加后的完整文件定义如下：</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Namespace</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nginx-1</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">nginx-1</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">nginx</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">nginx:latest</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">80</span>
+<span class="nn">---</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">nginx-1</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">nginx</span>
+  <span class="na">type</span><span class="pi">:</span>  <span class="s">NodePort</span>
+  <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">nodePort</span><span class="pi">:</span> <span class="m">30080</span>
+      <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
+      <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
+      <span class="na">targetPort</span><span class="pi">:</span> <span class="m">80</span>
+</code></pre></div></div>
+
+<p>然后 apply 一下这个 yaml 文件：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ kubectl apply  <span class="nt">-f</span> nginx.yaml
+namespace/nginx-1 created
+deployment.apps/nginx created
+service/nginx created
+</code></pre></div></div>
+
+<p>通过命令发现我们找不到原来的 Deployment 和 Service：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ kubectl get deployment
+No resources found.
+➜ kubectl get service
+No resources found.
+</code></pre></div></div>
+
+<p>原因是我们制定了 Namespace 所以需要加上一个 <code class="highlighter-rouge">-n nginx-1</code> 的参数指定 Namespace, 在创建资源未指定 Namespace 时，资源会默认创建在 <code class="highlighter-rouge">default</code> 的 Namespace 下。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ kubectl get deployment <span class="nt">-n</span> nginx-1
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   1/1     1            1           2m58s
+➜ kubectl get service <span class="nt">-n</span> nginx-1
+NAME    TYPE       CLUSTER-IP     EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>          AGE
+nginx   NodePort   10.43.22.154   &lt;none&gt;        8080:30080/TCP   3m6s
+</code></pre></div></div>
+
+<h2 id="总结">总结</h2>
+
+<p>以上就是「K8s 快速上手（一）—— 在云主机上部署我的服务」的全部内容，下一章将会介绍如何在部署的服务中使用配置文件或环境变量配置服务，以及如何挂载存储盘。</p>
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(49, 106, 223);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(49, 106, 223);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(49, 106, 223);
+        background-color: transparent;
+        border-left: 2px solid rgb(49, 106, 223);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>

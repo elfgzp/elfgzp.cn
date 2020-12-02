@@ -1,0 +1,477 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>ARTS 第四周</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(16, 28, 12) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(16, 28, 12);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">ARTS 第四周</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(16, 28, 12);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2019/04/13/arts-week-3.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(16, 28, 12)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(16, 28, 12);"><sapn class="main">ARTS 第三周</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">ARTS 第四周</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2019/04/28/arts-week-5.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(16, 28, 12)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(16, 28, 12);"><sapn class="main">ARTS 第五周</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2019/04/13/arts-week-3.html" class="leftchange" style="border-right: 1px solid rgb(16, 28, 12);border-bottom: 2px solid rgb(16, 28, 12);"><span>上一篇<br><br>ARTS 第三周</span></a>
+    
+    
+    <a href="/2019/04/28/arts-week-5.html" class="rightchange" style="border-left: 1px solid rgb(16, 28, 12);border-bottom: 2px solid rgb(16, 28, 12);"><span>下一篇<br><br>ARTS 第五周</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(16, 28, 12); border-right: 8px solid rgb(16, 28, 12)">
+        ARTS Week-4
+    </div>
+    
+    
+    <img src="https://www.notion.so/image/https%3A%2F%2Fwww.notion.so%2Fimages%2Fpage-cover%2Frijksmuseum_avercamp_1620.jpg?table=block&id=57bdd725-72ee-49e3-8902-fcfdb0b39767&width=3730&cache=v2" style="margin:auto;">
+    <!-- 文章内容 -->
+    <h2 id="algorithm">Algorithm</h2>
+
+<p><a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">5. 最长回文子串</a></p>
+
+<p>这是一道非常经典的动态规划的题目，题目如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
+
+示例 1：
+
+输入: "babad"
+输出: "bab"
+注意: "aba" 也是一个有效答案。
+示例 2：
+
+输入: "cbbd"
+输出: "bb"
+</code></pre></div></div>
+
+<p>我们可以先自己列举几个例子，先看一看规律：</p>
+
+<p>当输入 <code class="highlighter-rouge">s</code> 字符串长度为 <code class="highlighter-rouge">1</code> 时，它肯定是一个回文，如 <code class="highlighter-rouge">"a"</code>。</p>
+
+<p>当输入的 <code class="highlighter-rouge">s</code> 字符串长度为 <code class="highlighter-rouge">2</code> 时，需要判断第一个和最后一个字符是否相同才能判断是不是回文，如 <code class="highlighter-rouge">"aa"</code> , <code class="highlighter-rouge">"bb"</code> 是回文, <code class="highlighter-rouge">"ab"</code> , <code class="highlighter-rouge">"ba"</code> 不是回文。</p>
+
+<p>当输入的 <code class="highlighter-rouge">s</code> 字符串长度为 <code class="highlighter-rouge">3</code> 时，判断条件与 <code class="highlighter-rouge">2</code> 相同，即 <code class="highlighter-rouge">"aba"</code> , <code class="highlighter-rouge">"bab"</code> 是回文。</p>
+
+<p>当 <code class="highlighter-rouge">s</code> 字符串长度大于 <code class="highlighter-rouge">3</code> 时，我们则需要判断第一个和最后一个字符是否相同，且除去第一个和最后一个字符串后，剩余的子序列是不是回文，若剩余的子序列也是回文，则 <code class="highlighter-rouge">s</code> 也是回文。如 <code class="highlighter-rouge">"abba"</code> , <code class="highlighter-rouge">"ababa"</code> 是回文。</p>
+
+<p>假设 <code class="highlighter-rouge">i</code> 为字符串 <code class="highlighter-rouge">s</code> 的子序列第一个字符串的索引, <code class="highlighter-rouge">j</code> 为 <code class="highlighter-rouge">s</code> 子序列最后一个字符串的索引, 用 <code class="highlighter-rouge">dp</code> 来记录 <code class="highlighter-rouge">s</code> 字符串的某个子序列是否是回文，如 <code class="highlighter-rouge">dp[i][j]</code>= <code class="highlighter-rouge">1</code> 则代表 <code class="highlighter-rouge">s[i: j + 1]</code> （若 <code class="highlighter-rouge">s</code> 为 <code class="highlighter-rouge">"aba"</code> , <code class="highlighter-rouge">i = 0, j = 1</code> 则 <code class="highlighter-rouge">s[i: j + 1]</code> 为 <code class="highlighter-rouge">"ab"</code>）  是回文，<code class="highlighter-rouge">dp[i][j]</code>= <code class="highlighter-rouge">0</code> 则相反。</p>
+
+<p>则有动态规划方程：</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+dp[i][j] = \begin{cases} s[i] == s[j], & \text {if $j$ - $i$ <= 2} \\ s[i] == s[j] & and & dp[i + 1][j - 1] == 1, & \text{if $j$ - $i$ > 2} \end{cases} %]]></script>
+
+<p>将上面的规划方程转换为代码则为：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">longestPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">len_s</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">len_s</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">len_s</span><span class="p">)]</span>
+        <span class="c1"># 注意这里不能写成 [[0] * len_s] * len_s，这样生成的内嵌列表都是引用
+</span>
+        <span class="n">si</span><span class="p">,</span> <span class="n">sj</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">len_s</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">dis</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="n">i</span>
+                <span class="k">if</span> <span class="n">dis</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">dis</span> <span class="o">&gt;</span> <span class="n">sj</span> <span class="o">-</span> <span class="n">si</span><span class="p">:</span>
+                        <span class="n">si</span><span class="p">,</span> <span class="n">sj</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
+
+                <span class="k">elif</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">and</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">dis</span> <span class="o">&gt;</span> <span class="n">sj</span> <span class="o">-</span> <span class="n">si</span><span class="p">:</span>
+                        <span class="n">si</span><span class="p">,</span> <span class="n">sj</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
+
+        <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="n">si</span><span class="p">:</span> <span class="n">sj</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="review">Review</h2>
+
+<p><a href="https://jf-blog.fr/download/59/">《97 Things Every Programmer Should Know》 - Act with Prudence</a></p>
+
+<ul>
+  <li>技术债就像贷款，贷款可以解决燃眉之急，但是它是有利息的，而且时间越久利息越高。</li>
+  <li>我们则需要记录每个技术债，不能遗忘他，做好 <code class="highlighter-rouge">Todo</code> 或者 <code class="highlighter-rouge">技术债的记录</code>。</li>
+  <li>技术债最好在下一个版本迭代前还完，否则下一个版本迭代到来的时候，技术债会越堆越多。</li>
+</ul>
+
+<h2 id="tip">Tip</h2>
+
+<p><a href="https://stackedit.io/app#">Stackedit</a> 一个免费在线的 markdown 编辑器，可以自动将写好的文件同步到 <code class="highlighter-rouge">Google Drive</code> , <code class="highlighter-rouge">Github</code> , <code class="highlighter-rouge">Gitlab</code> , <code class="highlighter-rouge">CouchDB</code> 。</p>
+
+<p>虽然还是 <a href="https://www.typora.io/">Typora</a> 比较好用，但是相比前者它不能同步云存储。</p>
+
+<h2 id="share">Share</h2>
+
+<p>“I will learn it when I need it – 我会在我需要的时候再学“！ - <a href="https://coolshell.cn/articles/4235.html">程序员的谎谬之言还是至理名言</a>？</p>
+
+<ul>
+  <li>如果你把一个技术搞精搞深，你的知识面自然会很广的。</li>
+  <li>面对于各种比较深的东西，作为一个实用主义者可能很不屑，但是你也会为此而失去开阔眼界的机会。</li>
+  <li>为明天做一些技术储备，因为你不知道你所缺的东西。多多阅读，多多交流，最好能把自己的心得写下来强化自己的认识和记忆。</li>
+  <li>不要只寄望于在工作中学习，工作没有覆盖的地方你就不学了。真正的高手在工作之余都会花很多时间去自己研究点东西的。</li>
+  <li>很多东西在概念上是相通的，在哲学层次上是相通的，这是你需要去追求的学习知识的境界。</li>
+  <li>“很多时候，你缺少的不是知识而是热情”！</li>
+</ul>
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(16, 28, 12);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(16, 28, 12);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(16, 28, 12);
+        background-color: transparent;
+        border-left: 2px solid rgb(16, 28, 12);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>

@@ -1,0 +1,692 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>Travis CI  Jekyll  Docker 自动化部署博客到云服务器</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(92,167,96) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(92,167,96);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">Travis CI  Jekyll  Docker 自动化部署博客到云服务器</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(92,167,96);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2018/09/30/restart-my-blog.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(92,167,96)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(92,167,96);"><sapn class="main">重新开始，我的博客</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">Travis CI  Jekyll  Docker 自动化部署博客到云服务器</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2018/10/03/emqttd-django.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(92,167,96)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(92,167,96);"><sapn class="main">MQTT消息服务器EMQ部署，并改造Mysql鉴权，通过Django进行用户管理</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2018/09/30/restart-my-blog.html" class="leftchange" style="border-right: 1px solid rgb(92,167,96);border-bottom: 2px solid rgb(92,167,96);"><span>上一篇<br><br>重新开始，我的博客</span></a>
+    
+    
+    <a href="/2018/10/03/emqttd-django.html" class="rightchange" style="border-left: 1px solid rgb(92,167,96);border-bottom: 2px solid rgb(92,167,96);"><span>下一篇<br><br>MQTT消息服务器EMQ部署，并改造Mysql鉴权，通过Django进行用户管理</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(92,167,96); border-right: 8px solid rgb(92,167,96)">
+        解决Github pages百度爬虫被禁用
+    </div>
+    
+    
+    <img src="/assets/images/2018-10-02-travis-jekyll-docker/WX20181002-174437@2x-squashed.png" style="margin:auto;">
+    <!-- 文章内容 -->
+    <blockquote>
+  <p>本篇文章讲解了如何利用云Travis CI  Jekyll  Docker 自动化部署博客到云服务器，从而解决Github pages百度爬虫禁用的问题。</p>
+
+  <p>本文章不包含Github pages 如何配置，相信Google上有类似的文章就不说明了</p>
+</blockquote>
+
+<h2 id="jekyll-docker-容器构建">Jekyll Docker 容器构建</h2>
+
+<p>在开始<code class="highlighter-rouge">Jekyll</code>容器构建之前，先说一下我用的是一款叫<a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a>的主题，作者是<a href="https://github.com/xukimseven">xukimseven</a>。</p>
+
+<p>这款主题非常简洁清新，而且对移动端也有适配，在这里也感谢这位作者开源这个主题。</p>
+
+<p>在依照作者提供的部署说明在自己的仓库部署好该主题后，在仓库下先新建一个<code class="highlighter-rouge">Dockerfile</code>文件用于容器构建，<code class="highlighter-rouge">Dockerfile</code>文件内容如下。</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ruby:latest</span>
+<span class="k">RUN </span>gem sources <span class="nt">--add</span> https://gems.ruby-china.com/ <span class="nt">--remove</span> https://rubygems.org/
+<span class="k">RUN </span>gem <span class="nb">install </span>jekyll bundler
+<span class="k">COPY</span><span class="s"> . /blog/</span>
+<span class="k">RUN </span>bundle config mirror.https://rubygems.org https://gems.ruby-china.com
+<span class="k">RUN </span><span class="nb">cd </span>blog <span class="se">\
+</span>         <span class="o">&amp;&amp;</span> bundler <span class="nb">install</span>
+<span class="k">WORKDIR</span><span class="s"> /blog</span>
+<span class="k">CMD</span><span class="s"> bundle exec jekyll serve --host 0.0.0.0</span>
+</code></pre></div></div>
+
+<p>文件内容主要是使用<code class="highlighter-rouge">ruby</code>容器为基础，用<code class="highlighter-rouge">gem</code>命令安装<code class="highlighter-rouge">jekyll</code>和<code class="highlighter-rouge">bundler</code>，由于国内使用国外的<code class="highlighter-rouge">gem</code>源比较慢，所以我将源替换为<code class="highlighter-rouge">gems.ruby-china.com</code>。</p>
+
+<h3 id="centos-安装docker-ce">Centos 安装Docker CE</h3>
+
+<blockquote>
+  <p>在安装前确保linux内核版本是3.10以上并且是64位的centos版本。如果不能满足这个前提，建议看官的教程。</p>
+</blockquote>
+
+<ol>
+  <li>升级yum
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>yum update
+</code></pre></div>    </div>
+  </li>
+  <li>安装Docker CE
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>yum <span class="nt">-y</span> <span class="nb">install </span>docker
+</code></pre></div>    </div>
+    <p>在安装完<code class="highlighter-rouge">docker</code>后，还需要配置免<code class="highlighter-rouge">sudo</code>使用<code class="highlighter-rouge">docker</code>命令，步骤如下：</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>groupadd docker
+<span class="nb">sudo </span>gpasswd <span class="nt">-a</span> gzp docker <span class="c"># gzp为我的用户名</span>
+<span class="nb">sudo </span>service docker restart
+newgrp - docker
+</code></pre></div>    </div>
+    <p>运行完后重新打开<code class="highlighter-rouge">ssh</code>会话。</p>
+    <h3 id="使用dockerfile构建容器并运行jekyll">使用Dockerfile构建容器并运行Jekyll</h3>
+  </li>
+  <li>使用Dockerfile构建容器
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker build <span class="nt">-t</span> elfgzp.github.io <span class="nb">.</span> <span class="c"># elfgzp.github.io为我的容器名称</span>
+</code></pre></div>    </div>
+    <p>运行结果如下：</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sending build context to Docker daemon  203.5MB
+Step 1/8 : FROM ruby:latest
+ <span class="nt">---</span><span class="o">&gt;</span> eb8759981348
+Step 2/8 : RUN gem sources <span class="nt">--add</span> https://gems.ruby-china.com/ <span class="nt">--remove</span> https://rubygems.org/
+ <span class="nt">---</span><span class="o">&gt;</span> Using cache
+ <span class="nt">---</span><span class="o">&gt;</span> 9825055ad6ed
+Step 3/8 : RUN gem <span class="nb">install </span>jekyll bundler
+ <span class="nt">---</span><span class="o">&gt;</span> Using cache
+ <span class="nt">---</span><span class="o">&gt;</span> 1f6bad52f4e4
+Step 4/8 : COPY <span class="nb">.</span> /blog/
+ <span class="nt">---</span><span class="o">&gt;</span> e252fdb8d16a
+Step 5/8 : RUN bundle config mirror.https://rubygems.org https://gems.ruby-china.com
+ <span class="nt">---</span><span class="o">&gt;</span> Running <span class="k">in </span>aeb0a7c21689
+Removing intermediate container aeb0a7c21689
+ <span class="nt">---</span><span class="o">&gt;</span> 2a3944c701f0
+Step 6/8 : RUN <span class="nb">cd </span>blog          <span class="o">&amp;&amp;</span> bundler <span class="nb">install</span>
+ <span class="nt">---</span><span class="o">&gt;</span> Running <span class="k">in </span>494cbc520804
+Fetching gem metadata from https://gems.ruby-china.com/...........
+Fetching public_suffix 3.0.2
+Installing public_suffix 3.0.2
+Using addressable 2.5.2
+Using bundler 1.16.5
+Using colorator 1.1.0
+Using concurrent-ruby 1.0.5
+Using eventmachine 1.2.7
+Using http_parser.rb 0.6.0
+Using em-websocket 0.5.1
+Fetching ffi 1.9.23
+Installing ffi 1.9.23 with native extensions
+Using forwardable-extended 2.6.0
+Using i18n 0.9.5
+Using rb-fsevent 0.10.3
+Using rb-inotify 0.9.10
+Using sass-listen 4.0.0
+Fetching sass 3.5.6
+Installing sass 3.5.6
+Using jekyll-sass-converter 1.5.2
+Using ruby_dep 1.5.0
+Using listen 3.1.5
+Using jekyll-watch 2.0.0
+Fetching kramdown 1.16.2
+Installing kramdown 1.16.2
+Using liquid 4.0.0
+Using mercenary 0.3.6
+Using pathutil 0.16.1
+Fetching rouge 3.1.1
+Installing rouge 3.1.1
+Using safe_yaml 1.0.4
+Fetching jekyll 3.8.1
+Installing jekyll 3.8.1
+Fetching jekyll-feed 0.9.3
+Installing jekyll-feed 0.9.3
+Fetching jekyll-seo-tag 2.4.0
+Installing jekyll-seo-tag 2.4.0
+Fetching minima 2.5.0
+Installing minima 2.5.0
+Bundle <span class="nb">complete</span><span class="o">!</span> 4 Gemfile dependencies, 29 gems now installed.
+Bundled gems are installed into <span class="sb">`</span>/usr/local/bundle<span class="sb">`</span>
+Removing intermediate container 494cbc520804
+ <span class="nt">---</span><span class="o">&gt;</span> c5cadba1e55e
+Step 7/8 : WORKDIR /blog
+ <span class="nt">---</span><span class="o">&gt;</span> Running <span class="k">in </span>ccff546be8e0
+Removing intermediate container ccff546be8e0
+ <span class="nt">---</span><span class="o">&gt;</span> 70d0f72ed6b1
+Step 8/8 : CMD bundle <span class="nb">exec </span>jekyll serve <span class="nt">--host</span> 0.0.0.0
+ <span class="nt">---</span><span class="o">&gt;</span> Running <span class="k">in </span>ae3fd7719de5
+Removing intermediate container ae3fd7719de5
+ <span class="nt">---</span><span class="o">&gt;</span> e9973d4dac75
+Successfully built e9973d4dac75
+Successfully tagged elfgzp.github.io:latest
+</code></pre></div>    </div>
+  </li>
+  <li>构建成功后测试Jekyll是否能够运行
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-d</span> <span class="nt">-p</span> 4000:4000 elfgzp.github.io
+</code></pre></div>    </div>
+    <p>运行后使用<code class="highlighter-rouge">docker ps</code>查看容器是否成功运行，或者使用<code class="highlighter-rouge">curl http://127.0.0.1:4000</code>访问<code class="highlighter-rouge">4000</code>端口。</p>
+  </li>
+</ol>
+
+<h3 id="使用docker-compose来运行容器">使用docker-compose来运行容器</h3>
+
+<p>由于我们要实现自动化构建和运行容器，这里使用了<code class="highlighter-rouge">docker-compose</code></p>
+
+<h4 id="centos-安装-docker-compose">Centos 安装 docker-compose</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>yum <span class="nt">-y</span> <span class="nb">install </span>epel-release
+<span class="nb">sudo </span>yum <span class="nt">-y</span> <span class="nb">install </span>python-pip
+pip <span class="nb">install </span>docker-compose
+</code></pre></div></div>
+
+<h4 id="编写docker-composeyml">编写docker-compose.yml</h4>
+<p><code class="highlighter-rouge">docker-compose.yml</code>的内容非常简单，内容如下：</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">blog</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span>
+      <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+      <span class="na">dockerfile</span><span class="pi">:</span> <span class="s">Dockerfile</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">elfgzp.github.io:latest</span> <span class="c1"># 这里是我镜像的名字</span>
+    <span class="na">network_mode</span><span class="pi">:</span> <span class="s">host</span>
+</code></pre></div></div>
+<h4 id="使用docker-compose构建并运行容器">使用docker-compose构建并运行容器</h4>
+<p>这里将更新代码的<code class="highlighter-rouge">git pull</code>命令也加进去了，运行代码如下：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin master &amp;&amp; \
+docker-compose build &amp;&amp; \
+docker-compose down &amp;&amp; \
+docker-compose up -d
+</code></pre></div></div>
+<p>运行后会从<code class="highlighter-rouge">git</code>仓库拉取最新的代码，并根据<code class="highlighter-rouge">Dockerfile</code>进行容器构建，并且重启容器。</p>
+
+<p>到这里我们已经可以直接使用上面的命令拉取最新的代码，并且能够构建运行新的容器，我们只剩下一个自动触发这个命令的工具，这里就需要用到<code class="highlighter-rouge">Travis</code>，接下来我会讲解<code class="highlighter-rouge">Travis</code>如何使用。</p>
+
+<h2 id="travis-配置和使用">Travis 配置和使用</h2>
+
+<p>首先我们需要注册一个<a href="https://travis-ci.org">Travis</a>账号，并且关联<code class="highlighter-rouge">Github</code>。</p>
+
+<ol>
+  <li>
+    <p>在创建好账号并关联<code class="highlighter-rouge">Github</code>后，需要添加你的<code class="highlighter-rouge">Github pages</code>仓库。<br />
+  <img src="/assets/images/2018-10-02-travis-jekyll-docker/WX20181003-002426@2x.png" alt="img2" /></p>
+  </li>
+  <li>
+    <p>在添加好后进入仓库的设置，点击仓库右边的<code class="highlighter-rouge">more action</code>，并选择<code class="highlighter-rouge">settings</code>。
+  <img src="/assets/images/2018-10-02-travis-jekyll-docker/WX20181003-002806@2x.png" alt="img3" /></p>
+  </li>
+  <li>
+    <p>然后需要从<code class="highlighter-rouge">Github</code>获取一个<code class="highlighter-rouge">DEPLOY_TOKEN</code>，步骤如下：</p>
+
+    <ol>
+      <li>
+        <p>进入<code class="highlighter-rouge">Github</code>设置页面，点击<code class="highlighter-rouge">Developer Settings</code></p>
+
+        <p><img src="/assets/images/2018-10-02-travis-jekyll-docker/WX20181003-003201@2x.png" alt="WX20181003-003201@2x.png" /></p>
+      </li>
+      <li>
+        <p>然后在点击<code class="highlighter-rouge">Personal access tokens</code>，在点击右上角的<code class="highlighter-rouge">Generate new token</code></p>
+
+        <p><img src="/assets/images/2018-10-02-travis-jekyll-docker/WX20181003-003247@2x.png" alt="WX20181003-003247@2x.png" /></p>
+      </li>
+      <li>
+        <p>输入生成的<code class="highlighter-rouge">token</code>名称，然后勾选<code class="highlighter-rouge">admin:public_key, admin:repo_hook, repo</code></p>
+
+        <p><img src="/assets/images/2018-10-02-travis-jekyll-docker/WX20181003-003327@2x.png" alt="WX20181003-003327@2x.png" /></p>
+      </li>
+      <li>
+        <p>最后将成的<code class="highlighter-rouge">DEPLOY_TOKEN</code>填入<code class="highlighter-rouge">Travis</code>的<code class="highlighter-rouge">Environment Variables</code>中</p>
+
+        <p><img src="/assets/images/2018-10-02-travis-jekyll-docker/WX20181003-021647@2x.png" alt="WX20181003-021647@2x.png" /></p>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>最后我们还需要配置<code class="highlighter-rouge">Travis</code>远程登陆我们云服务器的<code class="highlighter-rouge">ssh key</code></p>
+
+    <ol>
+      <li>
+        <p>首先需要在本地生成<code class="highlighter-rouge">id_ras_deploy</code>和<code class="highlighter-rouge">id_ras_deploy.pub</code></p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen <span class="nt">-t</span> rsa <span class="nt">-C</span> <span class="s2">"deploy_key"</span> <span class="nt">-f</span> ~/.ssh/id_ras_deploy
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>然后将生成的<code class="highlighter-rouge">id_ras_deploy.pub</code>复制到云服务器中</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-copy-id <span class="nt">-i</span> ~/.ssh/id_ras_deploy.pub  gzp@cloud.elfgzp.cn <span class="c"># 我的服务器域名</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>在仓库中创建<code class="highlighter-rouge">ssh_config</code>文件，内容如下</p>
+
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Host cloud.elfgzp.cn
+    HostName cloud.elfgzp.cn
+    StrictHostKeyChecking no
+    User gzp
+    IdentityFile ~/.ssh/id_ras_deploy
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>最后在安装好<code class="highlighter-rouge">Travis</code>，运行命令</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="nb">install </span>travis
+travis login <span class="nt">--auto</span>  <span class="c"># 注意这里登陆会要求输入Github账号密码，账号是邮箱不是用户名</span>
+<span class="nb">touch</span> .travis.yml
+travis encrypt-file ~/.ssh/id_ras_deploy <span class="nt">--add</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>会在生成的<code class="highlighter-rouge">.travis.yml</code>中看到</p>
+
+        <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">before_install</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">openssl aes-256-cbc -K $encrypted_f91baf41390f_key -iv $encrypted_f91baf41390f_iv</span>
+  <span class="s">-in id_ras_deploy.enc -out ~/.ssh/id_ras_deploy -d</span> 
+</code></pre></div>        </div>
+
+        <p>注意<code class="highlighter-rouge">~/.ssh</code>有可能为<code class="highlighter-rouge">~\/.ssh </code>需要去掉<code class="highlighter-rouge"> \</code></p>
+      </li>
+      <li>
+        <p>我们还需要在<code class="highlighter-rouge">after_success</code>中加入成功之后访问云服务器执行响应的操作更新容器并运行</p>
+
+        <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">after_success</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">ssh gzp@cloud.elfgzp.cn "cd ~/workspace/elfgzp.github.io &amp;&amp; source ~/.zshrc  &amp;&amp; git pull origin master</span>
+  <span class="s">&amp;&amp; docker-compose build &amp;&amp; docker-compose down &amp;&amp; docker-compose up -d"</span>
+</code></pre></div>        </div>
+
+        <p>注意这里我使用的是<code class="highlighter-rouge">zsh</code>所以配置是<code class="highlighter-rouge">~/.zshrc</code>，如果使用的是默认的<code class="highlighter-rouge">bash</code>，请使用<code class="highlighter-rouge">~/.bashrc</code></p>
+
+        <p>最后的<code class="highlighter-rouge">.travis</code>文件格式如下：</p>
+
+        <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">language</span><span class="pi">:</span> <span class="s">ruby</span>
+<span class="na">rvm</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">2.3.3</span>
+<span class="na">addons</span><span class="pi">:</span>
+  <span class="na">ssh_known_hosts</span><span class="pi">:</span> <span class="s">cloud.elfgzp.cn</span>
+<span class="na">before_install</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">openssl aes-256-cbc -K $encrypted_f91baf41390f_key -iv $encrypted_f91baf41390f_iv</span>
+  <span class="s">-in id_ras_deploy.enc -out ~/.ssh/id_ras_deploy -d</span>
+<span class="pi">-</span> <span class="s">chmod 600 ~/.ssh/id_ras_deploy</span>
+<span class="pi">-</span> <span class="s">cp ssh_config ~/.ssh/config</span>
+<span class="na">script</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">bundle install</span>
+<span class="pi">-</span> <span class="s">bundle exec jekyll build</span>
+<span class="na">after_success</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">ssh gzp@cloud.elfgzp.cn "cd ~/workspace/elfgzp.github.io &amp;&amp; source ~/.zshrc  &amp;&amp; git pull origin master</span>
+  <span class="s">&amp;&amp; docker-compose build &amp;&amp; docker-compose down &amp;&amp; docker-compose up -d"</span>
+<span class="na">branches</span><span class="pi">:</span>
+  <span class="na">only</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">master</span>
+<span class="na">env</span><span class="pi">:</span>
+  <span class="na">global</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">NOKOGIRI_USE_SYSTEM_LIBRARIES=true</span>
+</code></pre></div>        </div>
+
+        <p>大功告成，最后我们只需要把代码提交到<code class="highlighter-rouge">master</code>分支，然后到<code class="highlighter-rouge">Travis</code>中查看代码的<code class="highlighter-rouge">build</code>结果，如果成功则最后的结果应该与运行<code class="highlighter-rouge">docker-compose</code>的结果相同。</p>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="总结">总结</h2>
+
+<p>在网上其实还有很多通过<code class="highlighter-rouge">coding pages</code>与<code class="highlighter-rouge">github pages</code>同步的方式来解决百度爬虫被禁用的问题，之所以我会选择这种方式，因为这种方式能学到更多使用的技术知识。</p>
+
+<p>希望看完本文章由收获的别忘了给我留言哦。</p>
+
+<h2 id="参考文章">参考文章</h2>
+<blockquote>
+  <p><a href="https://www.jianshu.com/p/dbc0fb6e9149">centos安装docker,docker-compose</a><br />
+<a href="https://xxblog.cn/2018/01/Run-jekyll-based-docker-and-auto-deployment/">基于Docker搭建Jekyll并实现自动部署</a><br />
+<a href="https://mritd.me/2017/02/25/jekyll-blog-+-travis-ci-auto-deploy/">Jekyll + Travis CI 自动化部署博客</a><br />
+<a href="https://blog.csdn.net/sp1206/article/details/80430493">Travis-ci远程部署到服务器</a><br />
+<a href="https://blog.tomyail.com/writing-hexo-blog-with-travis-ci/">使用travis自动部署hexo日志</a></p>
+</blockquote>
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(92,167,96);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(92,167,96);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(92,167,96);
+        background-color: transparent;
+        border-left: 2px solid rgb(92,167,96);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>

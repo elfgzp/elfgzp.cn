@@ -1,0 +1,794 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>Django使用心得（一） 善用migrations</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(101, 25, 160) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(101, 25, 160);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">Django使用心得（一） 善用migrations</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(101, 25, 160);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2018/11/01/greedy-algorithm.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(101, 25, 160)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(101, 25, 160);"><sapn class="main">贪心算法的转化</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">Django使用心得（一） 善用migrations</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2018/12/07/django-experience-2-test-case.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(101, 25, 160)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(101, 25, 160);"><sapn class="main">Django使用心得（二） 使用TestCase测试接口</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2018/11/01/greedy-algorithm.html" class="leftchange" style="border-right: 1px solid rgb(101, 25, 160);border-bottom: 2px solid rgb(101, 25, 160);"><span>上一篇<br><br>贪心算法的转化</span></a>
+    
+    
+    <a href="/2018/12/07/django-experience-2-test-case.html" class="rightchange" style="border-left: 1px solid rgb(101, 25, 160);border-bottom: 2px solid rgb(101, 25, 160);"><span>下一篇<br><br>Django使用心得（二） 使用TestCase测试接口</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(101, 25, 160); border-right: 8px solid rgb(101, 25, 160)">
+        善用migrations
+    </div>
+    
+    
+    <img src="/assets/images/2018-12-04-django-experience-1-migrations/django-migrations.png" style="margin:auto;">
+    <!-- 文章内容 -->
+    <p>在使用和学习<code class="highlighter-rouge">Django</code>框架时，发现很多人包括我自己在对<code class="highlighter-rouge">Django</code>项目进行版本管理时，通常把<code class="highlighter-rouge">migrations</code>文件添加到了<code class="highlighter-rouge">.gitignore</code>中。</p>
+
+<p>笔者也一直有疑问这种做法是否正确，于是去查看官方文档，找到以下这段。</p>
+
+<p>原文：</p>
+<blockquote>
+  <p>You should think of migrations as a version control system for your database schema. makemigrations is responsible for packaging up your model changes into individual migration files - analogous to commits - and migrate is responsible for applying those to your database.</p>
+
+  <p>The migration files for each app live in a “migrations” directory inside of that app, and are designed to be committed to, and distributed as part of, its codebase. You should be making them once on your development machine and then running the same migrations on your colleagues’ machines, your staging machines, and eventually your production machines.</p>
+</blockquote>
+
+<p>中文翻译：</p>
+<blockquote>
+  <p>你可以想象 migrations 相当一个你的数据库的一个版本控制系统。makemigrations 命令负责保存你的模型变化到一个迁移文件 - 和 commits 很类似 - 同时 migrate负责将改变提交到数据库。</p>
+
+  <p>每个 app 的迁移文件会保存到每个相应 app 的“migrations”文件夹里面,并且准备如何去执行它, 作为一个分布式代码库。 每当在你的开发机器或是你同事的机器并且最终在你的生产机器上运行同样的迁移，你应当再创建这些文件。</p>
+</blockquote>
+
+<p>根据官方文档的说法，不将<code class="highlighter-rouge">migrations</code>提交到仓库的做法时错误的。</p>
+
+<p>而且如果要使用<code class="highlighter-rouge">django</code>自带的封装好的<code class="highlighter-rouge">TestCase</code>进行单元测试，<code class="highlighter-rouge">migrations</code>也必须保留。</p>
+
+<p>下一篇文章笔者也会介绍一下<code class="highlighter-rouge">django</code>中的<code class="highlighter-rouge">TestCase</code>的使用心得。</p>
+
+<p>下面介绍一下，在项目中<code class="highlighter-rouge">migrations</code>的一些使用心得和遇到的一些问题。</p>
+
+<h2 id="利用migrations初始化数据">利用migrations初始化数据</h2>
+
+<p>我们现在有一个<code class="highlighter-rouge">Book</code>的模型，我想在<code class="highlighter-rouge">migrate</code>之后初始化一些数据。</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/42e1f6ca6d68b49d7e87f0d5121aa80cfd692372/make_good_use_of_migrations/models.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    make_good_use_of_migrations/models.py <a href="https://github.com/elfgzp/django_experience/blob/42e1f6ca6d68b49d7e87f0d5121aa80cfd692372/make_good_use_of_migrations/models.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/42e1f6ca6d68b49d7e87f0d5121aa80cfd692372/make_good_use_of_migrations/models.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span></code></pre></figure>
+
+<p>例如：生成三本名称分别为<code class="highlighter-rouge">Hamlet</code>、<code class="highlighter-rouge">Tempest</code>、<code class="highlighter-rouge">The Little Prince</code>的书。</p>
+
+<p>在执行了<code class="highlighter-rouge">python manage.py makemigrations</code>之后<code class="highlighter-rouge">migrations</code>文件夹会生成<code class="highlighter-rouge">0001_initial.py</code>的文件。</p>
+
+<p>文件中包含了<code class="highlighter-rouge">Book</code>这个模型初始化的一些代码。</p>
+
+<p>在介绍如何利用<code class="highlighter-rouge">migrations</code>初始化数据时，先介绍一下<code class="highlighter-rouge">migrations</code>常用的两个操作：</p>
+
+<p><code class="highlighter-rouge">RunSQL</code>、<code class="highlighter-rouge">RunPython</code></p>
+
+<p>顾名思义分别是执行<code class="highlighter-rouge">SQL语句</code>和<code class="highlighter-rouge">Python函数</code>。</p>
+
+<p>下面我用<code class="highlighter-rouge">migrations</code>中的<code class="highlighter-rouge">RunPython</code>来初始化数据。</p>
+<ol>
+  <li>
+    <p>在相应app下的<code class="highlighter-rouge">migrations</code>文件新建<code class="highlighter-rouge">0002_init_book_data.py</code>
+migrations/. <br />
+​      ├── 0001_initial.py. <br />
+​      └── 0002_init_book_data.py.</p>
+  </li>
+  <li>
+    <p>然后增加<code class="highlighter-rouge">Migration</code>类继承<code class="highlighter-rouge">django.db.migrations.Migration</code>，并在<code class="highlighter-rouge">operations</code>中增加需要执行的代码。</p>
+  </li>
+</ol>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/migrations/0002_init_book_data.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    make_good_use_of_migrations/migrations/0002_init_book_data.py <a href="https://github.com/elfgzp/django_experience/blob/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/migrations/0002_init_book_data.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/migrations/0002_init_book_data.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">migrations</span>
+
+<span class="s">"""
+make_good_use_of_migrations 是App的名字
+"""</span>
+
+
+<span class="k">def</span> <span class="nf">init_book_data</span><span class="p">(</span><span class="n">apps</span><span class="p">,</span> <span class="n">schema_editor</span><span class="p">):</span>
+    <span class="n">Book</span> <span class="o">=</span> <span class="n">apps</span><span class="p">.</span><span class="n">get_model</span><span class="p">(</span><span class="s">'make_good_use_of_migrations'</span><span class="p">,</span> <span class="s">'Book'</span><span class="p">)</span>
+    <span class="n">init_data</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Hamlet'</span><span class="p">,</span> <span class="s">'Tempest'</span><span class="p">,</span> <span class="s">'The Little Prince'</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">init_data</span><span class="p">:</span>
+        <span class="n">book</span> <span class="o">=</span> <span class="n">Book</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">book</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">Migration</span><span class="p">(</span><span class="n">migrations</span><span class="p">.</span><span class="n">Migration</span><span class="p">):</span>
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s">'make_good_use_of_migrations'</span><span class="p">,</span> <span class="s">'0001_initial'</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="c1"># 这里要注意dependencies为上一次migrations的文件名称
+</span>
+    <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">migrations</span><span class="p">.</span><span class="n">RunPython</span><span class="p">(</span><span class="n">init_book_data</span><span class="p">)</span>
+    <span class="p">]</span></code></pre></figure>
+
+<ol>
+  <li>运行<code class="highlighter-rouge">python manage.py migrate</code>，可以看到数据已经在数据库中生成了。</li>
+</ol>
+
+<h2 id="利用migrations修复数据">利用migrations修复数据</h2>
+
+<p>我们常常遇到这种情况，例如我需要给<code class="highlighter-rouge">Book</code>模型增加一个外键字段，而且这个字段不能为空，所以旧的数据就要进行处理修复，我们可以这样处理。</p>
+
+<ol>
+  <li>先将需要增加的字段<code class="highlighter-rouge">null</code>属性设置为<code class="highlighter-rouge">True</code>，然后执行<code class="highlighter-rouge">makemigrations</code></li>
+</ol>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/ede5c73dbb87b6f3f6a93c77d39a2488daaf6acf/make_good_use_of_migrations/models.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    make_good_use_of_migrations/models.py <a href="https://github.com/elfgzp/django_experience/blob/ede5c73dbb87b6f3f6a93c77d39a2488daaf6acf/make_good_use_of_migrations/models.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/ede5c73dbb87b6f3f6a93c77d39a2488daaf6acf/make_good_use_of_migrations/models.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Author</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="n">Author</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span></code></pre></figure>
+
+<ol>
+  <li>在相应app下的<code class="highlighter-rouge">migrations</code>文件新建<code class="highlighter-rouge">0004_fix_book_data.py</code>
+migrations/.  <br />
+├── 0001_initial.py. <br />
+├── 0002_init_book_data.py. <br />
+├── 0003_auto_20181204_0533.py. <br />
+└──  0004_fix_book_data.py.</li>
+</ol>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/ede5c73dbb87b6f3f6a93c77d39a2488daaf6acf/make_good_use_of_migrations/migrations/0004_fix_book_data.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    make_good_use_of_migrations/migrations/0004_fix_book_data.py <a href="https://github.com/elfgzp/django_experience/blob/ede5c73dbb87b6f3f6a93c77d39a2488daaf6acf/make_good_use_of_migrations/migrations/0004_fix_book_data.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/ede5c73dbb87b6f3f6a93c77d39a2488daaf6acf/make_good_use_of_migrations/migrations/0004_fix_book_data.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">migrations</span>
+
+
+<span class="k">def</span> <span class="nf">fix_book_data</span><span class="p">(</span><span class="n">apps</span><span class="p">,</span> <span class="n">schema_editor</span><span class="p">):</span>
+    <span class="n">Book</span> <span class="o">=</span> <span class="n">apps</span><span class="p">.</span><span class="n">get_model</span><span class="p">(</span><span class="s">'make_good_use_of_migrations'</span><span class="p">,</span> <span class="s">'Book'</span><span class="p">)</span>
+    <span class="n">Author</span> <span class="o">=</span> <span class="n">apps</span><span class="p">.</span><span class="n">get_model</span><span class="p">(</span><span class="s">'make_good_use_of_migrations'</span><span class="p">,</span> <span class="s">'Author'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">book</span> <span class="ow">in</span> <span class="n">Book</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="nb">all</span><span class="p">():</span>
+        <span class="n">author</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">Author</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="n">get_or_create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'%s author'</span> <span class="o">%</span> <span class="n">book</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">book</span><span class="p">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">author</span>
+        <span class="n">book</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">Migration</span><span class="p">(</span><span class="n">migrations</span><span class="p">.</span><span class="n">Migration</span><span class="p">):</span>
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s">'make_good_use_of_migrations'</span><span class="p">,</span> <span class="s">'0003_auto_20181204_0533'</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">migrations</span><span class="p">.</span><span class="n">RunPython</span><span class="p">(</span><span class="n">fix_book_data</span><span class="p">)</span>
+    <span class="p">]</span></code></pre></figure>
+
+<ol>
+  <li>
+    <p>最后再将<code class="highlighter-rouge">Book</code>模型中的<code class="highlighter-rouge">author</code>字段属性<code class="highlighter-rouge">null</code>设为<code class="highlighter-rouge">False</code>，并执行<code class="highlighter-rouge">makemigrations</code>。执行后会出现，</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You are trying to change the nullable field <span class="s1">'author'</span> on book to non-nullable without a default<span class="p">;</span> we can<span class="s1">'t do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Ignore for now, and let me handle existing rows with NULL myself (e.g. because you added a RunPython or RunSQL operation to handle NULL values in a previous data migration)
+ 3) Quit, and let me add a default in models.py
+Select an option:
+</span></code></pre></div>    </div>
+
+    <p>这里选择第<code class="highlighter-rouge">2</code>项，意思是忽略该字段已经为空的数据，使用<code class="highlighter-rouge">RunPython</code>或者<code class="highlighter-rouge">RunSQL</code>自行处理。</p>
+
+    <p>选择完成后在执行<code class="highlighter-rouge">python manage.py migrate</code>，会发现数据库中的数据会按照我们的预期处理完成。</p>
+  </li>
+</ol>
+
+<h2 id="解决多人开发时migrations产生的冲突">解决多人开发时migrations产生的冲突</h2>
+
+<p>为了模拟多人多分支开发，新建一个<code class="highlighter-rouge">master-2</code>的分支，并且版本在创建<code class="highlighter-rouge">Author</code>类之前，并且在<code class="highlighter-rouge">Book</code>模型中增加<code class="highlighter-rouge">remark</code>字段。</p>
+
+<p><code class="highlighter-rouge">model.py</code>文件中的内容如下：</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/62e58772a112ac46251fbb1c40de711d832feb35/make_good_use_of_migrations/models.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    make_good_use_of_migrations/models.py <a href="https://github.com/elfgzp/django_experience/blob/62e58772a112ac46251fbb1c40de711d832feb35/make_good_use_of_migrations/models.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/62e58772a112ac46251fbb1c40de711d832feb35/make_good_use_of_migrations/models.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+    <span class="n">remark</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></figure>
+
+<p><code class="highlighter-rouge">migrations</code>文件目录如下：</p>
+
+<p>migrations/. <br />
+├── 0001_initial.py. <br />
+├── 0002_init_book_data.py. <br />
+└──0003_book_remark.py.</p>
+
+<p>当我们把<code class="highlighter-rouge">master-2</code>的代码合并到<code class="highlighter-rouge">master</code>时，会发现<code class="highlighter-rouge">migrations</code>中出现了重复的编号<code class="highlighter-rouge">0003</code>并且他们共同依赖于<code class="highlighter-rouge">0002_init_book_data</code>。</p>
+
+<p>migrations/. <br />
+├── 0001_initial.py. <br />
+├── 0002_init_book_data.py. <br />
+├── 0003_auto_20181204_0533.py<br />
+├── 0003_book_remark.py<br />
+├── 0004_fix_book_data.py<br />
+└──0005_auto_20181204_0610.py.</p>
+
+<p>这时候就需要用到命令：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python manage.py makemigrations <span class="nt">--merge</span>
+</code></pre></div></div>
+
+<p>然后就会在<code class="highlighter-rouge">migrations</code>目录生成一个<code class="highlighter-rouge">0006_merge_20181204_0622.py</code>文件</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/migrations/0006_merge_20181204_0622.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    make_good_use_of_migrations/migrations/0006_merge_20181204_0622.py <a href="https://github.com/elfgzp/django_experience/blob/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/migrations/0006_merge_20181204_0622.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/migrations/0006_merge_20181204_0622.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">migrations</span>
+
+<span class="k">class</span> <span class="nc">Migration</span><span class="p">(</span><span class="n">migrations</span><span class="p">.</span><span class="n">Migration</span><span class="p">):</span>
+
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s">'make_good_use_of_migrations'</span><span class="p">,</span> <span class="s">'0005_auto_20181204_0610'</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">'make_good_use_of_migrations'</span><span class="p">,</span> <span class="s">'0003_book_remark'</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">]</span></code></pre></figure>
+
+<p>这时候在执行<code class="highlighter-rouge">python manage.py migrate</code>就可以了。</p>
+
+<h2 id="使用migrationsrunpython需要注意的问题">使用migrations.RunPython需要注意的问题</h2>
+
+<h3 id="在函数中是无法调用模型类的函数的">在函数中是无法调用模型类的函数的</h3>
+
+<p>假设在<code class="highlighter-rouge">Book</code>模型中定义了两个函数<code class="highlighter-rouge">print_name</code>和类函数<code class="highlighter-rouge">print_class_name</code></p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/models.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    make_good_use_of_migrations/models.py <a href="https://github.com/elfgzp/django_experience/blob/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/models.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/models.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="n">Author</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">remark</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">print_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="o">@</span><span class="nb">classmethod</span>
+    <span class="k">def</span> <span class="nf">print_class_name</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">cls</span><span class="p">.</span><span class="n">__name__</span><span class="p">)</span></code></pre></figure>
+
+<p>在<code class="highlighter-rouge">migrations</code>中是无法调用的，笔者也没有仔细研究，推测是<code class="highlighter-rouge">Book</code>类初始化时只把字段初始化了。</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/migrations/0004_fix_book_data.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    make_good_use_of_migrations/migrations/0004_fix_book_data.py <a href="https://github.com/elfgzp/django_experience/blob/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/migrations/0004_fix_book_data.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/migrations/0004_fix_book_data.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">migrations</span>
+
+
+<span class="k">def</span> <span class="nf">fix_book_data</span><span class="p">(</span><span class="n">apps</span><span class="p">,</span> <span class="n">schema_editor</span><span class="p">):</span>
+    <span class="n">Book</span> <span class="o">=</span> <span class="n">apps</span><span class="p">.</span><span class="n">get_model</span><span class="p">(</span><span class="s">'make_good_use_of_migrations'</span><span class="p">,</span> <span class="s">'Book'</span><span class="p">)</span>
+    <span class="n">Author</span> <span class="o">=</span> <span class="n">apps</span><span class="p">.</span><span class="n">get_model</span><span class="p">(</span><span class="s">'make_good_use_of_migrations'</span><span class="p">,</span> <span class="s">'Author'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">book</span> <span class="ow">in</span> <span class="n">Book</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="nb">all</span><span class="p">():</span>
+        <span class="n">author</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">Author</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="n">get_or_create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'%s author'</span> <span class="o">%</span> <span class="n">book</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">book</span><span class="p">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">author</span>
+        <span class="s">"""
+        book.print_name()
+        book.print_class_name()
+        这样调用会报错
+        """</span>
+        <span class="n">book</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">Migration</span><span class="p">(</span><span class="n">migrations</span><span class="p">.</span><span class="n">Migration</span><span class="p">):</span>
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s">'make_good_use_of_migrations'</span><span class="p">,</span> <span class="s">'0003_auto_20181204_0533'</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">migrations</span><span class="p">.</span><span class="n">RunPython</span><span class="p">(</span><span class="n">fix_book_data</span><span class="p">)</span>
+    <span class="p">]</span></code></pre></figure>
+
+<h3 id="在函数中模型的类所重写的save方法无效包括继承的save方法">在函数中模型的类所重写的save方法无效，包括继承的save方法</h3>
+<p>在<code class="highlighter-rouge">migrations</code>中所有重写的<code class="highlighter-rouge">save</code>方法都不会运行，例如：</p>
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/0ab98dbec094bb115d9adf3547bf3eccbd0800af/make_good_use_of_migrations/models.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    make_good_use_of_migrations/models.py <a href="https://github.com/elfgzp/django_experience/blob/0ab98dbec094bb115d9adf3547bf3eccbd0800af/make_good_use_of_migrations/models.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/0ab98dbec094bb115d9adf3547bf3eccbd0800af/make_good_use_of_migrations/models.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="n">Author</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">remark</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">print_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="o">@</span><span class="nb">classmethod</span>
+    <span class="k">def</span> <span class="nf">print_class_name</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">cls</span><span class="p">.</span><span class="n">__name__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">remark</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">remark</span> <span class="o">=</span> <span class="s">'This is a book.'</span></code></pre></figure>
+
+<p>最后初始化生成的数据的<code class="highlighter-rouge">remark</code>字段的值仍然为空。</p>
+
+<h3 id="在函数中模型注册的所有signal无效">在函数中模型注册的所有signal无效</h3>
+<p>虽然给<code class="highlighter-rouge">Book</code>模型注册了<code class="highlighter-rouge">signal</code>，但是在<code class="highlighter-rouge">migrations</code>中仍然不会起作用</p>
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/0ab98dbec094bb115d9adf3547bf3eccbd0800af/make_good_use_of_migrations/models.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    make_good_use_of_migrations/models.py <a href="https://github.com/elfgzp/django_experience/blob/0ab98dbec094bb115d9adf3547bf3eccbd0800af/make_good_use_of_migrations/models.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/0ab98dbec094bb115d9adf3547bf3eccbd0800af/make_good_use_of_migrations/models.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">@</span><span class="n">receiver</span><span class="p">(</span><span class="n">pre_save</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="n">Book</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">generate_book_remark</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">instance</span><span class="p">.</span><span class="n">remark</span><span class="p">:</span>
+        <span class="n">instance</span><span class="p">.</span><span class="n">remark</span> <span class="o">=</span> <span class="s">'This is a book.'</span></code></pre></figure>
+
+<h3 id="不要将数据处理放到模型变更的migrations文件中">不要将数据处理放到模型变更的migrations文件中</h3>
+
+<p>在做数据修复或者生成初始化数据时，不要将处理函数放到自动生成的变更或生成字段、模型的<code class="highlighter-rouge">migrations</code>文件中，例如：</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/migrations/0005_auto_20181204_0610.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    make_good_use_of_migrations/migrations/0005_auto_20181204_0610.py <a href="https://github.com/elfgzp/django_experience/blob/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/migrations/0005_auto_20181204_0610.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/6f5dafb69e282051dbd0f65458dc56762f03c437/make_good_use_of_migrations/migrations/0005_auto_20181204_0610.py">raw</a>
+  </div>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Migration</span><span class="p">(</span><span class="n">migrations</span><span class="p">.</span><span class="n">Migration</span><span class="p">):</span>
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s">'make_good_use_of_migrations'</span><span class="p">,</span> <span class="s">'0004_fix_book_data'</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">migrations</span><span class="p">.</span><span class="n">AlterField</span><span class="p">(</span>
+            <span class="n">model_name</span><span class="o">=</span><span class="s">'book'</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s">'author'</span><span class="p">,</span>
+            <span class="n">field</span><span class="o">=</span><span class="n">models</span><span class="p">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">on_delete</span><span class="o">=</span><span class="n">django</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="n">deletion</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span>
+                                    <span class="n">to</span><span class="o">=</span><span class="s">'make_good_use_of_migrations.Author'</span><span class="p">),</span>
+        <span class="p">),</span>
+        <span class="s">"""
+        migrations.RunPython(xxx) 不要把数据处理放到模型变更中
+        """</span>
+    <span class="p">]</span></code></pre></figure>
+
+<p>不要放在一起的主要原因是，当<code class="highlighter-rouge">RunPython</code>中函数的处理逻辑一旦出现异常无法向下执行，</p>
+
+<p><code class="highlighter-rouge">django_migrations</code>将不会记录这一次处理，<strong>但是表结构的变更已经执行了！</strong></p>
+
+<p>这也是<code class="highlighter-rouge">Django migrations</code>做的不好的地方，正确应该是出现异常需要做数据库回滚。</p>
+
+<p>一旦出现这种情况，只能手动将<code class="highlighter-rouge">migrations</code>的名称如<code class="highlighter-rouge">0005_auto_20181204_0610</code>，写入到数据库表<code class="highlighter-rouge">django_migrations</code>中，然后将<code class="highlighter-rouge">RunPython</code>中的逻辑单独剥离出来。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>以上就是笔者在项目中使用<code class="highlighter-rouge">Django</code>框架的<code class="highlighter-rouge">migrations</code>的心得，下一篇会介绍<code class="highlighter-rouge">Django</code>框架的<code class="highlighter-rouge">TestCase</code>。</p>
+
+<p>本文的源码会放到<code class="highlighter-rouge">github</code>上，<a href="https://github.com/elfgzp/django_experience">https://github.com/elfgzp/django_experience</a></p>
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(101, 25, 160);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(101, 25, 160);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(101, 25, 160);
+        background-color: transparent;
+        border-left: 2px solid rgb(101, 25, 160);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>

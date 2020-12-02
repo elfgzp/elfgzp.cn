@@ -1,0 +1,600 @@
+<!-- 首页及其他页面的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 引入head标签 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>Gzp的博客</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+</head>
+<body>
+<!-- 页面主体 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>Gzp的博客</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+<header id="index-header">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/">首页</a></li>
+              
+                <li><a href="/tags.html">标签</a></li>
+              
+                <li><a href="/timeline.html">时间线</a></li>
+              
+                <li><a href="/about.html">关于博主</a></li>
+              
+                <li><a href="/friendLink.html">友情链接</a></li>
+              
+          </ul>
+      </nav>
+
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot.png" alt=""></a>
+      </div>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+  </div>
+
+</header>
+
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<main>
+    <div class="wow fadeIn top" data-wow-duration="3.5s" style="background-color:;">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">Gzp 's blog.</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s">Gzp的博客.</span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">一个兴趣使然的程序员</span>
+</div>
+
+    <ul class="post-list">
+      
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+
+    
+      <a href="/2019/06/09/arts-week-11.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="/assets/images/2019-06-09-arts-week-11/photo-1509235296665-1fce97de9a2e.jpeg">
+          
+          <section class="post-preview">
+              <h2 class="post-title">ARTS 第十一周</h2>
+              
+              <h3 class="post-subtitle">ARTS Week-11</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#ARTS class="post-tag">ARTS</a>
+                    
+                
+                <time class="post-date" datetime="19-06-09">09 Jun 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2019/06/02/arts-week-10.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="/assets/images/2019-06-02-arts-week-10/photo-1509228468518-180dd4864904.jpeg">
+          
+          <section class="post-preview">
+              <h2 class="post-title">ARTS 第十周</h2>
+              
+              <h3 class="post-subtitle">ARTS Week-10</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#ARTS class="post-tag">ARTS</a>
+                    
+                
+                <time class="post-date" datetime="19-06-02">02 Jun 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2019/05/25/arts-week-9.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="https://www.notion.so/image/https%3A%2F%2Fwww.notion.so%2Fimages%2Fpage-cover%2Fnasa_space_shuttle_columbia_and_sunrise.jpg?table=block&id=14bf51a0-f92d-4681-bb3c-ecd8a1e3fec8&width=2640&cache=v2">
+          
+          <section class="post-preview">
+              <h2 class="post-title">ARTS 第九周</h2>
+              
+              <h3 class="post-subtitle">ARTS Week-9</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#ARTS class="post-tag">ARTS</a>
+                    
+                
+                <time class="post-date" datetime="19-05-25">25 May 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2019/05/19/arts-week-8.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="https://www.notion.so/image/https%3A%2F%2Fwww.notion.so%2Fimages%2Fpage-cover%2Fnasa_eagle_in_lunar_orbit.jpg?table=block&id=204449ee-6c30-4311-aaad-7af12fac4797&width=2640&cache=v2">
+          
+          <section class="post-preview">
+              <h2 class="post-title">ARTS 第八周</h2>
+              
+              <h3 class="post-subtitle">ARTS Week-8</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#ARTS class="post-tag">ARTS</a>
+                    
+                
+                <time class="post-date" datetime="19-05-19">19 May 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2019/05/11/arts-week-7.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="https://www.notion.so/image/https%3A%2F%2Fwww.notion.so%2Fimages%2Fpage-cover%2Fwoodcuts_4.jpg?table=block&id=d7c034ab-137d-4440-929e-5b33b5db66f5&width=3730&cache=v2">
+          
+          <section class="post-preview">
+              <h2 class="post-title">ARTS 第七周</h2>
+              
+              <h3 class="post-subtitle">ARTS Week-7</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#ARTS class="post-tag">ARTS</a>
+                    
+                
+                <time class="post-date" datetime="19-05-11">11 May 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2019/05/05/arts-week-6.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="https://www.notion.so/image/https%3A%2F%2Fwww.notion.so%2Fimages%2Fpage-cover%2Fmet_bruegel_1565.jpg?table=block&id=2ebbd993-3a78-4925-8133-4db2d6cafc84&width=2640&cache=v2">
+          
+          <section class="post-preview">
+              <h2 class="post-title">ARTS 第六周</h2>
+              
+              <h3 class="post-subtitle">ARTS Week-6</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#ARTS class="post-tag">ARTS</a>
+                    
+                
+                <time class="post-date" datetime="19-05-05">05 May 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2019/04/28/arts-week-5.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="https://www.notion.so/image/https%3A%2F%2Fwww.notion.so%2Fimages%2Fpage-cover%2Fmet_william_turner_1835.jpg?table=block&id=64d57621-0fdb-46d3-a062-7acbbf5c2c13&width=3730&cache=v2">
+          
+          <section class="post-preview">
+              <h2 class="post-title">ARTS 第五周</h2>
+              
+              <h3 class="post-subtitle">ARTS Week-5</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#ARTS class="post-tag">ARTS</a>
+                    
+                
+                <time class="post-date" datetime="19-04-28">28 Apr 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2019/04/21/arts-week-4.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="https://www.notion.so/image/https%3A%2F%2Fwww.notion.so%2Fimages%2Fpage-cover%2Frijksmuseum_avercamp_1620.jpg?table=block&id=57bdd725-72ee-49e3-8902-fcfdb0b39767&width=3730&cache=v2">
+          
+          <section class="post-preview">
+              <h2 class="post-title">ARTS 第四周</h2>
+              
+              <h3 class="post-subtitle">ARTS Week-4</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#ARTS class="post-tag">ARTS</a>
+                    
+                
+                <time class="post-date" datetime="19-04-21">21 Apr 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2019/04/13/arts-week-3.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="https://www.notion.so/image/https%3A%2F%2Fwww.notion.so%2Fimages%2Fpage-cover%2Fwoodcuts_1.jpg?table=block&id=29afa7aa-b1bc-471a-96bf-27c7176efb32&width=3730&cache=v2">
+          
+          <section class="post-preview">
+              <h2 class="post-title">ARTS 第三周</h2>
+              
+              <h3 class="post-subtitle">ARTS Week-3</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#ARTS class="post-tag">ARTS</a>
+                    
+                
+                <time class="post-date" datetime="19-04-13">13 Apr 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+
+    
+      <a href="/2019/03/31/arts-week-2.html">
+      <li class="fadeInUp animated">
+          
+          <img class="post-img" src="https://www.notion.so/image/https%3A%2F%2Fwww.notion.so%2Fimages%2Fpage-cover%2Fmet_vincent_van_gogh_irises.jpg?table=block&id=511ae90f-9dbf-4154-8525-25f4745d51e3&width=3730&cache=v2">
+          
+          <section class="post-preview">
+              <h2 class="post-title">ARTS 第二周</h2>
+              
+              <h3 class="post-subtitle">ARTS Week-2</h3>
+              
+              
+          </section>
+          <footer class="post-tags">
+                
+                    
+                    <a href=tags.html#ARTS class="post-tag">ARTS</a>
+                    
+                
+                <time class="post-date" datetime="19-03-31">31 Mar 2019</time>
+          </footer>
+      </li>
+  </a>
+    
+
+
+    </ul>
+</main>
+<nav class="pagination">
+  <div class="page-links">
+    
+    
+        
+            <a href="/" class="page-link" title="Previous Page">&laquo;</a>
+            
+    
+    
+        <!-- 
+            <a href="/page3/" class="page-link" title="Next Page">&raquo;</a>
+         -->
+        <a href="/page3/" class="page-link" title="Next Page">&raquo;</a>
+    
+    
+  </div>
+
+</nav>
+
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+<!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+    var wow = new WOW({
+        boxClass: 'wow',
+        animateClass: 'animated',
+        // offset: 5,
+        mobile: true,
+        live: true
+    });
+    wow.init();
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+    window.onbeforeunload = function(){
+        //刷新后页面自动回到顶部
+        document.documentElement.scrollTop = 0;  //ie下
+        document.body.scrollTop = 0;  //非ie
+    }
+</script>
+
+</body>
+</html>

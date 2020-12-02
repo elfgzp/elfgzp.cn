@@ -1,0 +1,682 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 引入head标签 -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="一个兴趣使然的程序员" />
+<meta name="keywords" content="技术, Python, Vue, 后端开发，前端开发，日常" />
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/images/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/images/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>Django 使用心得 （三）利用 middleware 和 signal 实现数据的 「create_by」 记录功能</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?db89c93fc4343f3fa42c3534a1aaad01";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!--  Google ADS -->
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9999308390903216",
+    enable_page_level_ads: true
+  });
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+
+    <!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(222, 11, 123) ">
+    
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(222, 11, 123);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="site_search">
+    <input type="text" id="search-input" placeholder="Search to jump ...">
+    <ul id="results-container"></ul>
+</div>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+if (os.isAndroid || os.isPhone) {
+  $('#site_search').hide()
+} else {
+  var sjs = SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json'
+  })}
+</script>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/images/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/images/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">Django 使用心得 （三）利用 middleware 和 signal 实现数据的 「create_by」 记录功能</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(222, 11, 123);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+    <a href="/2018/12/07/django-experience-2-test-case.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(222, 11, 123)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+    <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(222, 11, 123);"><sapn class="main">Django使用心得（二） 使用TestCase测试接口</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">Django 使用心得 （三）利用 middleware 和 signal 实现数据的 「create_by」 记录功能</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+  </div>
+  <div class="right-area">
+    
+    <a href="/2019/01/09/django-experience-4-multidatabases.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(222, 11, 123)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+    <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(222, 11, 123);"><sapn class="main">Django 使用心得 （四）多数据库</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+    <a href="/2018/12/07/django-experience-2-test-case.html" class="leftchange" style="border-right: 1px solid rgb(222, 11, 123);border-bottom: 2px solid rgb(222, 11, 123);"><span>上一篇<br><br>Django使用心得（二） 使用TestCase测试接口</span></a>
+    
+    
+    <a href="/2019/01/09/django-experience-4-multidatabases.html" class="rightchange" style="border-left: 1px solid rgb(222, 11, 123);border-bottom: 2px solid rgb(222, 11, 123);"><span>下一篇<br><br>Django 使用心得 （四）多数据库</span></a>
+    
+  </div>
+</div>
+
+<div class="toc">
+    <span>Toc</span>
+    <nav id="toc"></nav>
+</div>
+<div class="markdown-body fadeInUp animated">
+
+    
+    
+    <div class="postpage-subtitle"
+         style="border-left: 8px solid rgb(222, 11, 123); border-right: 8px solid rgb(222, 11, 123)">
+        middleware 与 signal 使用小技巧
+    </div>
+    
+    
+    <img src="/assets/images/2019-01-09-django-experience-3-create-by/django-exp-3.png" style="margin:auto;">
+    <!-- 文章内容 -->
+    <p>记录数据的创建者和更新者是一个在实际项目中非常常见的功能，但是若是在每个接口都增加这个业务逻辑就很不 Pythonic。</p>
+
+<p>笔者在 Google 上无意发现了一种非常巧妙的实现方式，在这里分享给大家。</p>
+
+<h2 id="middleware-代码实现">Middleware 代码实现</h2>
+<p>在做了一些小修小改，处理掉了一些代码的版本问题后，最终的代码如下，我们一起来看看它是怎么实现的。</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    create_by/middleware.py <a href="https://github.com/elfgzp/django_experience/blob/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">raw</a>
+  </div>
+</div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">conf</span>
+<span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">signals</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">FieldDoesNotExist</span>
+<span class="kn">from</span> <span class="nn">django.utils.deprecation</span> <span class="kn">import</span> <span class="n">MiddlewareMixin</span>
+<span class="kn">from</span> <span class="nn">django.utils.functional</span> <span class="kn">import</span> <span class="n">curry</span>
+
+
+<span class="k">class</span> <span class="nc">WhoDidMiddleware</span><span class="p">(</span><span class="n">MiddlewareMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">process_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'GET'</span><span class="p">,</span> <span class="s">'HEAD'</span><span class="p">,</span> <span class="s">'OPTIONS'</span><span class="p">,</span> <span class="s">'TRACE'</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'user'</span><span class="p">)</span> <span class="ow">and</span> <span class="n">request</span><span class="p">.</span><span class="n">user</span><span class="p">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">user</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="bp">None</span>
+
+            <span class="n">mark_whodid</span> <span class="o">=</span> <span class="n">curry</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">mark_whodid</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+            <span class="n">signals</span><span class="p">.</span><span class="n">pre_save</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">mark_whodid</span><span class="p">,</span> <span class="n">dispatch_uid</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">request</span><span class="p">,),</span> <span class="n">weak</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">process_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'GET'</span><span class="p">,</span> <span class="s">'HEAD'</span><span class="p">,</span> <span class="s">'OPTIONS'</span><span class="p">,</span> <span class="s">'TRACE'</span><span class="p">):</span>
+            <span class="n">signals</span><span class="p">.</span><span class="n">pre_save</span><span class="p">.</span><span class="n">disconnect</span><span class="p">(</span><span class="n">dispatch_uid</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">request</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+    <span class="k">def</span> <span class="nf">mark_whodid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">sender</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">create_by_field</span><span class="p">,</span> <span class="n">update_by_field</span> <span class="o">=</span> <span class="n">conf</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">CREATE_BY_FIELD</span><span class="p">,</span> <span class="n">conf</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">UPDATE_BY_FIELD</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">instance</span><span class="p">.</span><span class="n">_meta</span><span class="p">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">create_by_field</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">FieldDoesNotExist</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">create_by_field</span><span class="p">):</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">create_by_field</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">instance</span><span class="p">.</span><span class="n">_meta</span><span class="p">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">update_by_field</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">FieldDoesNotExist</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">update_by_field</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>通过 <code class="highlighter-rouge">WhoDidMiddleware</code> 这个类继承了 <code class="highlighter-rouge">MiddlewareMixin</code> 我们可以知道他的主要是通过 Django 的 <code class="highlighter-rouge">middleware</code> 来实现记录 create_by（数据修改者）的。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+
+<span class="k">class</span> <span class="nc">WhoDidMiddleware</span><span class="p">(</span><span class="n">MiddlewareMixin</span><span class="p">):</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<p>由于 Django 调用到达模型层后，我们就无法获取到当前 request（请求）的用户，所以一般做法是在是视图层在创建数据的时候将 request 所对应的用户直接传递给模型，
+用于创建数据。</p>
+
+<p>这里的 middleware 是用于处理 request，那么 request的用户该如何传递下去呢，我们继续看代码，这里出现了 signal（信号）。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="n">signals</span><span class="p">.</span><span class="n">pre_save</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">mark_whodid</span><span class="p">,</span> <span class="n">dispatch_uid</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">request</span><span class="p">,),</span> <span class="n">weak</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<p>Signal 在 Django 中常用来处理<code class="highlighter-rouge">在某些数据之前我要做一些处理</code>或者<code class="highlighter-rouge">在某些数据处理之后我要执行些逻辑</code>等等的业务需求。例如：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="n">Author</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">remark</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="p">...</span>
+
+<span class="o">@</span><span class="n">receiver</span><span class="p">(</span><span class="n">pre_save</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="n">Book</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">generate_book_remark</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">instance</span><span class="p">.</span><span class="n">remark</span><span class="p">:</span>
+        <span class="n">instance</span><span class="p">.</span><span class="n">remark</span> <span class="o">=</span> <span class="s">'This is a book.'</span>
+</code></pre></div></div>
+
+<h3 id="signal-connect-中的参数">Signal connect 中的参数</h3>
+<p>那么在这里他又是如何使用的呢，我们需要去看看 Django 源码中 signals.pre_save.connect 这个函数的定义和参数。</p>
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/django/django/blob/e90af8bad44341cf8ebd469dac57b61a95667c1d/django/dispatch/dispatcher.py">This Github Sample</a> is by <a href="https://github.com/django">django</a>
+  </div>
+  <div class="meta-info">
+    django/dispatch/dispatcher.py <a href="https://github.com/django/django/blob/e90af8bad44341cf8ebd469dac57b61a95667c1d/django/dispatch/dispatcher.py">view</a> <a href="https://raw.githubusercontent.com/django/django/e90af8bad44341cf8ebd469dac57b61a95667c1d/django/dispatch/dispatcher.py">raw</a>
+  </div>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">weak</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">dispatch_uid</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="s">"""
+        Connect receiver to sender for signal.
+
+        Arguments:
+
+            receiver
+                A function or an instance method which is to receive signals.
+                Receivers must be hashable objects.
+
+                If weak is True, then receiver must be weak referenceable.
+
+                Receivers must be able to accept keyword arguments.
+
+                If a receiver is connected with a dispatch_uid argument, it
+                will not be added if another receiver was already connected
+                with that dispatch_uid.
+
+            sender
+                The sender to which the receiver should respond. Must either be
+                a Python object, or None to receive events from any sender.
+
+            weak
+                Whether to use weak references to the receiver. By default, the
+                module will attempt to use weak references to the receiver
+                objects. If this parameter is false, then strong references will
+                be used.
+
+            dispatch_uid
+                An identifier used to uniquely identify a particular instance of
+                a receiver. This will usually be a string, though it may be
+                anything hashable.
+        """</span>
+        <span class="p">...</span>
+</code></pre></div></div>
+
+<p>这里稍微解释一下每个参数的含义：</p>
+
+<ul>
+  <li><code class="highlighter-rouge">receiver</code> 接收到此信号回调函数</li>
+  <li><code class="highlighter-rouge">sender</code> 这个信号的发送对象，若为空则可以为任意对象</li>
+  <li><code class="highlighter-rouge">weak</code> 是否将 receiver 转换成 弱引用对象，Signal 中默认 会将所有的 receiver 转成弱引用，所以 如果你的receiver是个局部对象的话，
+那么receiver 可能会被垃圾回收期回收，receiver 也就变成一个 dead_receiver 了，Signal 会在 connect 和 disconnect 方法调用的时候，清除 dead_receiver。</li>
+  <li><code class="highlighter-rouge">dispatch_uid</code> 这个参数用于唯一标识这个 receiver 函数，主要的作用是防止 receiver 函数被注册多次。</li>
+</ul>
+
+<h2 id="middleware-代码分析">Middleware 代码分析</h2>
+
+<p>接下来我们一步步来分析 Middleware 中的代码</p>
+
+<h3 id="process_request-函数代码分析">process_request 函数代码分析</h3>
+
+<p>当一个客户端请求来到服务器并经过 WoDidMiddleware 时，首先 request 会进入 <code class="highlighter-rouge">process_request</code> 函数。</p>
+
+<h4 id="提取-request-中的-user">提取 request 中的 user</h4>
+<p>依照 RestFul 规范，我们先把非数据修改的方法都过滤掉，然后取出请求中的 user。</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    create_by/middleware.py <a href="https://github.com/elfgzp/django_experience/blob/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">raw</a>
+  </div>
+</div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">process_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'GET'</span><span class="p">,</span> <span class="s">'HEAD'</span><span class="p">,</span> <span class="s">'OPTIONS'</span><span class="p">,</span> <span class="s">'TRACE'</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'user'</span><span class="p">)</span> <span class="ow">and</span> <span class="n">request</span><span class="p">.</span><span class="n">user</span><span class="p">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">user</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="p">...</span>
+</code></pre></div></div>
+
+<h4 id="mark_whodid-函数代码分析">mark_whodid 函数代码分析</h4>
+<p>然后我们对 <code class="highlighter-rouge">mark_whodid</code> 函数做一些处理，在说明做了什么处理之前，我们先看看 mark_whodid 函数实现了什么逻辑。</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    create_by/middleware.py <a href="https://github.com/elfgzp/django_experience/blob/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">raw</a>
+  </div>
+</div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="k">def</span> <span class="nf">mark_whodid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">sender</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">create_by_field</span><span class="p">,</span> <span class="n">update_by_field</span> <span class="o">=</span> <span class="n">conf</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">CREATE_BY_FIELD</span><span class="p">,</span> <span class="n">conf</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">UPDATE_BY_FIELD</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">instance</span><span class="p">.</span><span class="n">_meta</span><span class="p">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">create_by_field</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">FieldDoesNotExist</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">create_by_field</span><span class="p">):</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">create_by_field</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">instance</span><span class="p">.</span><span class="n">_meta</span><span class="p">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">update_by_field</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">FieldDoesNotExist</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">update_by_field</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<p>这段代码非常的容易理解，主要功能就是根据 settings 中设置的 <code class="highlighter-rouge">CREATE_BY_FIELD</code> 和 <code class="highlighter-rouge">UPDATE_BY_FIELD</code>（创建者字段和更新者字段）的名称，
+对 instance（数据对象实例）的对应的字段附上用户值。</p>
+
+<h4 id="curry-函数的作用">curry 函数的作用</h4>
+
+<p>让我们回到 process_request 这个函数，这里对 mark_whodid 函数做了一个处理。</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    create_by/middleware.py <a href="https://github.com/elfgzp/django_experience/blob/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">raw</a>
+  </div>
+</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+mark_whodid <span class="o">=</span> curry<span class="o">(</span>self.mark_whodid, user<span class="o">)</span>
+...
+</code></pre></div></div>
+
+<p>我这里通过一个简单的代码例子解释一下 <code class="highlighter-rouge">curry</code> 函数的作用。</p>
+
+<pre><code class="language-plain">&gt;&gt;&gt; from django.utils.functional import curry
+&gt;&gt;&gt; def p1(a, b, c):
+…     print a, b, c
+&gt;&gt;&gt; p2 = curry(a, ‘a’, ‘b’)
+&gt;&gt;&gt; p2(‘c’)
+a b c
+</code></pre>
+
+<p>其实 curry 实现了类似装饰器的功能，他将 p1 函数的参数通过 curry 函数设置了两个默认值 ‘a’ 和 ‘b’ 分别按顺序赋值给 a 和 b，产生了一个新的函数 p2。
+这样相当于我们如果要调用 p1 函数只想传入 c 参数但是 a 和 b 参数并没有设置默认值，我们就可以用 curry 函数封装成一个新的函数 p2 来调用。</p>
+
+<p>所以上面的代码中，我们将 mark_whodid 的 user 参数的默认值设置为从 request 中获取的 user，并且再次生成一个 mark_whodid 函数。</p>
+
+<h4 id="注册-signal">注册 signal</h4>
+
+<p>从代码我们可以知道 connect 函数传入了 receiver、dispatch_uid 和 weak 参数，每个参数的作用上文中已经说明了，sender 参数为空则所有 <code class="highlighter-rouge">models</code> 的
+pre_save（在数据保存之前）都会触发 receiver，也就是我们的 mark_whodid 函数。</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    create_by/middleware.py <a href="https://github.com/elfgzp/django_experience/blob/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">raw</a>
+  </div>
+</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+signals.pre_save.connect<span class="o">(</span>mark_whodid, <span class="nv">dispatch_uid</span><span class="o">=(</span>self.__class__, request,<span class="o">)</span>, <span class="nv">weak</span><span class="o">=</span>False<span class="o">)</span>
+...
+</code></pre></div></div>
+
+<h3 id="process_response-函数代码分析">process_response 函数代码分析</h3>
+
+<p>完成客户端的请求处理，当然是要返回 response（服务端响应）了。因为我们在 process_request 函数注册了信号，我们用完当然要把信号注销。</p>
+
+<p>这里就用到了 disconnect 函数，由于我们在注册时传入了 dispatch_uid 所以我们不需要过多的参数，对这个函数感兴趣的可以看一看官方的文档 <a href="https://docs.djangoproject.com/en/dev/topics/signals/#django.dispatch.Signal.disconnect">Disconnecting signals</a>。</p>
+
+<div class="github-sample-reference">
+  <div class="author-info">
+    <a href="https://github.com/elfgzp/django_experience/blob/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">This Github Sample</a> is by <a href="https://github.com/elfgzp">elfgzp</a>
+  </div>
+  <div class="meta-info">
+    create_by/middleware.py <a href="https://github.com/elfgzp/django_experience/blob/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">view</a> <a href="https://raw.githubusercontent.com/elfgzp/django_experience/b896f97029f4eb371aef3ed369e601e3817145b6/create_by/middleware.py">raw</a>
+  </div>
+</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+def process_response<span class="o">(</span>self, request, response<span class="o">)</span>:
+    <span class="k">if </span>request.method not <span class="k">in</span> <span class="o">(</span><span class="s1">'GET'</span>, <span class="s1">'HEAD'</span>, <span class="s1">'OPTIONS'</span>, <span class="s1">'TRACE'</span><span class="o">)</span>:
+        signals.pre_save.disconnect<span class="o">(</span><span class="nv">dispatch_uid</span><span class="o">=(</span>self.__class__, request,<span class="o">))</span>
+    <span class="k">return </span>response
+...
+</code></pre></div></div>
+
+<h2 id="总结">总结</h2>
+
+<p>这个实现方式非常巧妙，同时也可以学习到 Django 中的 Middleware 和 Signal 的简单用法，以上就是本文的主要内容，希望能给大家带来帮助。</p>
+
+<h2 id="参考文章">参考文章</h2>
+
+<p><a href="https://code.i-harness.com/en/q/d293a">django get current user in model save - Django: Populate user ID when saving a model</a></p>
+
+<p><a href="https://my.oschina.net/memorybox/blog/74628">Django 学习 curry 函数</a></p>
+
+<p><a href="https://blog.csdn.net/zhuoxiuwu/article/details/52498003">Django Signal 解析</a></p>
+
+
+    <!-- 引入share模块 -->
+    
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA4OS8xNjYxNg=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Gzp的博客 ©
+  
+  
+    2018
+    -
+  
+  2020
+  <a href="http://www.beian.miit.gov.cn">粤ICP备16038504号-1</a>
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+var wow = new WOW({
+  boxClass: 'wow',
+  animateClass: 'animated',
+  // offset: 600,
+  mobile: true,
+  live: true
+})
+wow.init()
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+window.onbeforeunload = function () {
+  //刷新后页面自动回到顶部
+  document.documentElement.scrollTop = 0  //ie下
+  document.body.scrollTop = 0  //非ie
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap-toc.min.css">
+<script src="/assets/js/bootstrap-toc.min.js"></script>
+<script>
+var navSelector = '#toc'
+var $myNav = $(navSelector)
+
+if (os.isAndroid || os.isPhone) {
+  $myNav.parent().hide()
+} else {
+  $(function () {
+    Toc.init($myNav)
+    $('body').scrollspy({
+      target: navSelector
+    })
+  })
+}
+</script>
+<style type="text/css">
+
+    nav[data-toggle=toc] .nav>li>a:focus,nav[data-toggle=toc] .nav>li>a:hover {
+        padding-left: 19px;
+        color: rgb(222, 11, 123);
+        text-decoration: none;
+        background-color: transparent;
+        border-left: 1px solid rgb(222, 11, 123);
+    }
+
+    nav[data-toggle=toc] .nav-link.active, nav[data-toggle=toc] .nav-link.active:focus, nav[data-toggle=toc] .nav-link.active:hover {
+        padding-left: 18px;
+        font-weight: 700;
+        color: rgb(222, 11, 123);
+        background-color: transparent;
+        border-left: 2px solid rgb(222, 11, 123);
+    }
+
+</style>
+    <!-- Google Analytics -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126817847-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126817847-1');
+</script>
+</body>
+</html>
